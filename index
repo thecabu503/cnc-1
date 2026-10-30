@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ระบบประเมินผลบุคลากร CNC 2026 (Tech / Leader / Ass. / Engineer) — E&amp;H Precision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --navy: #0f172a;
+    --blue: #1d4ed8;
+    --border: #e2e8f0;
+    --text: #1e293b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 108px;
+    line-height: 1.5;
+  }
+  .topbar {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #fff;
+    padding: 14px 18px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 14px rgba(15,23,42,0.22);
+  }
+  .topbar-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .brand h1 { font-size: 1.14rem; font-weight: 800; }
+  .brand p { font-size: 0.79rem; color: #cbd5e1; }
+  .nav-btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn-top {
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .btn-top:hover { background: rgba(255,255,255,0.24); }
+  .status-pill {
+    font-size: 0.76rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+  .status-ok { background: #dcfce7; color: #166534; }
+  .status-warn { background: #fef3c7; color: #92400e; }
+
+  .container { max-width: 1080px; margin: 16px auto; padding: 0 14px; }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(15,23,42,0.04);
+  }
+
+  /* 4-Tier Chain Cards */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 820px) { .role-grid { grid-template-columns: repeat(2, 1fr); } }
+  .role-card {
+    background: #fff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 11px 12px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: 0.15s;
+  }
+  .role-card:hover { border-color: #64748b; }
+  .role-card.active {
+    background: #eff6ff;
+    border-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(29,78,216,0.14);
+  }
+  .role-card .rc-title { font-size: 0.92rem; font-weight: 800; color: #0f172a; }
+  .role-card .rc-chain { font-size: 0.76rem; font-weight: 700; color: #1d4ed8; margin-top: 3px; }
+  .role-card .rc-meta { font-size: 0.73rem; color: #64748b; margin-top: 2px; }
+
+  .qr-banner {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 1.5px solid #10b981;
+    color: #065f46;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  label.field-lbl { display: block; font-size: 0.84rem; font-weight: 700; color: #334155; margin-bottom: 5px; }
+  select, input[type="text"], input[type="url"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.94rem;
+    background: #fff;
+    color: var(--text);
+  }
+
+  .tech-hero {
+    background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .badge-dark { display: inline-block; background: #0f172a; color: #fff; font-weight: 800; font-size: 0.8rem; padding: 3px 9px; border-radius: 6px; margin-right: 5px; }
+  .badge-blue { display: inline-block; background: #1d4ed8; color: #fff; font-weight: 800; font-size: 0.82rem; padding: 3px 10px; border-radius: 6px; margin-right: 5px; }
+  .badge-chain { display: inline-block; background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; font-weight: 800; font-size: 0.8rem; padding: 3px 9px; border-radius: 6px; margin-right: 5px; }
+  .tech-hero h2 { font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-top: 6px; }
+  .tech-hero .sub-info { font-size: 0.86rem; color: #475569; margin-top: 2px; }
+
+  .quick-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
+  .btn-sm {
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    font-family: inherit;
+    font-size: 0.83rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #334155;
+  }
+  .btn-sm:hover { background: #f8fafc; }
+
+  .sec-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .sec-head {
+    padding: 11px 16px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .sec-score-pill {
+    background: rgba(255,255,255,0.22);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 800;
+  }
+  .item-row {
+    padding: 13px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .item-row:last-child { border-bottom: none; }
+  .item-info { flex: 1 1 340px; }
+  .item-code {
+    display: inline-block;
+    font-weight: 800;
+    color: #1e40af;
+    background: #dbeafe;
+    padding: 1px 7px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    margin-right: 6px;
+  }
+  .item-desc { font-weight: 600; font-size: 0.93rem; color: #1e293b; }
+  .item-max { font-size: 0.8rem; color: #64748b; margin-left: 4px; font-weight: 700; }
+
+  .score-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .chip-btn {
+    min-width: 38px;
+    height: 36px;
+    padding: 0 9px;
+    border-radius: 8px;
+    border: 1.5px solid #cbd5e1;
+    background: #f8fafc;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #334155;
+    cursor: pointer;
+  }
+  .chip-btn.active {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #fff;
+  }
+  .num-input {
+    width: 68px;
+    height: 36px;
+    text-align: center;
+    border: 1.5px solid #94a3b8;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.94rem;
+  }
+
+  .bottom-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #0f172a;
+    color: #fff;
+    padding: 12px 16px;
+    z-index: 120;
+    box-shadow: 0 -4px 16px rgba(15,23,42,0.25);
+  }
+  .bottom-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .score-summary { display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+  .big-num { font-size: 1.35rem; font-weight: 800; color: #38bdf8; }
+  .ratio-num { font-size: 1.35rem; font-weight: 800; color: #4ade80; }
+  .btn-submit {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    color: #fff;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e1;
+    background: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #475569;
+  }
+  .tab-btn.active { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(15,23,42,0.6);
+    display: none; align-items: center; justify-content: center;
+    z-index: 200; padding: 16px;
+  }
+  .modal-box { background: #fff; border-radius: 16px; max-width: 580px; width: 100%; padding: 22px; }
+  table.sum-tbl { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  table.sum-tbl th { background: #0f172a; color: #fff; padding: 9px 10px; text-align: left; }
+  table.sum-tbl td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; }
+  table.sum-tbl tr:nth-child(even) { background: #f8fafc; }
+  .toast {
+    position: fixed; top: 76px; right: 18px;
+    background: #0f172a; color: #fff;
+    padding: 12px 18px; border-radius: 10px;
+    font-weight: 700; font-size: 0.9rem; z-index: 300; display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <h1>📋 ระบบประเมินผลบุคลากร CNC 2026 (อัตราส่วน 20% ครบทั้ง 4 ระดับ)</h1>
+      <p>Leader ➔ Tech  |  Ass. ➔ Leader  |  Sup. ➔ Ass.  |  Sup. ➔ Engineer</p>
+    </div>
+    <div class="nav-btns">
+      <span id="connStatus" class="status-pill status-warn">⚠️ รอผูก Google Sheet</span>
+      <a href="qr_table.html" class="btn-top">📱 ตาราง QR Code ทั้งหมด (87 คน)</a>
+      <button type="button" class="btn-top" onclick="openConfigModal()">⚙️ ตั้งค่า Google Sheet URL</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastBox" class="toast"></div>
+
+<div class="container">
+  <div class="tabs">
+    <button type="button" id="tabFormBtn" class="tab-btn active" onclick="switchView('form')">✍️ หน้าให้คะแนนประเมินผล (เต็ม 80 ➔ 20%)</button>
+    <button type="button" id="tabSummaryBtn" class="tab-btn" onclick="switchView('summary')">📊 ตารางสรุปคะแนนอัตราส่วน 20% ครบทั้ง 4 ระดับ</button>
+  </div>
+
+  <!-- VIEW 1: SCORING FORM -->
+  <div id="viewForm">
+    <div id="qrDeepLinkBanner" class="qr-banner">
+      <div>
+        <strong>🎯 เปิดจากการสแกน QR Code รายบุคคลสำเร็จ!</strong>
+        <span id="qrDeepLinkText" style="margin-left:6px;"></span>
+      </div>
+      <button type="button" class="btn-sm" onclick="unlockSelector()">🔄 เปลี่ยนคนประเมิน</button>
+    </div>
+
+    <!-- 4-Tier Role Selector -->
+    <div class="role-grid">
+      <button type="button" class="role-card active" id="rc_TECH" onclick="onSelectRoleGroup('TECH')">
+        <div class="rc-title">🔧 1. ประเมิน Technician</div>
+        <div class="rc-chain">ผู้ประเมิน: Leader</div>
+        <div class="rc-meta">55 คน • ฟอร์ม 34 ข้อ (80 คะแนน)</div>
+      </button>
+      <button type="button" class="role-card" id="rc_LEADER" onclick="onSelectRoleGroup('LEADER')">
+        <div class="rc-title">👷 2. ประเมิน Leader</div>
+        <div class="rc-chain">ผู้ประเมิน: Ass. (Asst.Sup)</div>
+        <div class="rc-meta">13 คน • ฟอร์ม 15 ข้อ (80 คะแนน)</div>
+      </button>
+      <button type="button" class="role-card" id="rc_ASST" onclick="onSelectRoleGroup('ASST')">
+        <div class="rc-title">👔 3. ประเมิน Ass.</div>
+        <div class="rc-chain">ผู้ประเมิน: Sup. (Supervisor)</div>
+        <div class="rc-meta">6 คน • ฟอร์ม 15 ข้อ (80 คะแนน)</div>
+      </button>
+      <button type="button" class="role-card" id="rc_ENGINEER" onclick="onSelectRoleGroup('ENGINEER')">
+        <div class="rc-title">⚙️ 4. ประเมิน Engineer</div>
+        <div class="rc-chain">ผู้ประเมิน: Sup. (Supervisor)</div>
+        <div class="rc-meta">13 คน • ฟอร์ม 15 ข้อ (80 คะแนน)</div>
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="grid-2">
+        <div>
+          <label class="field-lbl" id="evaluatorLabel">1️⃣ สายการผลิต และชื่อผู้ประเมิน (Leader)</label>
+          <div style="display:flex; gap:8px; margin-bottom:8px;">
+            <select id="zoneSelect" style="width:130px; font-weight:800;" onchange="onZoneChange()">
+              <option value="CNC-1">CNC-1</option>
+              <option value="CNC-2">CNC-2</option>
+            </select>
+            <select id="evaluatorSelect" style="flex:1;" onchange="onEvaluatorChange()"></select>
+          </div>
+          <div style="font-size:0.78rem; color:#64748b;">💡 ระบบจำชื่อผู้ประเมินแต่ละระดับไว้ในเครื่องให้อัตโนมัติ</div>
+        </div>
+
+        <div>
+          <label class="field-lbl" id="targetLabel">2️⃣ เลือกผู้รับการประเมิน (หรือสแกนจากตาราง QR Code)</label>
+          <div style="display:flex; gap:8px; margin-bottom:8px;">
+            <select id="empFilterKind" style="width:145px;" onchange="populateTargetSelect()">
+              <option value="ALL">ทั้งหมด</option>
+              <option value="PERM">พนักงานประจำ</option>
+              <option value="SUB">Subcontract</option>
+            </select>
+            <select id="targetSelect" style="flex:1;" onchange="onTargetChange()"></select>
+          </div>
+          <div style="font-size:0.78rem; color:#64748b;">✅ คนที่คุณประเมินไปแล้วจะมีเครื่องหมาย ✔ แสดงหน้าชื่อ</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="targetHeroCard" class="tech-hero"></div>
+
+    <div class="quick-actions">
+      <button type="button" class="btn-sm" onclick="fillPreset(1.0)">⚡ ตั้งค่าเริ่มต้นเต็มทุกข้อ (80/80) แล้วค่อยหักลด</button>
+      <button type="button" class="btn-sm" onclick="fillPreset(0.8)">⚡ ตั้งค่าเริ่มต้น 80% (~64/80)</button>
+      <button type="button" class="btn-sm" onclick="clearCurrentForm()" style="color:#dc2626;">🗑️ ล้างคะแนนเป็น 0</button>
+      <span id="pendingSyncBadge" style="margin-left:auto; font-size:0.82rem; font-weight:700; color:#b45309; display:none;"></span>
+    </div>
+
+    <div id="sectionsContainer"></div>
+
+    <div class="card">
+      <label class="field-lbl">💬 ความคิดเห็นเพิ่มเติม / จุดเด่น / ข้อเสนอแนะจากผู้ประเมิน (Remark)</label>
+      <textarea id="remarkInput" rows="3" placeholder="ระบุความคิดเห็นหรือหมายเหตุประกอบการประเมิน (ถ้ามี)..."></textarea>
+    </div>
+  </div>
+
+  <!-- VIEW 2: SUMMARY TABLE ACROSS ALL 4 TIERS -->
+  <div id="viewSummary" style="display:none;">
+    <div class="card">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px;">
+        <div>
+          <h3 style="font-size:1.1rem; font-weight:800;">📊 สรุปผลรวมคะแนนประเมินและอัตราส่วน 20% (ครบทั้ง 4 ระดับตำแหน่ง)</h3>
+          <p style="font-size:0.82rem; color:#64748b;">คำนวณแยกตามสายบังคับบัญชา: Leader ➔ Tech | Ass. ➔ Leader | Sup. ➔ Ass. | Sup. ➔ Engineer</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-sm" onclick="fetchCloudData(true)" style="background:#eff6ff; border-color:#93c5fd; color:#1d4ed8;">🔄 ดึงข้อมูลสดจาก Google Sheet</button>
+          <button type="button" class="btn-sm" onclick="syncPendingQueue()">☁️ ส่งคิวค้างขึ้น Cloud</button>
+          <button type="button" class="btn-sm" onclick="exportBackupJSON()">📥 ดาวน์โหลด JSON สำรอง</button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+        <select id="sumRoleFilter" style="width:230px;" onchange="renderSummaryTable()">
+          <option value="ALL">ทุกระดับตำแหน่ง (87 คน)</option>
+          <option value="TECH">1. Technician — ประเมินโดย Leader (55 คน)</option>
+          <option value="LEADER">2. Leader — ประเมินโดย Ass. (13 คน)</option>
+          <option value="ASST">3. Ass. — ประเมินโดย Sup. (6 คน)</option>
+          <option value="ENGINEER">4. Engineer — ประเมินโดย Sup. (13 คน)</option>
+        </select>
+        <select id="sumZoneFilter" style="width:165px;" onchange="renderSummaryTable()">
+          <option value="ALL">ทุกโซน (CNC-1 &amp; CNC-2)</option>
+          <option value="CNC-1">เฉพาะ CNC-1</option>
+          <option value="CNC-2">เฉพาะ CNC-2</option>
+        </select>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table class="sum-tbl">
+          <thead>
+            <tr>
+              <th>ลำดับ</th>
+              <th>ระดับตำแหน่ง</th>
+              <th>โซน</th>
+              <th>รหัส</th>
+              <th>ชื่อ - นามสกุล</th>
+              <th>ผู้ประเมินแล้ว</th>
+              <th>คะแนนรวม</th>
+              <th>เฉลี่ย (/80)</th>
+              <th>อัตราส่วน 20%</th>
+              <th>รายละเอียดผู้ประเมิน</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky Bottom Bar -->
+<div class="bottom-bar" id="bottomSubmitBar">
+  <div class="bottom-inner">
+    <div class="score-summary">
+      <div>คะแนนรวมใบนี้: <span id="liveTotal80" class="big-num">0.0</span> <span style="color:#94a3b8;">/ 80 คะแนน</span></div>
+      <div>คิดเป็นอัตราส่วน 20%: <span id="liveRatio20" class="ratio-num">0.00%</span> <span style="color:#94a3b8;">/ 20.00%</span></div>
+    </div>
+    <button type="button" id="submitBtn" class="btn-submit" onclick="submitEvaluation()">💾 บันทึก &amp; ส่งผลเข้า Google Sheet</button>
+  </div>
+</div>
+
+<!-- Google Sheet Config Modal -->
+<div id="configModal" class="modal-backdrop">
+  <div class="modal-box">
+    <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:8px;">⚙️ ตั้งค่าลิงก์เชื่อมโยง Google Sheets (Apps Script URL)</h3>
+    <p style="font-size:0.86rem; color:#475569; margin-bottom:12px;">
+      วางลิงก์ <strong>Web App URL</strong> จากการ Deploy โค้ด <code>Code.gs</code> บน Google Sheets (<code>https://script.google.com/macros/s/.../exec</code>)
+    </p>
+    <label class="field-lbl">🔗 Google Apps Script Web App URL</label>
+    <input type="url" id="gasUrlInput" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:18px;">
+      <button type="button" class="btn-sm" onclick="closeConfigModal()">ปิด</button>
+      <button type="button" class="btn-sm" style="background:#1d4ed8; color:#fff; border-color:#1d4ed8;" onclick="saveConfigUrl()">💾 บันทึกการเชื่อมต่อ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// [สำหรับ Admin] ลิงก์ Google Apps Script Web App URL (/exec) ที่ผูกกับ Google Sheet แล้ว
+// ============================================================================
+const DEFAULT_GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxnkesG3-wZlx1OpVp_Evqq5Sj3gYJCfUhIWlQJCGbZfn6JiTVHebSBvBFTta3n_QBqug/exec";
+
+const MASTER_DATA = {"eval_year": 2026, "role_meta": {"TECH": {"key": "TECH", "title_th": "1. ช่างเทคนิค (Technician)", "evaluator_title_th": "หัวหน้างานระดับ Leader", "chain_badge": "Leader ➔ ประเมิน Technician", "item_count": 34, "max_score": 80.0}, "LEADER": {"key": "LEADER", "title_th": "2. หัวหน้างาน (Leader)", "evaluator_title_th": "ผู้ช่วยหัวหน้างาน (Asst. Supervisor / Ass.)", "chain_badge": "Ass. ➔ ประเมิน Leader", "item_count": 15, "max_score": 80.0}, "ASST": {"key": "ASST", "title_th": "3. ผู้ช่วยหัวหน้างาน (Asst. Supervisor)", "evaluator_title_th": "หัวหน้าส่วนงาน (Supervisor / Sup.)", "chain_badge": "Sup. ➔ ประเมิน Ass.", "item_count": 15, "max_score": 80.0}, "ENGINEER": {"key": "ENGINEER", "title_th": "4. วิศวกร (Engineer)", "evaluator_title_th": "หัวหน้าส่วนงาน (Supervisor / Sup.)", "chain_badge": "Sup. ➔ ประเมิน Engineer", "item_count": 15, "max_score": 80.0}}, "rubrics": {"TECH": [{"sec_no": 1, "sec_title": "1. กิริยามารยาทความประพฤติ", "max_pts": 5.0, "color": "1D4ED8", "light_bg": "EFF6FF", "items": [{"code": "1.1", "short": "สวัสดีทักทาย", "desc": "การสวัสดีทักทาย", "max": 1.0}, {"code": "1.2", "short": "ประชุมเช้า/จดบันทึก", "desc": "การเข้าร่วมประชุมตอนเช้า เพื่อรับฟังข่าวสาร รวมทั้งการจดบันทึก", "max": 1.0}, {"code": "1.3", "short": "กิจกรรมเช้า/Otoshikomi", "desc": "การเข้าร่วมกิจกรรมบริษัทช่วงเช้า เช่น Otoshikomi, เข้าแถววันจันทร์เพื่อทำกิจกรรมบริษัท", "max": 1.0}, {"code": "1.4", "short": "ไม่หลีกเลี่ยงงาน", "desc": "การหลีกเลี่ยงการทำงานระหว่างปฏิบัติงาน", "max": 1.0}, {"code": "1.5", "short": "การตอบสนองรับ-สั่งงาน", "desc": "การตอบสนองเวลาสั่งงาน และรับงานระหว่างพนักงานกับหัวหน้างาน", "max": 1.0}]}, {"sec_no": 2, "sec_title": "2. การแจ้งปัญหา", "max_pts": 5.0, "color": "0369A1", "light_bg": "F0F9FF", "items": [{"code": "2.1", "short": "แจ้งเมื่อพบปัญหา", "desc": "การ Information เมื่อพบปัญหาเกี่ยวกับงาน", "max": 2.0}, {"code": "2.2", "short": "แจ้งผลหลังแก้ไข", "desc": "การแจ้งผลหลังจากการดำเนินการแก้ไข", "max": 1.0}, {"code": "2.3", "short": "แจ้งปัญหาตอนต่อกะ", "desc": "การแจ้งปัญหาให้หัวหน้างานและเพื่อนร่วมงานรับทราบเมื่อมีการต่อกะ", "max": 2.0}]}, {"sec_no": 3, "sec_title": "3. การทำงานเสร็จตามเวลาที่กำหนดไว้", "max_pts": 5.0, "color": "0F766E", "light_bg": "F0FDFA", "items": [{"code": "3.1", "short": "งานเสร็จตามเวลา", "desc": "สามารถทำงานเสร็จตามเวลาที่ได้รับมอบหมายจากหัวหน้างาน", "max": 2.0}, {"code": "3.2", "short": "รับผิดชอบหน้าที่", "desc": "มีความรับผิดชอบต่อหน้าที่ในงานที่ตนเองทำอยู่", "max": 2.0}, {"code": "3.3", "short": "ช่วยเพื่อนเมื่อว่าง", "desc": "สามารถช่วยเหลือเพื่อนร่วมงานเมื่อว่างจากงานที่ตนเองทำอยู่", "max": 1.0}]}, {"sec_no": 4, "sec_title": "4. คุณภาพและความถูกต้องของงานที่ทำเสร็จ", "max_pts": 5.0, "color": "15803D", "light_bg": "F0FDF4", "items": [{"code": "4.1", "short": "ไม่พบงานเสียหลังแก้", "desc": "หลังจากแก้ไขปัญหาแล้วพบงานเสียหรือไม่", "max": 3.0}, {"code": "4.2", "short": "เอกสารปฏิบัติงานถูกต้อง", "desc": "เอกสารประกอบการปฏิบัติงานถูกต้องหรือไม่", "max": 2.0}]}, {"sec_no": 5, "sec_title": "5. ความร่วมมือในการทำงาน", "max_pts": 35.0, "color": "B45309", "light_bg": "FFFBEB", "items": [{"code": "5.1", "short": "ความร่วมมือทำ OT", "desc": "การให้ความร่วมมือในการทำล่วงเวลา (OT)", "max": 30.0}, {"code": "5.2", "short": "ช่วยเหลือเพื่อนร่วมงาน", "desc": "การให้ความช่วยเหลือเพื่อนร่วมงาน", "max": 5.0}]}, {"sec_no": 6, "sec_title": "6. ความสามารถในการอ่าน Drawing และการใช้เครื่องมือวัด", "max_pts": 5.0, "color": "6D28D9", "light_bg": "F5F3FF", "items": [{"code": "6.1", "short": "คำนวณ Spec Drawing", "desc": "คำนวณ Spec ใน Drawing ได้", "max": 1.0}, {"code": "6.2", "short": "เข้าใจสัญลักษณ์ Drawing", "desc": "เข้าใจสัญลักษณ์ ที่อยู่ใน Drawing", "max": 1.0}, {"code": "6.3", "short": "ใช้เครื่องมือวัดถูกต้อง", "desc": "ใช้เครื่องมือวัดที่กำหนดในใบ Inspection ได้ถูกต้อง", "max": 1.0}, {"code": "6.4", "short": "ดูแลรักษาเครื่องมือวัด", "desc": "การดูแลรักษาเครื่องมือวัดได้อย่างถูกวิธี", "max": 1.0}, {"code": "6.5", "short": "ตรวจเครื่องมือวัดก่อนชำรุด", "desc": "สามารถตรวจสอบเครื่องมือวัดก่อนที่จะชำรุดเสียหาย", "max": 1.0}]}, {"sec_no": 7, "sec_title": "7. การปฏิบัติตามกฎระเบียบ, ความปลอดภัย และ Kankyoseibi, Kaizen", "max_pts": 5.0, "color": "BE123C", "light_bg": "FFF1F2", "items": [{"code": "7.1", "short": "ไม่เล่นมือถือ/กินขนม", "desc": "ไม่รับโทรศัพท์ในเวลาทำงานและไม่กินของขบเคี้ยว เช่น หมากฝรั่ง ในพื้นที่ทำงาน", "max": 1.0}, {"code": "7.2", "short": "ส่ง Kaizen ตามเป้า", "desc": "ส่ง Kaizen ตามเป้าหมายบริษัท", "max": 1.0}, {"code": "7.3", "short": "เข้า-ออกงานตรงเวลา", "desc": "การเข้า - ออกงานตรงเวลา", "max": 1.0}, {"code": "7.4", "short": "สวมใส่อุปกรณ์ PPE", "desc": "ต้องสวมใส่อุปกรณ์ PPE ในพื้นที่ทำงานที่เกี่ยวข้องกับเครื่องจักร", "max": 1.0}, {"code": "7.5", "short": "ไม่หยอกล้อขณะทำงาน", "desc": "ไม่หยอกล้อ, เล่นกันในขณะที่ปฏิบัติงาน", "max": 1.0}]}, {"sec_no": 8, "sec_title": "8. ความสามารถในการควบคุมและตรวจสอบเครื่องจักร", "max_pts": 5.0, "color": "0E7490", "light_bg": "ECFEFF", "items": [{"code": "8.1", "short": "ทำตามเอกสารประจำเครื่อง", "desc": "สามารถปฏิบัติตามเอกสารประจำเครื่องจักรได้อย่างถูกต้อง", "max": 2.0}, {"code": "8.2", "short": "คุมเครื่องให้เดินปกติ", "desc": "สามารถควบคุมเครื่องจักรที่รับผิดชอบให้ทำงานได้ตามปกติ", "max": 2.0}, {"code": "8.3", "short": "ตรวจเครื่องก่อนชำรุด", "desc": "สามารถตรวจสอบเครื่องมือ เครื่องจักร อุปกรณ์ในการผลิตก่อนที่จะชำรุดเสียหาย", "max": 1.0}]}, {"sec_no": 9, "sec_title": "9. ความสามารถในการแก้ไขปัญหาเครื่องจักร, ปัญหาชิ้นงาน", "max_pts": 5.0, "color": "4338CA", "light_bg": "EEF2FF", "items": [{"code": "9.1", "short": "แก้ปัญหาชิ้นงาน/Setting", "desc": "สามารถแก้ไขหรือหาวิธีแก้ปัญหาของชิ้นงานได้ถูกต้อง เช่น Adjust, Plan, Repair Setting", "max": 3.0}, {"code": "9.2", "short": "แก้ปัญหา Alarm เครื่อง", "desc": "สามารถแก้ไขหรือหาวิธีการแก้ปัญหาของเครื่องจักรได้ถูกต้อง เช่น Alarm counter, Alarm Bar, Alarm sensor", "max": 2.0}]}, {"sec_no": 10, "sec_title": "10. มีความรู้ความเข้าใจและความสามารถในงานของตนเอง", "max_pts": 5.0, "color": "334155", "light_bg": "F8FAFC", "items": [{"code": "10.1", "short": "ทำงานได้ไม่ต้องอธิบายซ้ำ", "desc": "สามารถทำงานที่ทำอยู่ได้โดยไม่ต้องอธิบายซ้ำๆ", "max": 1.0}, {"code": "10.2", "short": "ปฏิบัติงานไม่บกพร่อง", "desc": "สามารถปฏิบัติงานของตัวเองโดยไม่บกพร่อง", "max": 2.0}, {"code": "10.3", "short": "เสนอวิธีเพิ่ม Productivity", "desc": "นำเสนอวิธีการทำงานเพื่อเพิ่ม Productivity ให้หัวหน้างานพิจารณา", "max": 1.0}, {"code": "10.4", "short": "เสนอวิธีลดของเสีย", "desc": "นำเสนอวิธีการลดของเสีย ของตนเองให้หัวหน้างานพิจารณา", "max": 1.0}]}], "LEADER": [{"sec_no": 1, "sec_title": "ส่วนที่ 1: วินัย การปฏิบัติงาน และความร่วมมือ (Leader — 46 คะแนน)", "max_pts": 46.0, "color": "0F766E", "items": [{"code": "L.1", "desc": "1. กิริยามารยาทและความสุภาพ (Manner/behavior and politeness)", "max": 4.0}, {"code": "L.2", "desc": "2. การแจ้งปัญหางานที่เกิดขึ้นให้หัวหน้างานรับทราบทันที (Report problem occurrence to Asst. Supervisor / Supervisor)", "max": 4.0}, {"code": "L.3", "desc": "3. การทำงานเสร็จตามเวลาที่กำหนดให้ (Accomplished task on schedule)", "max": 4.0}, {"code": "L.4", "desc": "4. คุณภาพและความถูกต้องของงานที่ทำเสร็จ (Quality and Accuracy of completed task)", "max": 4.0}, {"code": "L.5", "desc": "5. ความร่วมมือในการทำงานล่วงเวลา (Overtime cooperation)", "max": 30.0}]}, {"sec_no": 2, "sec_title": "ส่วนที่ 2: ภาวะผู้นำ การบริหารทีม และการสอนงาน (Leader — 34 คะแนน)", "max_pts": 34.0, "color": "1D4ED8", "items": [{"code": "L.6", "desc": "6. ความเอาใจใส่เพิ่มพูนความรู้, ความสามารถในงานที่ตนเองรับผิดชอบ (Develop & improve technical knowledge and skill)", "max": 4.0}, {"code": "L.7", "desc": "7. ความสามารถจูงใจผู้ใต้บังคับบัญชาให้ปฏิบัติตามกฎระเบียบ, ความปลอดภัย, Kankyoseibi และ Kaizen", "max": 4.0}, {"code": "L.8", "desc": "8. ความสามารถในการจัดกำลังคนให้พอเหมาะกับปริมาณงานที่ต้องทำในแต่ละวัน (Manpower planning Day & Night shift)", "max": 4.0}, {"code": "L.9", "desc": "9. ความสามารถในการแก้ไขปัญหางานให้ผู้ใต้บังคับบัญชา (Capability of solving subordinate's problem)", "max": 4.0}, {"code": "L.10", "desc": "10. ความสามารถในการสอนงานให้ผู้ใต้บังคับบัญชา (Capability of coaching subordinates)", "max": 4.0}, {"code": "L.11", "desc": "11. ความสามารถในการสั่งงานได้อย่างถูกต้องชัดเจน และครบถ้วน (Capability of commanding correctly & clearly)", "max": 3.0}, {"code": "L.12", "desc": "12. ความสามารถในการควบคุมและติดตามงานให้เสร็จลุล่วง (Capability of control and follow up task)", "max": 3.0}, {"code": "L.13", "desc": "13. ความสามารถในการแก้ไขปัญหาความขัดแย้งเรื่องงานของผู้ใต้บังคับบัญชา (Handling conflict among subordinates)", "max": 3.0}, {"code": "L.14", "desc": "14. ความสามารถในการทำให้ผู้ใต้บังคับบัญชาทำงานร่วมกันเป็นทีม (Capability of building up teamwork)", "max": 3.0}, {"code": "L.15", "desc": "15. ความมีมนุษย์สัมพันธ์ที่ดีกับผู้ใต้บังคับบัญชาและหัวหน้างาน (Human relationship with subordinates and chief)", "max": 2.0}]}], "ASST": [{"sec_no": 1, "sec_title": "ส่วนที่ 1: การวางแผน การบริหารบังคับบัญชา และการแก้ปัญหา (Asst. Supervisor — 36 คะแนน)", "max_pts": 36.0, "color": "6D28D9", "items": [{"code": "AS.1", "desc": "1. การแจ้งปัญหางานที่เกิดขึ้น, สาเหตุและแนวทางการแก้ไขให้หัวหน้างานรับทราบ (Report problem, root cause & countermeasure)", "max": 4.0}, {"code": "AS.2", "desc": "2. การทำงานสำเร็จตรงตามเป้าหมายที่หัวหน้างานกำหนดให้ (Accomplish task accordance with assignment & target)", "max": 4.0}, {"code": "AS.3", "desc": "3. ความสามารถในการวางแผนงานเพื่อให้บรรลุเป้าหมายที่กำหนดไว้ (Making plan to achieve the settled goal)", "max": 4.0}, {"code": "AS.4", "desc": "4. ความสามารถจูงใจผู้ใต้บังคับบัญชาให้ปฏิบัติตามกฎระเบียบ, ความปลอดภัย, Kankyoseibi และการทำ Kaizen", "max": 4.0}, {"code": "AS.5", "desc": "5. ความสามารถในการแก้ไขปัญหางานให้ผู้ใต้บังคับบัญชา (Capability of solving subordinate's problem)", "max": 4.0}, {"code": "AS.6", "desc": "6. ความสามารถในการสอนงานให้ผู้ใต้บังคับบัญชา (Capability of coaching subordinates)", "max": 4.0}, {"code": "AS.7", "desc": "7. ความสามารถในการสั่งงานได้อย่างถูกต้องชัดเจนและครบถ้วน (Capability of commanding correctly, clearly & completely)", "max": 4.0}, {"code": "AS.8", "desc": "8. ความสามารถในการควบคุมและติดตามงานให้สำเร็จลุล่วง (Capability of control and follow up task till completed)", "max": 4.0}, {"code": "AS.9", "desc": "9. ความสามารถในการแก้ปัญหาความขัดแย้งเรื่องงานของผู้ใต้บังคับบัญชา (Capability of handling conflict)", "max": 4.0}]}, {"sec_no": 2, "sec_title": "ส่วนที่ 2: การประสานงาน การวิเคราะห์ปรับปรุงระบบ และความร่วมมือ OT (Asst. Supervisor — 44 คะแนน)", "max_pts": 44.0, "color": "4338CA", "items": [{"code": "AS.10", "desc": "10. ความสามารถในการทำให้ผู้ใต้บังคับบัญชาทำงานร่วมกันเป็นทีม (Capability of building up teamwork)", "max": 3.0}, {"code": "AS.11", "desc": "11. ความสามารถในการประสานงานกับหน่วยงานอื่นเพื่อแก้ไขปัญหาร่วมกัน (Cooperate with other sections)", "max": 3.0}, {"code": "AS.12", "desc": "12. ความสามารถในการเก็บข้อมูลและปัญหาต่างๆเพื่อทำการวิเคราะห์ทางสถิติ (Technical data collecting for statistical analysis)", "max": 3.0}, {"code": "AS.13", "desc": "13. ความสามารถในการแก้ไขปรับปรุงวิธีการทำงานต่างๆเพื่อลดความผิดพลาดที่เกิดขึ้น (Corrective working procedure)", "max": 3.0}, {"code": "AS.14", "desc": "14. ความสามารถในการออกแบบและควบคุมงานเอกสารที่ใช้ภายในแผนก (Document design & control in process)", "max": 2.0}, {"code": "AS.15", "desc": "15. ความร่วมมือในการทำงานล่วงเวลา (Overtime cooperation)", "max": 30.0}]}], "ENGINEER": [{"sec_no": 1, "sec_title": "ส่วนที่ 1: ความเชี่ยวชาญทางเทคนิค การวางแผน และการแก้ปัญหาทางวิศวกรรม (Engineer — 36 คะแนน)", "max_pts": 36.0, "color": "B45309", "items": [{"code": "E.1", "desc": "1. การแจ้งปัญหางานที่เกิดขึ้น, สาเหตุและเสนอแนะวิธีการแก้ไขให้หัวหน้างานพิจารณา (Report problem occurrence to Supervisor)", "max": 4.0}, {"code": "E.2", "desc": "2. การทำงานสำเร็จตรงตามเป้าหมายที่หัวหน้างานกำหนดให้ (Accomplish task accordance with assignment & target)", "max": 4.0}, {"code": "E.3", "desc": "3. ความสามารถในการวางแผนงานเพื่อให้บรรลุเป้าหมายที่กำหนดไว้ (Making plan to achieve the settled goal)", "max": 4.0}, {"code": "E.4", "desc": "4. ระดับความรู้, ความสามารถ, ความชำนาญในงานของตน (Technical know-how and expertise level)", "max": 4.0}, {"code": "E.5", "desc": "5. ความสามารถในการแก้ไขปัญหางานให้แต่ละหน่วยงานที่เกี่ยวข้อง (Capability of solving problem for concerned section)", "max": 4.0}, {"code": "E.6", "desc": "6. ความสามารถในการชี้แนะ, ถ่ายทอดความรู้เทคนิคต่างๆให้กับผู้อื่น (Capability of coaching know-how)", "max": 4.0}, {"code": "E.7", "desc": "7. ความสามารถในการมอบหมายงานให้ผู้อื่นปฏิบัติได้อย่างถูกต้องและครบถ้วน (Directing concerned section to follow procedure)", "max": 4.0}, {"code": "E.8", "desc": "8. ความสามารถในการควบคุมและติดตามงานให้สำเร็จลุล่วง (Capability of control and follow up task till completed)", "max": 4.0}, {"code": "E.9", "desc": "9. การปฏิบัติตามกฎระเบียบของบริษัท, ความปลอดภัยและ Kankyoseibi และการทำ Kaizen", "max": 4.0}]}, {"sec_no": 2, "sec_title": "ส่วนที่ 2: การวิเคราะห์สถิติ การพัฒนากระบวนการ และความร่วมมือ OT (Engineer — 44 คะแนน)", "max_pts": 44.0, "color": "BE123C", "items": [{"code": "E.10", "desc": "10. ความสามารถในการทำงานร่วมกันเป็นทีมกับเพื่อนร่วมงาน (Capability of building up teamwork)", "max": 3.0}, {"code": "E.11", "desc": "11. ความสามารถในการประสานงานกับหน่วยงานอื่นเพื่อแก้ไขปัญหาร่วมกัน (Cooperate with other sections)", "max": 3.0}, {"code": "E.12", "desc": "12. ความสามารถในการเก็บข้อมูลและปัญหาต่างๆเพื่อการวิเคราะห์ทางสถิติ (Technical data collecting for statistical analysis)", "max": 3.0}, {"code": "E.13", "desc": "13. ความสามารถในการพัฒนาปรับปรุงวิธีการทำงานต่างๆเพื่อลดความผิดพลาด (Develop & improve working procedure)", "max": 3.0}, {"code": "E.14", "desc": "14. ความสามารถในการออกแบบและควบคุมงานเอกสารที่เกี่ยวข้องแต่ละ process (Document design & control in process)", "max": 2.0}, {"code": "E.15", "desc": "15. ความร่วมมือในการทำงานล่วงเวลา (Overtime cooperation)", "max": 30.0}]}]}, "evaluators_by_role": {"TECH": {"CNC-1": [{"id": "00706", "login": "WITTAYA_NG", "name_th": "นาย วิทยา งอมสงัด", "name_en": "Wittaya Ngomsa-ngad", "role": "Leader"}, {"id": "01115", "login": "JUCKRAYUT_BO", "name_th": "นาย จักรายุทธ บุตรอินทร์", "name_en": "Juckrayut Boot-in", "role": "Leader"}, {"id": "01329", "login": "YONGYUT_KH", "name_th": "นาย ยงยุทธ แคนเสาร์", "name_en": "Yongyut Khaensao", "role": "Leader"}, {"id": "01335", "login": "YUTTAPONG_NA", "name_th": "นาย ยุทธพงษ์ นาคเงิน", "name_en": "Yutthaphong Nakngoen", "role": "Leader"}, {"id": "01631", "login": "SATHIAN_PA", "name_th": "นาย เสถียร ปะนามะโกสา", "name_en": "Sathian Panamakosa", "role": "Leader"}, {"id": "01294", "login": "KITTIPONG_YA", "name_th": "นาย กิตติพงษ์ ยารังษี", "name_en": "Kittipong Yarangsee", "role": "Sub-Leader/Leader"}, {"id": "01150", "login": "KITTIPHOP_CH", "name_th": "นาย กิตติภพ ชายหาด", "name_en": "Kittiphop Chayhad", "role": "Sub-Leader/Leader"}], "CNC-2": [{"id": "00841", "login": "PANUPONG_MU", "name_th": "นาย ภาณุพงศ์ มุมมาลา", "name_en": "Panupong Mummala", "role": "Leader"}, {"id": "01334", "login": "SONGYOOT_YO", "name_th": "นาย ทรงยศ อยู่ยืน", "name_en": "Songyoot Youyeun", "role": "Leader"}, {"id": "01397", "login": "NIWAT_BU", "name_th": "นาย นิวัฒน์ บุดดีแหบ", "name_en": "Niwat Buddeehaeb", "role": "Leader"}, {"id": "01588", "login": "MANOP_WU", "name_th": "นาย มานพ วุฒิการณ์", "name_en": "Manop Wutthikan", "role": "Leader"}, {"id": "01621", "login": "TINNAKORN_MA", "name_th": "นาย ทินกร มะลิหอม", "name_en": "Tinnakorn Malihom", "role": "Leader"}, {"id": "00839", "login": "PRASOPCHAI_SU", "name_th": "นาย ประสพชัย สุเมผา", "name_en": "Prasopchai Sumepha", "role": "Leader"}]}, "LEADER": {"CNC-1": [{"id": "00563", "login": "JAMNONG_IN", "name_th": "นาย จำนง อินจินดา", "name_en": "Jamnong Injinda", "role": "Asst.Supervisor"}, {"id": "00683", "login": "THANATHON_NO", "name_th": "นาย ธนธรณ์ น้อยมาลา", "name_en": "Thanathon Noimala", "role": "Asst.Supervisor"}, {"id": "00227", "login": "NATTINEE_SA", "name_th": "นางสาว ณัฎฐินี สายสิงห์", "name_en": "Nattinee Saising", "role": "Asst.Supervisor"}], "CNC-2": [{"id": "01151", "login": "SATHEAN_JA", "name_th": "นาย เสถียร ใจเด็ด", "name_en": "Sathean Jaided", "role": "Asst.Supervisor"}, {"id": "01175", "login": "ANURAK_YO", "name_th": "นาย อนุรักษ์ โยธาทูน", "name_en": "Anurak Yotatoon", "role": "Asst.Supervisor"}, {"id": "01315", "login": "SONGKRAN_TO", "name_th": "นาย สงการ ทองสิงห์", "name_en": "Songkran Tongsing", "role": "Asst.Supervisor"}]}, "ASST": {"CNC-1": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "00073", "login": "VARITTHON_TE", "name_th": "นาย วรินทร ทีเวียง", "name_en": "Varitthon Teewieng", "role": "Supervisor"}, {"id": "00117", "login": "SIRIPORN_SA", "name_th": "นางสาว ศิริพร แซ่เลียว", "name_en": "Siriporn Sacliao", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}], "CNC-2": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}, {"id": "00531", "login": "WIPA_PR", "name_th": "นางสาว วิภา ปานเงิน", "name_en": "Wipa Pranngeon", "role": "Supervisor"}, {"id": "00247", "login": "SUJITRA_JU", "name_th": "นาง สุจิตรา จันทร์โฮง", "name_en": "Sujitra Junhong", "role": "Supervisor"}, {"id": "00442", "login": "NIKORN_KH", "name_th": "นาย นิกร คำเลิศ", "name_en": "Nikorn Khamlerd", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}]}, "ENGINEER": {"CNC-1": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "00073", "login": "VARITTHON_TE", "name_th": "นาย วรินทร ทีเวียง", "name_en": "Varitthon Teewieng", "role": "Supervisor"}, {"id": "00117", "login": "SIRIPORN_SA", "name_th": "นางสาว ศิริพร แซ่เลียว", "name_en": "Siriporn Sacliao", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}], "CNC-2": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}, {"id": "00531", "login": "WIPA_PR", "name_th": "นางสาว วิภา ปานเงิน", "name_en": "Wipa Pranngeon", "role": "Supervisor"}, {"id": "00247", "login": "SUJITRA_JU", "name_th": "นาง สุจิตรา จันทร์โฮง", "name_en": "Sujitra Junhong", "role": "Supervisor"}, {"id": "00442", "login": "NIKORN_KH", "name_th": "นาย นิกร คำเลิศ", "name_en": "Nikorn Khamlerd", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}]}}, "evaluatees_by_role": {"TECH": {"CNC-1": [{"zone": "CNC-1", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01954", "emp_disp": "01954 (เดิม V11204)", "login": "RAKSANA_TA (เดิม RAKSANA_TAS)", "name_th": "นาย รักษณ ทัศนาพันธ์", "name_en": "Raksana Tassanaphan", "disp_name": "นาย รักษณ ทัศนาพันธ์ (Raksana Tassanaphan)", "dept": "CAM_CNC / CNC", "mc_score": 7605.0, "set_score": 24.5, "raw_score": 7629.5, "bench_raw": 7629.5, "s60": 60.0, "leave_days": 5.0, "att20": 15.0, "default_tot100": 95.0, "ref2025": null, "default_rank": 1, "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01571", "emp_disp": "01571", "login": "NATTAWUT_SA", "name_th": "นาย ณัฐวุฒิ แสงใส", "name_en": "Nattawut Sangsai", "disp_name": "นาย ณัฐวุฒิ แสงใส (Nattawut Sangsai)", "dept": "CNC", "mc_score": 6623.25, "set_score": 48.0, "raw_score": 6671.25, "bench_raw": 7629.5, "s60": 52.46, "leave_days": 0.0, "att20": 20.0, "default_tot100": 92.46, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 2.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 3.0, "4.2": 2.0, "5.1": 27.0, "5.2": 4.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.5, "9.2": 1.5, "10.1": 1.0, "10.2": 1.5, "10.3": 0.5, "10.4": 0.5}, "total80": 66.0, "score20": 16.5}, "default_rank": 2, "line": "G-H-J-K", "start_date": "2012-04-02", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01306", "emp_disp": "01306", "login": "PUNSAK_KU", "name_th": "นาย พูนศักดิ์ คำพา", "name_en": "Punsak Kumpar", "disp_name": "นาย พูนศักดิ์ คำพา (Punsak Kumpar)", "dept": "CNC", "mc_score": 4605.25, "set_score": 286.0, "raw_score": 4891.25, "bench_raw": 7629.5, "s60": 38.47, "leave_days": 0.0, "att20": 20.0, "default_tot100": 78.47, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.5, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 1.0}, "total80": 58.0, "score20": 14.5}, "default_rank": 3, "line": "G-H-J-K", "start_date": "2009-06-22", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01467", "emp_disp": "01467", "login": "SATHAPORN_TH", "name_th": "นาย สถาพร ทาทิพย์", "name_en": "Sathaporn Thathip", "disp_name": "นาย สถาพร ทาทิพย์ (Sathaporn Thathip)", "dept": "CNC", "mc_score": 4618.5, "set_score": 38.5, "raw_score": 4657.0, "bench_raw": 7629.5, "s60": 36.62, "leave_days": 0.0, "att20": 20.0, "default_tot100": 76.62, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 26.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 0.0, "7.2": 0.0, "7.3": 0.5, "7.4": 0.5, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 56.0, "score20": 14.0}, "default_rank": 4, "line": "N-P-Q-R", "start_date": "2011-08-02", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01952", "emp_disp": "01952 (เดิม V11019)", "login": "WATTANA_KA (เดิม WATTHANA_KHE)", "name_th": "นาย วัฒนา เขตชมภู", "name_en": "Watthana Khetchomphu", "disp_name": "นาย วัฒนา เขตชมภู (Watthana Khetchomphu)", "dept": "CAM_CNC / CNC", "mc_score": 4871.5, "set_score": 22.5, "raw_score": 4894.0, "bench_raw": 7629.5, "s60": 38.49, "leave_days": 2.5, "att20": 17.5, "default_tot100": 75.99, "ref2025": null, "default_rank": 5, "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01520", "emp_disp": "01520", "login": "SUPAT_PH", "name_th": "นาย สุภัทร โพนแก้ว", "name_en": "Supat Phonkaow", "disp_name": "นาย สุภัทร โพนแก้ว (Supat Phonkaow)", "dept": "CNC", "mc_score": 4285.7, "set_score": 29.5, "raw_score": 4315.2, "bench_raw": 7629.5, "s60": 33.94, "leave_days": 0.0, "att20": 20.0, "default_tot100": 73.94, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.0, "4.2": 1.0, "5.1": 26.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.5, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.5, "score20": 14.62}, "default_rank": 6, "line": "N-P-Q-R", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "00709", "emp_disp": "00709", "login": "KRISADA_YA", "name_th": "นาย กฤษฎา ยะโส", "name_en": "Krisada Yaso", "disp_name": "นาย กฤษฎา ยะโส (Krisada Yaso)", "dept": "CNC", "mc_score": 4073.5, "set_score": 576.5, "raw_score": 4650.0, "bench_raw": 7629.5, "s60": 36.57, "leave_days": 3.0, "att20": 17.0, "default_tot100": 73.57, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 3.0, "4.2": 2.0, "5.1": 27.0, "5.2": 4.0, "6.1": 1.0, "6.2": 0.5, "6.3": 1.0, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 2.0, "8.2": 2.0, "8.3": 1.0, "9.1": 3.0, "9.2": 2.0, "10.1": 1.0, "10.2": 2.0, "10.3": 1.0, "10.4": 1.0}, "total80": 70.0, "score20": 17.5}, "default_rank": 7, "line": "G-H-J-K", "start_date": "2004-06-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01752", "emp_disp": "01752", "login": "THANATIS_C", "name_th": "นาย ธนธิศ แซ่เฮ้ง", "name_en": "Thanatis_CNC Staff", "disp_name": "นาย ธนธิศ แซ่เฮ้ง (Thanatis_CNC Staff)", "dept": "CNC", "mc_score": 3638.3, "set_score": 527.5, "raw_score": 4165.8, "bench_raw": 7629.5, "s60": 32.76, "leave_days": 0.0, "att20": 20.0, "default_tot100": 72.76, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 0.5, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 8, "line": "X-Y-Z", "start_date": "2017-05-15", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01320", "emp_disp": "01320", "login": "SAKDA_SU", "name_th": "นาย ศักดา สังฆคาม", "name_en": "Sakda Sungkakam", "disp_name": "นาย ศักดา สังฆคาม (Sakda Sungkakam)", "dept": "CNC", "mc_score": 45.5, "set_score": 4041.0, "raw_score": 4086.5, "bench_raw": 7629.5, "s60": 32.14, "leave_days": 0.0, "att20": 20.0, "default_tot100": 72.14, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.5, "4.2": 1.5, "5.1": 25.0, "5.2": 3.5, "6.1": 1.0, "6.2": 0.5, "6.3": 1.0, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 9, "line": "G-H-J-K", "start_date": "2009-08-17", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01652", "emp_disp": "01652", "login": "PRAWIT_RE", "name_th": "นาย ประวิทย์ เรียมแสน", "name_en": "Prawit Ream-san", "disp_name": "นาย ประวิทย์ เรียมแสน (Prawit Ream-san)", "dept": "CNC", "mc_score": 3405.5, "set_score": 392.0, "raw_score": 3797.5, "bench_raw": 7629.5, "s60": 29.86, "leave_days": 0.0, "att20": 20.0, "default_tot100": 69.86, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 1.0, "10.1": 0.5, "10.2": 0.5, "10.3": 0.5, "10.4": 0.5}, "total80": 57.0, "score20": 14.25}, "default_rank": 10, "line": "N-P-Q-R", "start_date": "2013-07-15", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01953", "emp_disp": "01953 (เดิม V11082)", "login": "YUTTHAKAN_KI (เดิม YUTTHAKAN_KLA)", "name_th": "นาย ยุทธการ กล้าเมืองกลาง", "name_en": "Yutthakan Klamueangklang", "disp_name": "นาย ยุทธการ กล้าเมืองกลาง (Yutthakan Klamueangklang)", "dept": "CAM_CNC / CNC", "mc_score": 3784.5, "set_score": 64.0, "raw_score": 3848.5, "bench_raw": 7629.5, "s60": 30.27, "leave_days": 0.75, "att20": 19.25, "default_tot100": 69.52, "ref2025": null, "default_rank": 11, "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01536", "emp_disp": "01536", "login": "SOMYOS_LA", "name_th": "นาย สมยศ หล้าบาง", "name_en": "Somyos Labang", "disp_name": "นาย สมยศ หล้าบาง (Somyos Labang)", "dept": "CNC", "mc_score": 3837.75, "set_score": 5.0, "raw_score": 3842.75, "bench_raw": 7629.5, "s60": 30.22, "leave_days": 1.0, "att20": 19.0, "default_tot100": 69.22, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 0.5, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.5, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 56.0, "score20": 14.0}, "default_rank": 12, "line": "X-Y-Z", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01312", "emp_disp": "01312", "login": "SOOKSAN_TE", "name_th": "นาย สุขสรร ถีระมัด", "name_en": "Sooksan Teeramad", "disp_name": "นาย สุขสรร ถีระมัด (Sooksan Teeramad)", "dept": "CNC", "mc_score": 3541.5, "set_score": 135.0, "raw_score": 3676.5, "bench_raw": 7629.5, "s60": 28.91, "leave_days": 0.0, "att20": 20.0, "default_tot100": 68.91, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.5, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 13, "line": "G-H-J-K", "start_date": "2009-07-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01507", "emp_disp": "01507", "login": "CHAIWAT_MU", "name_th": "นาย ชัยวัฒน์ มั่นดี", "name_en": "Chaiwat Mundee", "disp_name": "นาย ชัยวัฒน์ มั่นดี (Chaiwat Mundee)", "dept": "CNC", "mc_score": 3235.0, "set_score": 183.5, "raw_score": 3418.5, "bench_raw": 7629.5, "s60": 26.88, "leave_days": 0.0, "att20": 20.0, "default_tot100": 66.88, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.5, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 0.5, "7.5": 1.0, "8.1": 1.5, "8.2": 1.5, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 14, "line": "G-H-J-K", "start_date": "2011-09-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01138", "emp_disp": "01138", "login": "PINYO_KH", "name_th": "นาย ภิญโญ ขันติวงศ์", "name_en": "Pinyo Khantiwong", "disp_name": "นาย ภิญโญ ขันติวงศ์ (Pinyo Khantiwong)", "dept": "CNC", "mc_score": 3339.25, "set_score": 25.5, "raw_score": 3364.75, "bench_raw": 7629.5, "s60": 26.46, "leave_days": 0.0, "att20": 20.0, "default_tot100": 66.46, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 0.5, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.0, "4.2": 2.0, "5.1": 25.0, "5.2": 3.0, "6.1": 0.5, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.0, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 55.5, "score20": 13.88}, "default_rank": 15, "line": "X-Y-Z", "start_date": "2006-02-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01459", "emp_disp": "01459", "login": "SIRISAK_CO", "name_th": "นาย ศิริศักดิ์ คำพูล", "name_en": "Sirisak Compool", "disp_name": "นาย ศิริศักดิ์ คำพูล (Sirisak Compool)", "dept": "CNC", "mc_score": 3553.25, "set_score": 12.5, "raw_score": 3565.75, "bench_raw": 7629.5, "s60": 28.04, "leave_days": 2.0, "att20": 18.0, "default_tot100": 66.04, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 56.0, "score20": 14.0}, "default_rank": 16, "line": "G-H-J-K", "start_date": "2011-07-04", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01356", "emp_disp": "01356", "login": "PONRIT_WA", "name_th": "นาย พลฤทธิ์ วันคำ", "name_en": "Ponrit Wankham", "disp_name": "นาย พลฤทธิ์ วันคำ (Ponrit Wankham)", "dept": "CNC", "mc_score": 3631.75, "set_score": 19.5, "raw_score": 3651.25, "bench_raw": 7629.5, "s60": 28.71, "leave_days": 8.0, "att20": 12.0, "default_tot100": 60.71, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 1.5, "4.2": 1.0, "5.1": 27.5, "5.2": 4.0, "6.1": 0.5, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 0.5, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 17, "line": "N-P-Q-R", "start_date": "2010-01-11", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01789", "emp_disp": "01789", "login": "KEATTIPONG_CH", "name_th": "นาย เกียรติพงษ์ ชัยถา", "name_en": "Keattipong Chaitha", "disp_name": "นาย เกียรติพงษ์ ชัยถา (Keattipong Chaitha)", "dept": "CNC", "mc_score": 138.5, "set_score": 3136.0, "raw_score": 3274.5, "bench_raw": 7629.5, "s60": 25.75, "leave_days": 6.5, "att20": 13.5, "default_tot100": 59.25, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.5, "2.2": 1.0, "2.3": 1.5, "3.1": 1.5, "3.2": 1.5, "3.3": 1.0, "4.1": 2.5, "4.2": 1.5, "5.1": 27.0, "5.2": 4.0, "6.1": 1.0, "6.2": 1.0, "6.3": 1.0, "6.4": 1.0, "6.5": 1.0, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 1.0, "9.1": 2.5, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 1.0, "10.4": 1.0}, "total80": 68.5, "score20": 17.12}, "default_rank": 18, "line": "X-Y-Z", "start_date": "16-Jan-18", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01751", "emp_disp": "01751", "login": "PAIROTE_C", "name_th": "นาย ไพโรจน์ พึ่งพุทธิกานต์", "name_en": "Pairote_CNC Staff", "disp_name": "นาย ไพโรจน์ พึ่งพุทธิกานต์ (Pairote_CNC Staff)", "dept": "CNC", "mc_score": 3360.75, "set_score": 10.0, "raw_score": 3370.75, "bench_raw": 7629.5, "s60": 26.51, "leave_days": 8.0, "att20": 12.0, "default_tot100": 58.51, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 0.5, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.5, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 0.5, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 0.5, "10.1": 0.5, "10.2": 0.5, "10.3": 0.5, "10.4": 0.5}, "total80": 53.0, "score20": 13.25}, "default_rank": 19, "line": "X-Y-Z", "start_date": "2017-05-15", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01317", "emp_disp": "01317", "login": "SANCHAI_VI", "name_th": "นาย สัญชัย วิมลรัตน์", "name_en": "Sanchai Vimolrat", "disp_name": "นาย สัญชัย วิมลรัตน์ (Sanchai Vimolrat)", "dept": "CNC", "mc_score": 3335.25, "set_score": 35.5, "raw_score": 3370.75, "bench_raw": 7629.5, "s60": 26.51, "leave_days": 11.75, "att20": 8.25, "default_tot100": 54.76, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 0.5, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.5, "3.2": 1.5, "3.3": 0.5, "4.1": 1.5, "4.2": 1.5, "5.1": 23.0, "5.2": 4.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 0.5, "7.4": 0.0, "7.5": 1.0, "8.1": 1.5, "8.2": 2.0, "8.3": 0.5, "9.1": 2.5, "9.2": 1.5, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 57.0, "score20": 14.25}, "default_rank": 20, "line": "S-T", "start_date": "2009-08-03", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11083", "emp_disp": "V11083", "login": "SAHAPHAP_SA", "name_th": "นาย สหภาพ สวัสดี", "name_en": "Sahaphap Sawaddee", "disp_name": "นาย สหภาพ สวัสดี (Sahaphap Sawaddee)", "dept": "CNC", "mc_score": 3611.5, "set_score": 11.0, "raw_score": 3622.5, "bench_raw": 4210.0, "s60": 51.63, "leave_days": 0.0, "att20": 20.0, "default_tot100": 91.63, "ref2025": null, "default_rank": 1, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11744", "emp_disp": "V11744", "login": "KITTICHAI_NA", "name_th": "นาย กิตติชัย นันทะเพชร", "name_en": "Kittichai Nanthaphet", "disp_name": "นาย กิตติชัย นันทะเพชร (Kittichai Nanthaphet)", "dept": "CNC", "mc_score": 4206.5, "set_score": 3.5, "raw_score": 4210.0, "bench_raw": 4210.0, "s60": 60.0, "leave_days": 13.0, "att20": 7.0, "default_tot100": 87.0, "ref2025": null, "default_rank": 2, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11685", "emp_disp": "V11685", "login": "JIRASAK_RI", "name_th": "นาย จีระศักดิ์ ฤทธิศาสตร์", "name_en": "JIRASAK RITTHISAT", "disp_name": "นาย จีระศักดิ์ ฤทธิศาสตร์ (JIRASAK RITTHISAT)", "dept": "CNC", "mc_score": 3072.25, "set_score": 14.5, "raw_score": 3086.75, "bench_raw": 4210.0, "s60": 43.99, "leave_days": 0.0, "att20": 20.0, "default_tot100": 83.99, "ref2025": null, "default_rank": 3, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11705", "emp_disp": "V11705", "login": "JETNARIN_KE", "name_th": "นาย เจตนรินทร์ เกตุวิริยะกรรม", "name_en": "Jetnarin Ketuwiriyakam", "disp_name": "นาย เจตนรินทร์ เกตุวิริยะกรรม (Jetnarin Ketuwiriyakam)", "dept": "CAM_CNC", "mc_score": 3510.75, "set_score": 2.0, "raw_score": 3512.75, "bench_raw": 4210.0, "s60": 50.06, "leave_days": 13.0, "att20": 7.0, "default_tot100": 77.06, "ref2025": null, "default_rank": 4, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11878", "emp_disp": "V11878", "login": "SITTISAK_KA", "name_th": "นาย สิทธิศักดิ์ คำคูณเมือง", "name_en": "Sittisak Kamkunmaung", "disp_name": "นาย สิทธิศักดิ์ คำคูณเมือง (Sittisak Kamkunmaung)", "dept": "CNC", "mc_score": 2032.0, "set_score": 12.0, "raw_score": 2044.0, "bench_raw": 4210.0, "s60": 29.13, "leave_days": 4.0, "att20": 16.0, "default_tot100": 65.13, "ref2025": null, "default_rank": 5, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11904", "emp_disp": "V11904", "login": "JAKKAPHONG_PH", "name_th": "จักรพงศ์ ภูครองแง่", "name_en": "JAKKAPHONG PHUKRONGNGAE", "disp_name": "จักรพงศ์ ภูครองแง่ (JAKKAPHONG PHUKRONGNGAE)", "dept": "CNC", "mc_score": 314.0, "set_score": 0.0, "raw_score": 314.0, "bench_raw": 4210.0, "s60": 4.48, "leave_days": 0.0, "att20": 20.0, "default_tot100": 44.48, "ref2025": null, "default_rank": 6, "role_group": "TECH"}], "CNC-2": [{"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01319", "emp_disp": "01319", "login": "SEDTHA_NO", "name_th": "นาย เศรษฐา นกน้อย", "name_en": "Sedtha Noknoi", "disp_name": "นาย เศรษฐา นกน้อย (Sedtha Noknoi)", "dept": "CNC", "mc_score": 5195.25, "set_score": 21.5, "raw_score": 5216.75, "bench_raw": 5216.75, "s60": 60.0, "leave_days": 0.0, "att20": 20.0, "default_tot100": 100.0, "ref2025": null, "default_rank": 1, "line": "N-P-Q-R", "start_date": "2009-08-03", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01460", "emp_disp": "01460", "login": "SOMPOP_CH", "name_th": "นาย สมภพ ชะลุนรัมย์", "name_en": "Sompop Chalunram", "disp_name": "นาย สมภพ ชะลุนรัมย์ (Sompop Chalunram)", "dept": "CNC", "mc_score": 4510.25, "set_score": 326.0, "raw_score": 4836.25, "bench_raw": 5216.75, "s60": 55.62, "leave_days": 0.0, "att20": 20.0, "default_tot100": 95.62, "ref2025": null, "default_rank": 2, "line": "N-P-Q-R", "start_date": "2011-07-18", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01519", "emp_disp": "01519", "login": "KANCHANA_CH", "name_th": "นาย กาญจนะ ชำนาญพล", "name_en": "Kanchana Chamnanphon", "disp_name": "นาย กาญจนะ ชำนาญพล (Kanchana Chamnanphon)", "dept": "CNC", "mc_score": 4510.5, "set_score": 131.5, "raw_score": 4642.0, "bench_raw": 5216.75, "s60": 53.39, "leave_days": 0.0, "att20": 20.0, "default_tot100": 93.39, "ref2025": null, "default_rank": 3, "line": "N-P-Q-R", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01461", "emp_disp": "01461", "login": "RATTANAWONG_MA", "name_th": "รัตนาวงศ์ มาน้อย Mr.", "name_en": "Rattanawong Manoi", "disp_name": "รัตนาวงศ์ มาน้อย Mr. (Rattanawong Manoi)", "dept": "CNC", "mc_score": 4187.5, "set_score": 261.0, "raw_score": 4448.5, "bench_raw": 5216.75, "s60": 51.16, "leave_days": 0.0, "att20": 20.0, "default_tot100": 91.16, "ref2025": null, "default_rank": 4, "line": "Rattanawong", "start_date": "Manoi", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01957", "emp_disp": "01957 (เดิม V10216)", "login": "THANAKORN_NO (เดิม THANAKORN_H)", "name_th": "นาย ธนากร หนูหงษ์", "name_en": "Thanakorn Noohong", "disp_name": "นาย ธนากร หนูหงษ์ (Thanakorn Noohong)", "dept": "CNC", "mc_score": 4461.75, "set_score": 3.5, "raw_score": 4465.25, "bench_raw": 5216.75, "s60": 51.36, "leave_days": 1.0, "att20": 19.0, "default_tot100": 90.36, "ref2025": null, "default_rank": 5, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01466", "emp_disp": "01466", "login": "KANAKORN_PH", "name_th": "นาย คณากร เพ็งคุณ", "name_en": "Kanakorn Phengkhun", "disp_name": "นาย คณากร เพ็งคุณ (Kanakorn Phengkhun)", "dept": "CNC", "mc_score": 3460.0, "set_score": 860.0, "raw_score": 4320.0, "bench_raw": 5216.75, "s60": 49.69, "leave_days": 0.0, "att20": 20.0, "default_tot100": 89.69, "ref2025": null, "default_rank": 6, "line": "N-P-Q-R", "start_date": "2011-08-02", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01750", "emp_disp": "01750", "login": "ANUSAK_TAN", "name_th": "นาย อนุศักดิ์ แตงเรือง", "name_en": "Anusak Tangrueng", "disp_name": "นาย อนุศักดิ์ แตงเรือง (Anusak Tangrueng)", "dept": "CNC", "mc_score": 3402.0, "set_score": 358.5, "raw_score": 3760.5, "bench_raw": 5216.75, "s60": 43.25, "leave_days": 0.0, "att20": 20.0, "default_tot100": 83.25, "ref2025": null, "default_rank": 7, "line": "N-P-Q-R", "start_date": "16-Feb-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01309", "emp_disp": "01309", "login": "MONTRI_PA", "name_th": "นาย มนตรี ปะทะโก", "name_en": "Montri Pathako", "disp_name": "นาย มนตรี ปะทะโก (Montri Pathako)", "dept": "CNC", "mc_score": 2858.25, "set_score": 897.5, "raw_score": 3755.75, "bench_raw": 5216.75, "s60": 43.2, "leave_days": 0.0, "att20": 20.0, "default_tot100": 83.2, "ref2025": null, "default_rank": 8, "line": "N-P-Q-R", "start_date": "2009-06-29", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01594", "emp_disp": "01594", "login": "WANLOP_TU", "name_th": "นาย วัลลพ ตุรภิภาค", "name_en": "Wanlop Turaphipak", "disp_name": "นาย วัลลพ ตุรภิภาค (Wanlop Turaphipak)", "dept": "CNC", "mc_score": 3431.5, "set_score": 15.0, "raw_score": 3446.5, "bench_raw": 5216.75, "s60": 39.64, "leave_days": 0.0, "att20": 20.0, "default_tot100": 79.64, "ref2025": null, "default_rank": 9, "line": "V-W", "start_date": "2012-06-16", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01159", "emp_disp": "01159", "login": "AMNAJ_NA", "name_th": "นาย อำนาจ นามเย็น", "name_en": "Amnaj Namyen", "disp_name": "นาย อำนาจ นามเย็น (Amnaj Namyen)", "dept": "CNC", "mc_score": 3392.0, "set_score": 12.0, "raw_score": 3404.0, "bench_raw": 5216.75, "s60": 39.15, "leave_days": 0.0, "att20": 20.0, "default_tot100": 79.15, "ref2025": null, "default_rank": 10, "line": "N-P-Q-R", "start_date": "2006-04-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01400", "emp_disp": "01400", "login": "WEERAPONG_SI", "name_th": "นาย วีรพงษ์ สิตะเสน", "name_en": "Weerapong Sitasen", "disp_name": "นาย วีรพงษ์ สิตะเสน (Weerapong Sitasen)", "dept": "CNC", "mc_score": 2134.75, "set_score": 1246.5, "raw_score": 3381.25, "bench_raw": 5216.75, "s60": 38.89, "leave_days": 0.0, "att20": 20.0, "default_tot100": 78.89, "ref2025": null, "default_rank": 11, "line": "N-P-Q-R", "start_date": "2010-06-23", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01834", "emp_disp": "01834", "login": "WINAI_POR", "name_th": "นาย วินัย พรโสภณ", "name_en": "Winai Pornsopon", "disp_name": "นาย วินัย พรโสภณ (Winai Pornsopon)", "dept": "CNC", "mc_score": 2599.0, "set_score": 742.5, "raw_score": 3341.5, "bench_raw": 5216.75, "s60": 38.43, "leave_days": 0.0, "att20": 20.0, "default_tot100": 78.43, "ref2025": null, "default_rank": 12, "line": "V-W", "start_date": "2019-04-01", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01298", "emp_disp": "01298", "login": "MANUS_KO", "name_th": "นาย มานัส คงสัมฤทธิ", "name_en": "Manus Kongsumrit", "disp_name": "นาย มานัส คงสัมฤทธิ (Manus Kongsumrit)", "dept": "CNC", "mc_score": 2555.0, "set_score": 222.0, "raw_score": 2777.0, "bench_raw": 5216.75, "s60": 31.94, "leave_days": 0.0, "att20": 20.0, "default_tot100": 71.94, "ref2025": null, "default_rank": 13, "line": "S-T", "start_date": "2009-06-01", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01774", "emp_disp": "01774", "login": "SONGSAK_BU", "name_th": "นาย ทรงศักดิ์ บำรุงราช", "name_en": "Songsak Bumrungrat", "disp_name": "นาย ทรงศักดิ์ บำรุงราช (Songsak Bumrungrat)", "dept": "CNC", "mc_score": 1245.25, "set_score": 1457.0, "raw_score": 2702.25, "bench_raw": 5216.75, "s60": 31.08, "leave_days": 0.0, "att20": 20.0, "default_tot100": 71.08, "ref2025": null, "default_rank": 14, "line": "N-P-Q-R", "start_date": "2017-02-16", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01835", "emp_disp": "01835", "login": "NARONG_NU", "name_th": "นาย ณรงค์ น้ำคำ", "name_en": "NARONG NUMKAM", "disp_name": "นาย ณรงค์ น้ำคำ (NARONG NUMKAM)", "dept": "CNC", "mc_score": 2521.5, "set_score": 133.0, "raw_score": 2654.5, "bench_raw": 5216.75, "s60": 30.53, "leave_days": 0.0, "att20": 20.0, "default_tot100": 70.53, "ref2025": null, "default_rank": 15, "line": "S-T", "start_date": "2019-04-01", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01513", "emp_disp": "01513", "login": "PIYA_PR", "name_th": "นาย ปิยะ พรมฟัก", "name_en": "Piya Promfak", "disp_name": "นาย ปิยะ พรมฟัก (Piya Promfak)", "dept": "CNC", "mc_score": 631.75, "set_score": 1784.0, "raw_score": 2415.75, "bench_raw": 5216.75, "s60": 27.78, "leave_days": 0.0, "att20": 20.0, "default_tot100": 67.78, "ref2025": null, "default_rank": 16, "line": "S-T", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01603", "emp_disp": "01603", "login": "ANIWAT_JA", "name_th": "นาย อนิวัฒน์ จักรแก้ว", "name_en": "Aniwat Jakkaew", "disp_name": "นาย อนิวัฒน์ จักรแก้ว (Aniwat Jakkaew)", "dept": "CNC", "mc_score": 1364.5, "set_score": 797.5, "raw_score": 2162.0, "bench_raw": 5216.75, "s60": 24.87, "leave_days": 0.0, "att20": 20.0, "default_tot100": 64.87, "ref2025": null, "default_rank": 17, "line": "S-T", "start_date": "2012-08-07", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01951", "emp_disp": "01951 (เดิม V10840)", "login": "SATHAPORN_WO", "name_th": "นาย สถาพร วงค์พุฒ", "name_en": "Sathaporn WONGPUCH", "disp_name": "นาย สถาพร วงค์พุฒ (Sathaporn WONGPUCH)", "dept": "CNC", "mc_score": 2012.5, "set_score": 28.5, "raw_score": 2041.0, "bench_raw": 5216.75, "s60": 23.47, "leave_days": 4.0, "att20": 16.0, "default_tot100": 59.47, "ref2025": null, "default_rank": 18, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11746", "emp_disp": "V11746", "login": "JAKKARIN_SA", "name_th": "นาย จักรณรินทร์ สติภา", "name_en": "JAKKARIN SATIPHA", "disp_name": "นาย จักรณรินทร์ สติภา (JAKKARIN SATIPHA)", "dept": "CNC", "mc_score": 3468.75, "set_score": 32.5, "raw_score": 3501.25, "bench_raw": 3501.25, "s60": 60.0, "leave_days": 0.0, "att20": 20.0, "default_tot100": 100.0, "ref2025": null, "default_rank": 1, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V10990", "emp_disp": "V10990", "login": "KITTIPONGS", "name_th": "นาย กิจติพงศ์ ศิลาอุดม", "name_en": "Kittipong S.", "disp_name": "นาย กิจติพงศ์ ศิลาอุดม (Kittipong S.)", "dept": "CNC", "mc_score": 3339.0, "set_score": 5.0, "raw_score": 3344.0, "bench_raw": 3501.25, "s60": 57.31, "leave_days": 0.0, "att20": 20.0, "default_tot100": 97.31, "ref2025": null, "default_rank": 2, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11639", "emp_disp": "V11639", "login": "RACHEN_DE", "name_th": "นาย ราเชนทร์ ดีเสมอ", "name_en": "Rachen Deesamer", "disp_name": "นาย ราเชนทร์ ดีเสมอ (Rachen Deesamer)", "dept": "CNC", "mc_score": 2594.5, "set_score": 1.0, "raw_score": 2595.5, "bench_raw": 3501.25, "s60": 44.48, "leave_days": 0.0, "att20": 20.0, "default_tot100": 84.48, "ref2025": null, "default_rank": 3, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11640", "emp_disp": "V11640", "login": "PIKNET_CH", "name_th": "นาย พิคเนตร เชื่อนิตย์", "name_en": "Piknet Chuenit", "disp_name": "นาย พิคเนตร เชื่อนิตย์ (Piknet Chuenit)", "dept": "CNC", "mc_score": 1826.5, "set_score": 0.0, "raw_score": 1826.5, "bench_raw": 3501.25, "s60": 31.3, "leave_days": 0.0, "att20": 20.0, "default_tot100": 71.3, "ref2025": null, "default_rank": 4, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12164", "emp_disp": "V12164", "login": "KRITSANAPORN_CH", "name_th": "KRITSANAPORN CHAIYOTA", "name_en": "KRITSANAPORN CHAIYOTA", "disp_name": "KRITSANAPORN CHAIYOTA", "dept": "CNC", "mc_score": 993.5, "set_score": 0.0, "raw_score": 993.5, "bench_raw": 3501.25, "s60": 17.03, "leave_days": 0.0, "att20": 20.0, "default_tot100": 57.03, "ref2025": null, "default_rank": 5, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12144", "emp_disp": "V12144", "login": "JIRAYU_SE", "name_th": "JIRAYU SEESAKNOK", "name_en": "JIRAYU SEESAKNOK", "disp_name": "JIRAYU SEESAKNOK", "dept": "CNC", "mc_score": 883.5, "set_score": 0.0, "raw_score": 883.5, "bench_raw": 3501.25, "s60": 15.14, "leave_days": 0.0, "att20": 20.0, "default_tot100": 55.14, "ref2025": null, "default_rank": 6, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11144", "emp_disp": "V11144", "login": "PONRAT_SA", "name_th": "พลรัตน์ แสบงบาล", "name_en": "Ponrat Sabongban", "disp_name": "พลรัตน์ แสบงบาล (Ponrat Sabongban)", "dept": "CNC", "mc_score": 834.5, "set_score": 0.0, "raw_score": 834.5, "bench_raw": 3501.25, "s60": 14.3, "leave_days": 0.0, "att20": 20.0, "default_tot100": 54.3, "ref2025": null, "default_rank": 7, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11863", "emp_disp": "V11863", "login": "THAWISAK_KU", "name_th": "ทวีศักดิ์ กุดแกลง", "name_en": "Thawisak Kutthalaeng", "disp_name": "ทวีศักดิ์ กุดแกลง (Thawisak Kutthalaeng)", "dept": "CNC", "mc_score": 591.0, "set_score": 0.0, "raw_score": 591.0, "bench_raw": 3501.25, "s60": 10.13, "leave_days": 0.0, "att20": 20.0, "default_tot100": 50.13, "ref2025": null, "default_rank": 8, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11169", "emp_disp": "V11169", "login": "SAKCHAI", "name_th": "ศักด์ชัย แสนทวีสุข", "name_en": "Sakchai S", "disp_name": "ศักด์ชัย แสนทวีสุข (Sakchai S)", "dept": "CNC", "mc_score": 491.0, "set_score": 0.0, "raw_score": 491.0, "bench_raw": 3501.25, "s60": 8.41, "leave_days": 0.0, "att20": 20.0, "default_tot100": 48.41, "ref2025": null, "default_rank": 9, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12219", "emp_disp": "V12219", "login": "KIRATI_SA", "name_th": "KIRATI SANPRANEE", "name_en": "KIRATI SANPRANEE", "disp_name": "KIRATI SANPRANEE", "dept": "CNC", "mc_score": 253.5, "set_score": 0.0, "raw_score": 253.5, "bench_raw": 3501.25, "s60": 4.34, "leave_days": 0.0, "att20": 20.0, "default_tot100": 44.34, "ref2025": null, "default_rank": 10, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12178", "emp_disp": "V12178", "login": "CHATCHAPONG_KA", "name_th": "CHATCHAPONG KAPINIT", "name_en": "CHATCHAPONG KAPINIT", "disp_name": "CHATCHAPONG KAPINIT", "dept": "CNC", "mc_score": 103.5, "set_score": 0.0, "raw_score": 103.5, "bench_raw": 3501.25, "s60": 1.77, "leave_days": 0.0, "att20": 20.0, "default_tot100": 41.77, "ref2025": null, "default_rank": 11, "role_group": "TECH"}]}, "LEADER": {"CNC-1": [{"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "00706", "login": "WITTAYA_NG", "name_th": "นาย วิทยา งอมสงัด", "name_en": "Wittaya Ngomsa-ngad", "cat_label": "Leader", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01115", "login": "JUCKRAYUT_BO", "name_th": "นาย จักรายุทธ บุตรอินทร์", "name_en": "Juckrayut Boot-in", "cat_label": "Leader", "line": "G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01329", "login": "YONGYUT_KH", "name_th": "นาย ยงยุทธ แคนเสาร์", "name_en": "Yongyut Khaensao", "cat_label": "Leader", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01335", "login": "YUTTAPONG_NA", "name_th": "นาย ยุทธพงษ์ นาคเงิน", "name_en": "Yutthaphong Nakngoen", "cat_label": "Leader", "line": "CNC-T1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01631", "login": "SATHIAN_PA", "name_th": "นาย เสถียร ปะนามะโกสา", "name_en": "Sathian Panamakosa", "cat_label": "Leader", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01294", "login": "KITTIPONG_YA", "name_th": "นาย กิตติพงษ์ ยารังษี", "name_en": "Kittipong Yarangsee", "cat_label": "Sub-Leader/Leader", "line": "G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01150", "login": "KITTIPHOP_CH", "name_th": "นาย กิตติภพ ชายหาด", "name_en": "Kittiphop Chayhad", "cat_label": "Sub-Leader/Leader", "line": "G-H-J-K", "is_perm_group": true}], "CNC-2": [{"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "00841", "login": "PANUPONG_MU", "name_th": "นาย ภาณุพงศ์ มุมมาลา", "name_en": "Panupong Mummala", "cat_label": "Leader", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01334", "login": "SONGYOOT_YO", "name_th": "นาย ทรงยศ อยู่ยืน", "name_en": "Songyoot Youyeun", "cat_label": "Leader", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01397", "login": "NIWAT_BU", "name_th": "นาย นิวัฒน์ บุดดีแหบ", "name_en": "Niwat Buddeehaeb", "cat_label": "Leader", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01588", "login": "MANOP_WU", "name_th": "นาย มานพ วุฒิการณ์", "name_en": "Manop Wutthikan", "cat_label": "Leader", "line": "S-T", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01621", "login": "TINNAKORN_MA", "name_th": "นาย ทินกร มะลิหอม", "name_en": "Tinnakorn Malihom", "cat_label": "Leader", "line": "V-W", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "00839", "login": "PRASOPCHAI_SU", "name_th": "นาย ประสพชัย สุเมผา", "name_en": "Prasopchai Sumepha", "cat_label": "Leader", "line": "S-T", "is_perm_group": true}]}, "ASST": {"CNC-1": [{"zone": "CNC-1", "role_group": "ASST", "emp_clean": "00563", "login": "JAMNONG_IN", "name_th": "นาย จำนง อินจินดา", "name_en": "Jamnong Injinda", "cat_label": "Asst.Supervisor", "line": "G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ASST", "emp_clean": "00683", "login": "THANATHON_NO", "name_th": "นาย ธนธรณ์ น้อยมาลา", "name_en": "Thanathon Noimala", "cat_label": "Asst.Supervisor", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ASST", "emp_clean": "00227", "login": "NATTINEE_SA", "name_th": "นางสาว ณัฎฐินี สายสิงห์", "name_en": "Nattinee Saising", "cat_label": "Asst.Supervisor", "line": "G-H-J-K", "is_perm_group": true}], "CNC-2": [{"zone": "CNC-2", "role_group": "ASST", "emp_clean": "01151", "login": "SATHEAN_JA", "name_th": "นาย เสถียร ใจเด็ด", "name_en": "Sathean Jaided", "cat_label": "Asst.Supervisor", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ASST", "emp_clean": "01175", "login": "ANURAK_YO", "name_th": "นาย อนุรักษ์ โยธาทูน", "name_en": "Anurak Yotatoon", "cat_label": "Asst.Supervisor", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ASST", "emp_clean": "01315", "login": "SONGKRAN_TO", "name_th": "นาย สงการ ทองสิงห์", "name_en": "Songkran Tongsing", "cat_label": "Asst.Supervisor", "line": "N-P-Q-R", "is_perm_group": true}]}, "ENGINEER": {"CNC-1": [{"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01896", "login": "SAKKARIN_CH", "name_th": "นาย ศักรินทร์ ช่วยประสิทธิ์", "name_en": "Sakkarin Chouprasit", "cat_label": "Engineer", "line": "CNC-T1 / G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01841", "login": "WIRAYUT", "name_th": "นาย วีรยุทธ แวงมล", "name_en": "Wirayut Waengmon", "cat_label": "Engineer", "line": "EG1 / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01688", "login": "SONGRIT", "name_th": "นาย ทรงฤทธิ์ วรกาล", "name_en": "Songrit Worakarn", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01947", "login": "SAKDINAN_WO", "name_th": "นาย ศักดิ์นันท์ วงศ์ศรีชา", "name_en": "Sakdinan Wongsricha", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01874", "login": "PATIPAN_CH", "name_th": "นาย ปฏิภาณ จงดี", "name_en": "Patipan Chongdee", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01916", "login": "WADCHARA", "name_th": "นาย วัชระ บุญดล", "name_en": "Wadchara Bundon", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "00404", "login": "TUI", "name_th": "นาง ศศิภา สุขประเสริฐ", "name_en": "Sasipha Sukprasert", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01899", "login": "NATTHAPHONG", "name_th": "นาย ณัฐพงษ์ ภูพวก", "name_en": "Natthaphong Phuphuak", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}], "CNC-2": [{"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01939", "login": "WEERAPAT_WO", "name_th": "นาย วีรภัทร วงษ์พวง", "name_en": "Weerapat Wongphuang", "cat_label": "Engineer", "line": "CNC-T2 / S-T-V-W", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01895", "login": "NATTAWUT_TR", "name_th": "นาย ณัฐวุฒิ ตรีเพ็ชร", "name_en": "Nattawut Treepetch", "cat_label": "Engineer", "line": "CNC-T2 / S-T", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01462", "login": "SOMCHAI_KA", "name_th": "นาย สมชาย ขันทะ", "name_en": "Somchai Kanta", "cat_label": "Engineer", "line": "EG / CNC-2", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01854", "login": "TEERASAK", "name_th": "นาย ธีรศักดิ์ สอนเพียร", "name_en": "Teerasak Sornphian", "cat_label": "Engineer", "line": "EG2 / CNC-2", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "V12129", "login": "PRICHA_HI", "name_th": "นาย ปรีชา หิตะเทศ", "name_en": "Pricha Hittathet", "cat_label": "CAM/Engineer", "line": "CAM_CNC / CNC-2", "is_perm_group": false}]}}};
+
+const LS_GAS_URL = "cnc_eval2026_gas_url";
+const LS_LAST_EVALUATOR = "cnc_eval2026_last_eval_v2";
+const LS_LOCAL_RECORDS = "cnc_eval2026_local_records_v2";
+const LS_PENDING_QUEUE = "cnc_eval2026_pending_queue_v2";
+
+let currentRoleGroup = "TECH"; // TECH | LEADER | ASST | ENGINEER
+let currentZone = "CNC-1";
+let currentEvaluatorKey = "";
+let currentTargetEmpId = "";
+let currentScores = {};
+let cloudRawRecords = [];
+
+function getGasUrl() {
+  return (localStorage.getItem(LS_GAS_URL) || DEFAULT_GAS_WEBAPP_URL || "").trim();
+}
+function getLocalRecords() {
+  try { return JSON.parse(localStorage.getItem(LS_LOCAL_RECORDS) || "{}"); } catch (e) { return {}; }
+}
+function saveLocalRecords(obj) { localStorage.setItem(LS_LOCAL_RECORDS, JSON.stringify(obj)); }
+function getPendingQueue() {
+  try { return JSON.parse(localStorage.getItem(LS_PENDING_QUEUE) || "[]"); } catch (e) { return []; }
+}
+function savePendingQueue(arr) {
+  localStorage.setItem(LS_PENDING_QUEUE, JSON.stringify(arr));
+  updateConnectionBadge();
+}
+
+function showToast(msg, bg) {
+  const el = document.getElementById("toastBox");
+  el.textContent = msg;
+  el.style.background = bg || "#0f172a";
+  el.style.display = "block";
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => { el.style.display = "none"; }, 3600);
+}
+
+function updateConnectionBadge() {
+  const pill = document.getElementById("connStatus");
+  const url = getGasUrl();
+  const q = getPendingQueue();
+  const qBadge = document.getElementById("pendingSyncBadge");
+  if (q.length > 0) {
+    qBadge.style.display = "inline";
+    qBadge.textContent = `⏳ รอซิงก์ขึ้น Google Sheet ${q.length} รายการ`;
+  } else {
+    qBadge.style.display = "none";
+  }
+  if (url) {
+    pill.className = "status-pill status-ok";
+    pill.textContent = q.length > 0 ? `☁️ เชื่อมต่อแล้ว (ค้าง ${q.length})` : "☁️ เชื่อมต่อ Google Sheet แล้ว";
+  } else {
+    pill.className = "status-pill status-warn";
+    pill.textContent = "⚠️ โหมดบันทึกในเครื่อง (ยังไม่ได้ใส่ URL)";
+  }
+}
+
+function findPersonAcrossAllTiers(empQuery, roleHint) {
+  if (!empQuery) return null;
+  const q = String(empQuery).trim().toUpperCase();
+  const qPad = /^\d+$/.test(q) ? q.padStart(5, "0") : q;
+  const searchOrder = roleHint && MASTER_DATA.evaluatees_by_role[roleHint]
+    ? [roleHint, "TECH", "LEADER", "ASST", "ENGINEER"]
+    : ["TECH", "LEADER", "ASST", "ENGINEER"];
+
+  for (const rg of searchOrder) {
+    for (const z of ["CNC-1", "CNC-2"]) {
+      for (const p of (MASTER_DATA.evaluatees_by_role[rg][z] || [])) {
+        const ec = String(p.emp_clean || "").toUpperCase();
+        const lg = String(p.login || "").toUpperCase().split(" ")[0];
+        if (ec === q || ec === qPad || lg === q) {
+          return { roleGroup: rg, zone: z, person: p };
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function initApp() {
+  const params = new URLSearchParams(window.location.search);
+
+  const gasParam = params.get("gas");
+  if (gasParam && gasParam.startsWith("https://script.google.com/")) {
+    localStorage.setItem(LS_GAS_URL, gasParam.trim());
+  }
+
+  const roleParam = (params.get("role") || "").toUpperCase();
+  if (MASTER_DATA.role_meta[roleParam]) {
+    currentRoleGroup = roleParam;
+  }
+
+  const zoneParam = params.get("zone");
+  if (zoneParam === "CNC-1" || zoneParam === "CNC-2") {
+    currentZone = zoneParam;
+  }
+
+  const empParam = params.get("emp") || params.get("tech") || params.get("id");
+  let deepHit = null;
+  if (empParam) {
+    deepHit = findPersonAcrossAllTiers(empParam, roleParam);
+    if (deepHit) {
+      currentRoleGroup = deepHit.roleGroup;
+      currentZone = deepHit.zone;
+    }
+  }
+
+  syncRoleGroupUI();
+  document.getElementById("zoneSelect").value = currentZone;
+  populateEvaluatorSelect();
+  populateTargetSelect();
+
+  if (deepHit) {
+    currentTargetEmpId = deepHit.person.emp_clean;
+    document.getElementById("targetSelect").value = currentTargetEmpId;
+    renderTargetHero();
+    const meta = MASTER_DATA.role_meta[currentRoleGroup];
+    const banner = document.getElementById("qrDeepLinkBanner");
+    banner.style.display = "flex";
+    document.getElementById("qrDeepLinkText").textContent =
+      `[${meta.chain_badge}] (${deepHit.zone}) รหัส ${deepHit.person.emp_clean} — ${deepHit.person.name_th}`;
+  }
+
+  renderRubricSections();
+  loadCurrentPairScores();
+  updateConnectionBadge();
+
+  if (getGasUrl()) {
+    fetchCloudData(false);
+  }
+}
+
+function unlockSelector() {
+  document.getElementById("qrDeepLinkBanner").style.display = "none";
+  document.getElementById("targetSelect").focus();
+}
+
+function syncRoleGroupUI() {
+  ["TECH", "LEADER", "ASST", "ENGINEER"].forEach(rg => {
+    const btn = document.getElementById("rc_" + rg);
+    if (btn) btn.classList.toggle("active", rg === currentRoleGroup);
+  });
+  const meta = MASTER_DATA.role_meta[currentRoleGroup];
+  document.getElementById("evaluatorLabel").textContent =
+    `1️⃣ สายการผลิต และชื่อผู้ประเมิน (${meta.evaluator_title_th})`;
+  document.getElementById("targetLabel").textContent =
+    `2️⃣ เลือกผู้รับการประเมิน — กลุ่ม ${meta.title_th}`;
+  document.getElementById("empFilterKind").style.display =
+    currentRoleGroup === "TECH" ? "block" : "none";
+}
+
+function onSelectRoleGroup(rg) {
+  currentRoleGroup = rg;
+  currentTargetEmpId = "";
+  syncRoleGroupUI();
+  populateEvaluatorSelect();
+  populateTargetSelect();
+  renderRubricSections();
+  loadCurrentPairScores();
+}
+
+function onZoneChange() {
+  currentZone = document.getElementById("zoneSelect").value;
+  currentTargetEmpId = "";
+  populateEvaluatorSelect();
+  populateTargetSelect();
+  loadCurrentPairScores();
+}
+
+function populateEvaluatorSelect() {
+  const sel = document.getElementById("evaluatorSelect");
+  const list = (MASTER_DATA.evaluators_by_role[currentRoleGroup] || {})[currentZone] || [];
+  sel.innerHTML = "";
+
+  const lsKey = `${LS_LAST_EVALUATOR}_${currentRoleGroup}_${currentZone}`;
+  const saved = localStorage.getItem(lsKey) || "";
+
+  list.forEach((ev, idx) => {
+    const key = ev.id || ev.login;
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = `[${ev.id}] ${ev.name_th} (${ev.role})`;
+    sel.appendChild(opt);
+    if (saved && saved === key) sel.value = key;
+    else if (!saved && idx === 0) sel.value = key;
+  });
+  currentEvaluatorKey = sel.value;
+}
+
+function onEvaluatorChange() {
+  currentEvaluatorKey = document.getElementById("evaluatorSelect").value;
+  localStorage.setItem(`${LS_LAST_EVALUATOR}_${currentRoleGroup}_${currentZone}`, currentEvaluatorKey);
+  populateTargetSelect();
+  loadCurrentPairScores();
+}
+
+function makeRecordKey(roleGroup, zone, evalKey, targetEmpId) {
+  return `2026|${roleGroup}|${zone}|${evalKey}|${targetEmpId}`;
+}
+
+function hasScoredPair(roleGroup, zone, evalKey, targetEmpId) {
+  const rKey = makeRecordKey(roleGroup, zone, evalKey, targetEmpId);
+  if (getLocalRecords()[rKey]) return true;
+  return cloudRawRecords.some(r => String(r.Record_Key) === rKey);
+}
+
+function populateTargetSelect() {
+  const sel = document.getElementById("targetSelect");
+  const kindFilter = currentRoleGroup === "TECH" ? document.getElementById("empFilterKind").value : "ALL";
+  const prevVal = currentTargetEmpId || sel.value;
+  sel.innerHTML = "";
+
+  const list = ((MASTER_DATA.evaluatees_by_role[currentRoleGroup] || {})[currentZone] || []).filter(p => {
+    if (kindFilter === "PERM") return p.is_perm_group;
+    if (kindFilter === "SUB") return !p.is_perm_group;
+    return true;
+  });
+
+  list.forEach((p, idx) => {
+    const opt = document.createElement("option");
+    opt.value = p.emp_clean;
+    const done = hasScoredPair(currentRoleGroup, currentZone, currentEvaluatorKey, p.emp_clean);
+    opt.textContent = `${done ? "✔ " : ""}[${p.emp_clean}] ${p.name_th} (${p.cat_label})`;
+    sel.appendChild(opt);
+    if (prevVal && p.emp_clean === prevVal) sel.value = prevVal;
+    else if (!prevVal && idx === 0) sel.value = p.emp_clean;
+  });
+  currentTargetEmpId = sel.value;
+  renderTargetHero();
+}
+
+function onTargetChange() {
+  currentTargetEmpId = document.getElementById("targetSelect").value;
+  renderTargetHero();
+  loadCurrentPairScores();
+}
+
+function getCurrentTargetObj() {
+  return (((MASTER_DATA.evaluatees_by_role[currentRoleGroup] || {})[currentZone]) || [])
+    .find(p => p.emp_clean === currentTargetEmpId) || null;
+}
+
+function getCurrentEvaluatorObj() {
+  return (((MASTER_DATA.evaluators_by_role[currentRoleGroup] || {})[currentZone]) || [])
+    .find(e => (e.id || e.login) === currentEvaluatorKey) || null;
+}
+
+function renderTargetHero() {
+  const box = document.getElementById("targetHeroCard");
+  const p = getCurrentTargetObj();
+  const meta = MASTER_DATA.role_meta[currentRoleGroup];
+  if (!p) {
+    box.innerHTML = "<div>ไม่พบรายชื่อผู้รับการประเมินในตัวกรองนี้</div>";
+    return;
+  }
+  const done = hasScoredPair(currentRoleGroup, currentZone, currentEvaluatorKey, p.emp_clean);
+  box.innerHTML = `
+    <div>
+      <div>
+        <span class="badge-dark">${p.zone}</span>
+        <span class="badge-blue">รหัส: ${p.emp_clean}</span>
+        <span class="badge-chain">${meta.chain_badge}</span>
+        ${done ? '<span style="background:#dcfce7;color:#166534;font-weight:800;font-size:0.8rem;padding:3px 9px;border-radius:6px;">✔ ประเมินแล้ว (แก้ไขซ้ำได้)</span>' : ''}
+      </div>
+      <h2>${p.name_th}</h2>
+      <div class="sub-info">ชื่ออังกฤษ: <strong>${p.name_en}</strong> (${p.login}) • ตำแหน่ง: <strong>${p.cat_label}</strong> • Line: <strong>${p.line || p.dept || p.zone}</strong></div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:0.78rem; color:#64748b;">แบบฟอร์ม: ${meta.item_count} ข้อ (เต็ม 80)</div>
+      <code style="font-size:0.76rem; background:#e2e8f0; padding:3px 8px; border-radius:6px;">?role=${currentRoleGroup}&amp;emp=${p.emp_clean}</code>
+    </div>
+  `;
+}
+
+function buildQuickChips(maxPts) {
+  if (maxPts === 1) return [0, 0.5, 1];
+  if (maxPts === 2) return [0, 1, 1.5, 2];
+  if (maxPts === 3) return [0, 1, 2, 2.5, 3];
+  if (maxPts === 4) return [0, 1, 2, 3, 3.5, 4];
+  if (maxPts === 5) return [0, 2, 3, 4, 5];
+  if (maxPts === 30) return [0, 10, 15, 20, 25, 28, 30];
+  return [0, maxPts];
+}
+
+function safeDomId(code) {
+  return String(code).replace(/[^a-zA-Z0-9]/g, "_");
+}
+
+function getActiveRubric() {
+  return MASTER_DATA.rubrics[currentRoleGroup] || [];
+}
+
+function renderRubricSections() {
+  currentScores = {};
+  const wrap = document.getElementById("sectionsContainer");
+  const rubric = getActiveRubric();
+
+  wrap.innerHTML = rubric.map(sec => {
+    const rowsHtml = sec.items.map(it => {
+      const domId = safeDomId(it.code);
+      const chips = buildQuickChips(it.max).map(v =>
+        `<button type="button" class="chip-btn" data-code="${it.code}" data-val="${v}" onclick="setItemScore('${it.code}', ${v}, ${it.max})">${v}</button>`
+      ).join("");
+      return `
+        <div class="item-row">
+          <div class="item-info">
+            <span class="item-code">${it.code}</span>
+            <span class="item-desc">${it.desc}</span>
+            <span class="item-max">(เต็ม ${it.max} คะแนน)</span>
+          </div>
+          <div class="score-controls">
+            ${chips}
+            <input type="number" step="0.5" min="0" max="${it.max}" id="inp_${domId}"
+              class="num-input" value="0" onchange="setItemScore('${it.code}', this.value, ${it.max})">
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    return `
+      <div class="sec-card">
+        <div class="sec-head" style="background:#${sec.color};">
+          <span>${sec.sec_title}</span>
+          <span class="sec-score-pill" id="secSum_${sec.sec_no}">0.0 / ${sec.max_pts}</span>
+        </div>
+        <div>${rowsHtml}</div>
+      </div>
+    `;
+  }).join("");
+  recalcLiveTotals();
+}
+
+function setItemScore(code, val, maxPts) {
+  let num = Number(val);
+  if (isNaN(num) || num < 0) num = 0;
+  if (num > maxPts) num = maxPts;
+  currentScores[code] = Math.round(num * 100) / 100;
+
+  const inp = document.getElementById("inp_" + safeDomId(code));
+  if (inp) inp.value = currentScores[code];
+
+  document.querySelectorAll(`.chip-btn[data-code="${code}"]`).forEach(btn => {
+    btn.classList.toggle("active", Number(btn.dataset.val) === currentScores[code]);
+  });
+
+  recalcLiveTotals();
+}
+
+function recalcLiveTotals() {
+  let grandTotal = 0;
+  getActiveRubric().forEach(sec => {
+    let sTot = 0;
+    sec.items.forEach(it => { sTot += Number(currentScores[it.code] || 0); });
+    grandTotal += sTot;
+    const pill = document.getElementById("secSum_" + sec.sec_no);
+    if (pill) pill.textContent = `${sTot.toFixed(1)} / ${sec.max_pts}`;
+  });
+  const ratio20 = (grandTotal / 80.0) * 20.0;
+  document.getElementById("liveTotal80").textContent = grandTotal.toFixed(1);
+  document.getElementById("liveRatio20").textContent = ratio20.toFixed(2) + "%";
+}
+
+function fillPreset(multiplier) {
+  getActiveRubric().forEach(sec => {
+    sec.items.forEach(it => {
+      const v = Math.round((it.max * multiplier) * 2) / 2;
+      setItemScore(it.code, v, it.max);
+    });
+  });
+}
+
+function clearCurrentForm() {
+  getActiveRubric().forEach(sec => {
+    sec.items.forEach(it => setItemScore(it.code, 0, it.max));
+  });
+  document.getElementById("remarkInput").value = "";
+}
+
+function loadCurrentPairScores() {
+  if (!currentTargetEmpId || !currentEvaluatorKey) return;
+  const rKey = makeRecordKey(currentRoleGroup, currentZone, currentEvaluatorKey, currentTargetEmpId);
+  const localObj = getLocalRecords();
+
+  let savedScores = null;
+  let savedRemark = "";
+
+  if (localObj[rKey] && localObj[rKey].scores) {
+    savedScores = localObj[rKey].scores;
+    savedRemark = localObj[rKey].remark || "";
+  } else {
+    const cloudHit = cloudRawRecords.find(r => String(r.Record_Key) === rKey);
+    if (cloudHit && cloudHit.Scores_JSON) {
+      try { savedScores = JSON.parse(cloudHit.Scores_JSON); } catch (e) { savedScores = null; }
+      savedRemark = cloudHit.Remark || "";
+    }
+  }
+
+  if (savedScores) {
+    getActiveRubric().forEach(sec => {
+      sec.items.forEach(it => setItemScore(it.code, Number(savedScores[it.code] || 0), it.max));
+    });
+    document.getElementById("remarkInput").value = savedRemark;
+  } else {
+    clearCurrentForm();
+  }
+}
+
+async function submitEvaluation() {
+  const target = getCurrentTargetObj();
+  const evaluator = getCurrentEvaluatorObj();
+  if (!target || !evaluator) {
+    alert("กรุณาเลือกผู้ประเมินและผู้รับการประเมินก่อนบันทึกครับ");
+    return;
+  }
+
+  const orderedCodes = [];
+  let total80 = 0;
+  getActiveRubric().forEach(sec => {
+    sec.items.forEach(it => {
+      orderedCodes.push(it.code);
+      total80 += Number(currentScores[it.code] || 0);
+    });
+  });
+
+  if (total80 === 0) {
+    if (!confirm("คะแนนรวมเป็น 0.0 / 80 คะแนน ยืนยันต้องการบันทึกใช่หรือไม่?")) return;
+  }
+
+  const recordKey = makeRecordKey(currentRoleGroup, currentZone, evaluator.id || evaluator.login, target.emp_clean);
+  const payload = {
+    record_key: recordKey,
+    eval_year: 2026,
+    target_role_group: currentRoleGroup,
+    zone: currentZone,
+    evaluator_id: evaluator.id || evaluator.login,
+    evaluator_login: evaluator.login,
+    evaluator_name_th: evaluator.name_th,
+    evaluator_role: evaluator.role,
+    target_emp_id: target.emp_clean,
+    target_login: target.login,
+    target_name_th: target.name_th,
+    target_name_en: target.name_en,
+    emp_type: target.cat_label,
+    line: target.line || target.dept || currentZone,
+    ordered_codes: orderedCodes,
+    scores: Object.assign({}, currentScores),
+    total_80: Math.round(total80 * 100) / 100,
+    ratio_20: Math.round(((total80 / 80.0) * 20.0) * 100) / 100,
+    remark: document.getElementById("remarkInput").value.trim(),
+    client_saved_at: new Date().toISOString()
+  };
+
+  const localObj = getLocalRecords();
+  localObj[recordKey] = payload;
+  saveLocalRecords(localObj);
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.textContent = "⏳ กำลังส่งข้อมูลเข้า Google Sheet...";
+
+  const gasUrl = getGasUrl();
+  if (!gasUrl) {
+    enqueuePending(payload);
+    btn.disabled = false;
+    btn.textContent = "💾 บันทึก & ส่งผลเข้า Google Sheet";
+    populateTargetSelect();
+    showToast(`✅ บันทึกในเครื่องแล้ว (${total80.toFixed(1)}/80 ➔ ${payload.ratio_20.toFixed(2)}%)`, "#b45309");
+    return;
+  }
+
+  try {
+    const resp = await fetch(gasUrl, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    const resJson = await resp.json();
+    if (resJson && resJson.ok) {
+      removeFromPending(recordKey);
+      showToast(`✅ ส่งเข้า Google Sheet สำเร็จ! ${target.name_th}: ${total80.toFixed(1)}/80 (${payload.ratio_20.toFixed(2)}%)`, "#15803d");
+      fetchCloudData(false);
+    } else {
+      throw new Error((resJson && resJson.error) || "Unknown response");
+    }
+  } catch (err) {
+    enqueuePending(payload);
+    showToast(`⚠️ เน็ตสะดุด เก็บเข้าคิวสำรองในเครื่องแล้ว (${target.name_th})`, "#b45309");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "💾 บันทึก & ส่งผลเข้า Google Sheet";
+    populateTargetSelect();
+  }
+}
+
+function enqueuePending(payload) {
+  const q = getPendingQueue().filter(x => x.record_key !== payload.record_key);
+  q.push(payload);
+  savePendingQueue(q);
+}
+function removeFromPending(recordKey) {
+  savePendingQueue(getPendingQueue().filter(x => x.record_key !== recordKey));
+}
+
+async function syncPendingQueue() {
+  const gasUrl = getGasUrl();
+  if (!gasUrl) { openConfigModal(); return; }
+  const q = getPendingQueue();
+  if (q.length === 0) {
+    showToast("✅ ไม่มีคิวค้าง ทุกข้อมูลซิงก์ขึ้น Google Sheet ครบแล้ว", "#15803d");
+    return;
+  }
+  try {
+    const resp = await fetch(gasUrl, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ records: q })
+    });
+    const data = await resp.json();
+    if (data && data.ok) {
+      savePendingQueue([]);
+      showToast(`✅ ซิงก์คิวค้างทั้ง ${q.length} รายการสำเร็จ!`, "#15803d");
+      fetchCloudData(true);
+    }
+  } catch (e) {
+    showToast("❌ ซิงก์ไม่สำเร็จ กรุณาตรวจสอบลิงก์ Google Sheet URL", "#dc2626");
+  }
+}
+
+async function fetchCloudData(notify) {
+  const gasUrl = getGasUrl();
+  if (!gasUrl) { if (notify) openConfigModal(); return; }
+  try {
+    const resp = await fetch(gasUrl + (gasUrl.includes("?") ? "&" : "?") + "action=all&t=" + Date.now());
+    const data = await resp.json();
+    if (data && data.ok && Array.isArray(data.raw_scores)) {
+      cloudRawRecords = data.raw_scores;
+      populateTargetSelect();
+      renderSummaryTable();
+      if (notify) showToast(`🔄 ดึงข้อมูลล่าสุดจาก Google Sheet สำเร็จ (${cloudRawRecords.length} รายการ)`, "#1d4ed8");
+    }
+  } catch (e) {
+    if (notify) showToast("⚠️ ไม่สามารถดึงข้อมูลจาก Google Sheet ได้ในขณะนี้", "#b45309");
+  }
+}
+
+function getMergedEvaluations() {
+  const map = {};
+  cloudRawRecords.forEach(r => {
+    if (r.Record_Key) {
+      map[String(r.Record_Key)] = {
+        role_group: String(r.Target_Role_Group || "TECH"),
+        zone: r.Zone,
+        eval_name: r.Evaluator_Name_TH || r.Evaluator_Login,
+        target_emp_id: String(r.Target_EmpID),
+        total_80: Number(r.Total_Score_80) || 0
+      };
+    }
+  });
+  const locObj = getLocalRecords();
+  Object.keys(locObj).forEach(k => {
+    const loc = locObj[k];
+    map[k] = {
+      role_group: String(loc.target_role_group || "TECH"),
+      zone: loc.zone,
+      eval_name: loc.evaluator_name_th || loc.evaluator_login,
+      target_emp_id: String(loc.target_emp_id),
+      total_80: Number(loc.total_80) || 0
+    };
+  });
+  return Object.values(map);
+}
+
+function renderSummaryTable() {
+  const rf = document.getElementById("sumRoleFilter").value;
+  const zf = document.getElementById("sumZoneFilter").value;
+  const evals = getMergedEvaluations();
+
+  const roleList = rf === "ALL" ? ["TECH", "LEADER", "ASST", "ENGINEER"] : [rf];
+  const people = [];
+  roleList.forEach(rg => {
+    ["CNC-1", "CNC-2"].forEach(z => {
+      if (zf !== "ALL" && z !== zf) return;
+      (MASTER_DATA.evaluatees_by_role[rg][z] || []).forEach(p => people.push(p));
+    });
+  });
+
+  const tbody = document.getElementById("summaryTbody");
+  tbody.innerHTML = people.map((p, i) => {
+    const hits = evals.filter(e => e.role_group === p.role_group && e.target_emp_id === String(p.emp_clean));
+    const cnt = hits.length;
+    const sum80 = hits.reduce((a, b) => a + b.total_80, 0);
+    const avg80 = cnt > 0 ? (sum80 / cnt) : 0;
+    const ratio20 = cnt > 0 ? ((avg80 / 80.0) * 20.0) : 0;
+    const names = hits.map(h => `${h.eval_name} (${h.total_80.toFixed(1)})`).join(", ");
+    const meta = MASTER_DATA.role_meta[p.role_group];
+
+    return `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${meta.chain_badge}</strong></td>
+        <td><strong>${p.zone}</strong></td>
+        <td><code>${p.emp_clean}</code></td>
+        <td><strong>${p.name_th}</strong><div style="font-size:0.75rem;color:#64748b;">${p.name_en} (${p.cat_label})</div></td>
+        <td style="text-align:center;font-weight:700;">${cnt > 0 ? cnt + " คน" : '<span style="color:#94a3b8;">รอประเมิน</span>'}</td>
+        <td style="text-align:right;">${cnt > 0 ? sum80.toFixed(1) : "-"}</td>
+        <td style="text-align:right;font-weight:700;color:#1d4ed8;">${cnt > 0 ? avg80.toFixed(2) : "-"}</td>
+        <td style="text-align:right;font-weight:800;color:#15803d;font-size:0.95rem;">${cnt > 0 ? ratio20.toFixed(2) + "%" : "-"}</td>
+        <td style="font-size:0.79rem;color:#334155;">${names || "-"}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function switchView(view) {
+  const isForm = view === "form";
+  document.getElementById("viewForm").style.display = isForm ? "block" : "none";
+  document.getElementById("viewSummary").style.display = isForm ? "none" : "block";
+  document.getElementById("bottomSubmitBar").style.display = isForm ? "block" : "none";
+  document.getElementById("tabFormBtn").classList.toggle("active", isForm);
+  document.getElementById("tabSummaryBtn").classList.toggle("active", !isForm);
+  if (!isForm) renderSummaryTable();
+}
+
+function openConfigModal() {
+  document.getElementById("gasUrlInput").value = getGasUrl();
+  document.getElementById("configModal").style.display = "flex";
+}
+function closeConfigModal() { document.getElementById("configModal").style.display = "none"; }
+function saveConfigUrl() {
+  const val = document.getElementById("gasUrlInput").value.trim();
+  localStorage.setItem(LS_GAS_URL, val);
+  closeConfigModal();
+  updateConnectionBadge();
+  if (val) { syncPendingQueue(); fetchCloudData(true); }
+}
+
+function exportBackupJSON() {
+  const blob = new Blob([JSON.stringify({
+    exported_at: new Date().toISOString(),
+    local_records: getLocalRecords(),
+    cloud_records: cloudRawRecords
+  }, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "CNC_4Tier_Eval_Backup_2026.json";
+  a.click();
+}
+
+window.addEventListener("DOMContentLoaded", initApp);
+</script>
+</body>
+</html>
