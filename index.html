@@ -187,12 +187,12 @@
     align-items: center;
   }
   .btn-sm {
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 8px;
     border: 1.5px solid #cbd5e1;
     background: #fff;
     font-family: inherit;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
     cursor: pointer;
     color: #334155;
@@ -203,14 +203,6 @@
     touch-action: manipulation;
   }
   .btn-sm:active { background: #e2e8f0; }
-  @media (max-width: 600px) {
-    .quick-actions .btn-sm {
-      flex: 1 1 calc(50% - 4px);
-      font-size: 0.78rem;
-      padding: 8px 6px;
-      text-align: center;
-    }
-  }
 
   /* Sections and Evaluation Rows */
   .sec-card {
@@ -412,12 +404,7 @@
 <div id="toastBox" class="toast"></div>
 
 <div class="container">
-  <div class="tabs">
-    <button type="button" id="tabFormBtn" class="tab-btn active" onclick="switchView('form')">✍️ หน้าให้คะแนนประเมินผล (เต็ม 80 ➔ 20%)</button>
-    <button type="button" id="tabSummaryBtn" class="tab-btn" onclick="switchView('summary')">📊 ตารางสรุปคะแนนอัตราส่วน 20% ครบทั้ง 4 ระดับ</button>
-  </div>
-
-  <!-- VIEW 1: SCORING FORM -->
+  <!-- SCORING FORM -->
   <div id="viewForm">
     <div id="qrDeepLinkBanner" class="qr-banner">
       <div>
@@ -478,8 +465,6 @@
     <div id="targetHeroCard" class="tech-hero"></div>
 
     <div class="quick-actions">
-      <button type="button" class="btn-sm" onclick="fillPreset(1.0)">⚡ ตั้งค่าเริ่มต้นเต็มทุกข้อ (80/80) แล้วค่อยหักลด</button>
-      <button type="button" class="btn-sm" onclick="fillPreset(0.8)">⚡ ตั้งค่าเริ่มต้น 80% (~64/80)</button>
       <button type="button" class="btn-sm" onclick="clearCurrentForm()" style="color:#dc2626;">🗑️ ล้างคะแนนเป็น 0</button>
       <span id="pendingSyncBadge" style="margin-left:auto; font-size:0.82rem; font-weight:700; color:#b45309; display:none;"></span>
     </div>
@@ -489,58 +474,6 @@
     <div class="card">
       <label class="field-lbl">💬 ความคิดเห็นเพิ่มเติม / จุดเด่น / ข้อเสนอแนะจากผู้ประเมิน (Remark)</label>
       <textarea id="remarkInput" rows="3" placeholder="ระบุความคิดเห็นหรือหมายเหตุประกอบการประเมิน (ถ้ามี)..."></textarea>
-    </div>
-  </div>
-
-  <!-- VIEW 2: SUMMARY TABLE ACROSS ALL 4 TIERS -->
-  <div id="viewSummary" style="display:none;">
-    <div class="card">
-      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px;">
-        <div>
-          <h3 style="font-size:1.1rem; font-weight:800;">📊 สรุปผลรวมคะแนนประเมินและอัตราส่วน 20% (เฉพาะพนักงานประจำ ครบทั้ง 4 ระดับ)</h3>
-          <p style="font-size:0.82rem; color:#64748b;">คำนวณแยกตามสายบังคับบัญชา: Leader, Ass., Sup. ➔ Tech | Ass. ➔ Leader | Sup. ➔ Ass. | Sup. ➔ Engineer</p>
-        </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button type="button" class="btn-sm" onclick="fetchCloudData(true)" style="background:#eff6ff; border-color:#93c5fd; color:#1d4ed8;">🔄 ดึงข้อมูลสดจาก Google Sheet</button>
-          <button type="button" class="btn-sm" onclick="syncPendingQueue()">☁️ ส่งคิวค้างขึ้น Cloud</button>
-          <button type="button" class="btn-sm" onclick="exportBackupJSON()">📥 ดาวน์โหลด JSON สำรอง</button>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
-        <select id="sumRoleFilter" style="width:285px;" onchange="renderSummaryTable()">
-          <option value="ALL">ทุกระดับตำแหน่ง — พนักงานประจำ (56 คน)</option>
-          <option value="TECH">1. Technician ประจำ — ประเมินโดย Leader/Ass./Sup. (38 คน)</option>
-          <option value="LEADER">2. Leader — ประเมินโดย Ass./Sup. (12 คน)</option>
-          <option value="ASST">3. Ass. — ประเมินโดย Sup. (4 คน)</option>
-          <option value="ENGINEER">4. Engineer ประจำ — Sakkarin &amp; Weerapat (2 คน)</option>
-        </select>
-        <select id="sumZoneFilter" style="width:165px;" onchange="renderSummaryTable()">
-          <option value="ALL">ทุกโซน (CNC-1 &amp; CNC-2)</option>
-          <option value="CNC-1">เฉพาะ CNC-1</option>
-          <option value="CNC-2">เฉพาะ CNC-2</option>
-        </select>
-      </div>
-
-      <div style="overflow-x:auto;">
-        <table class="sum-tbl">
-          <thead>
-            <tr>
-              <th>ลำดับ</th>
-              <th>ระดับตำแหน่ง</th>
-              <th>โซน</th>
-              <th>รหัส</th>
-              <th>ชื่อ - นามสกุล</th>
-              <th>ผู้ประเมินแล้ว</th>
-              <th>คะแนนรวม</th>
-              <th>เฉลี่ย (/80)</th>
-              <th>อัตราส่วน 20%</th>
-              <th>รายละเอียดผู้ประเมิน</th>
-            </tr>
-          </thead>
-          <tbody id="summaryTbody"></tbody>
-        </table>
-      </div>
     </div>
   </div>
 </div>
@@ -857,14 +790,12 @@ function renderTargetHero() {
         <span class="badge-dark">${p.zone}</span>
         <span class="badge-blue">รหัส: ${p.emp_clean}</span>
         <span class="badge-chain">${meta.chain_badge}</span>
-        ${done ? '<span style="background:#dcfce7;color:#166534;font-weight:800;font-size:0.8rem;padding:3px 9px;border-radius:6px;">✔ ประเมินแล้ว (แก้ไขซ้ำได้)</span>' : ''}
+        ${done ? '<span style="background:#dcfce7;color:#166534;font-weight:800;font-size:0.78rem;padding:2px 8px;border-radius:6px;">✔ ประเมินแล้ว (แก้ไขซ้ำได้)</span>' : ''}
       </div>
-      <h2>${p.name_th}</h2>
-      <div class="sub-info">ชื่ออังกฤษ: <strong>${p.name_en}</strong> (${p.login}) • ตำแหน่ง: <strong>${p.cat_label}</strong> • Line: <strong>${p.line || p.dept || p.zone}</strong></div>
+      <h2 style="font-size:1.25rem; font-weight:800; color:#0f172a; margin-top:4px;">${p.name_th}</h2>
     </div>
     <div style="text-align:right;">
-      <div style="font-size:0.78rem; color:#64748b;">แบบฟอร์ม: ${meta.item_count} ข้อ (เต็ม 80)</div>
-      <code style="font-size:0.76rem; background:#e2e8f0; padding:3px 8px; border-radius:6px;">?role=${currentRoleGroup}&amp;emp=${p.emp_clean}</code>
+      <div style="font-size:0.8rem; color:#475569; font-weight:700;">แบบฟอร์ม: ${meta.item_count} ข้อ (เต็ม 80 คะแนน)</div>
     </div>
   `;
 }
@@ -1134,102 +1065,11 @@ async function fetchCloudData(notify) {
     if (data && data.ok && Array.isArray(data.raw_scores)) {
       cloudRawRecords = data.raw_scores;
       populateTargetSelect();
-      renderSummaryTable();
       if (notify) showToast(`🔄 ดึงข้อมูลล่าสุดจาก Google Sheet สำเร็จ (${cloudRawRecords.length} รายการ)`, "#1d4ed8");
     }
   } catch (e) {
     if (notify) showToast("⚠️ ไม่สามารถดึงข้อมูลจาก Google Sheet ได้ในขณะนี้", "#b45309");
   }
-}
-
-function getMergedEvaluations() {
-  const map = {};
-  cloudRawRecords.forEach(r => {
-    if (r.Record_Key) {
-      map[String(r.Record_Key)] = {
-        role_group: String(r.Target_Role_Group || "TECH"),
-        zone: r.Zone,
-        eval_name: r.Evaluator_Name_TH || r.Evaluator_Login,
-        target_emp_id: String(r.Target_EmpID),
-        total_80: Number(r.Total_Score_80) || 0
-      };
-    }
-  });
-  const locObj = getLocalRecords();
-  Object.keys(locObj).forEach(k => {
-    const loc = locObj[k];
-    map[k] = {
-      role_group: String(loc.target_role_group || "TECH"),
-      zone: loc.zone,
-      eval_name: loc.evaluator_name_th || loc.evaluator_login,
-      target_emp_id: String(loc.target_emp_id),
-      total_80: Number(loc.total_80) || 0
-    };
-  });
-  return Object.values(map);
-}
-
-function renderSummaryTable() {
-  const rf = document.getElementById("sumRoleFilter").value;
-  const zf = document.getElementById("sumZoneFilter").value;
-  const evals = getMergedEvaluations();
-
-  const roleList = rf === "ALL" ? ["TECH", "LEADER", "ASST", "ENGINEER"] : [rf];
-  const people = [];
-  roleList.forEach(rg => {
-    ["CNC-1", "CNC-2"].forEach(z => {
-      if (zf !== "ALL" && z !== zf) return;
-      (MASTER_DATA.evaluatees_by_role[rg][z] || []).forEach(p => people.push(p));
-    });
-  });
-
-  const tbody = document.getElementById("summaryTbody");
-  tbody.innerHTML = people.map((p, i) => {
-    const hits = evals.filter(e => e.role_group === p.role_group && e.target_emp_id === String(p.emp_clean));
-    const cnt = hits.length;
-    const sum80 = hits.reduce((a, b) => a + b.total_80, 0);
-    const avg80 = cnt > 0 ? (sum80 / cnt) : 0;
-    const ratio20 = cnt > 0 ? ((avg80 / 80.0) * 20.0) : 0;
-    const names = hits.map(h => `${h.eval_name} (${h.total_80.toFixed(1)})`).join(", ");
-    const meta = MASTER_DATA.role_meta[p.role_group];
-
-    return `
-      <tr>
-        <td>${i + 1}</td>
-        <td><strong>${meta.chain_badge}</strong></td>
-        <td><strong>${p.zone}</strong></td>
-        <td><code>${p.emp_clean}</code></td>
-        <td><strong>${p.name_th}</strong><div style="font-size:0.75rem;color:#64748b;">${p.name_en} (${p.cat_label})</div></td>
-        <td style="text-align:center;font-weight:700;">${cnt > 0 ? cnt + " คน" : '<span style="color:#94a3b8;">รอประเมิน</span>'}</td>
-        <td style="text-align:right;">${cnt > 0 ? sum80.toFixed(1) : "-"}</td>
-        <td style="text-align:right;font-weight:700;color:#1d4ed8;">${cnt > 0 ? avg80.toFixed(2) : "-"}</td>
-        <td style="text-align:right;font-weight:800;color:#15803d;font-size:0.95rem;">${cnt > 0 ? ratio20.toFixed(2) + "%" : "-"}</td>
-        <td style="font-size:0.79rem;color:#334155;">${names || "-"}</td>
-      </tr>
-    `;
-  }).join("");
-}
-
-function switchView(view) {
-  const isForm = view === "form";
-  document.getElementById("viewForm").style.display = isForm ? "block" : "none";
-  document.getElementById("viewSummary").style.display = isForm ? "none" : "block";
-  document.getElementById("bottomSubmitBar").style.display = isForm ? "block" : "none";
-  document.getElementById("tabFormBtn").classList.toggle("active", isForm);
-  document.getElementById("tabSummaryBtn").classList.toggle("active", !isForm);
-  if (!isForm) renderSummaryTable();
-}
-
-function exportBackupJSON() {
-  const blob = new Blob([JSON.stringify({
-    exported_at: new Date().toISOString(),
-    local_records: getLocalRecords(),
-    cloud_records: cloudRawRecords
-  }, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "CNC_4Tier_Eval_Backup_2026.json";
-  a.click();
 }
 
 window.addEventListener("DOMContentLoaded", initApp);
