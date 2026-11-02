@@ -49,6 +49,56 @@
   .qr-cell-box { display: inline-flex; flex-direction: column; align-items: center; background: #fff; border: 1px solid #cbd5e1; padding: 6px; border-radius: 8px; }
   .qr-cell-box svg { display: block; }
 
+  /* Portal Card at bottom for Print & Screen */
+  .print-portal-card {
+    background: #fff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+  }
+  .portal-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .portal-info { flex: 1; }
+  .portal-badge {
+    display: inline-block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    font-size: 0.76rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+  .portal-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 3px;
+  }
+  .portal-desc {
+    font-size: 0.84rem;
+    color: #475569;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .portal-link {
+    font-size: 0.82rem;
+    color: #1e40af;
+  }
+  .portal-link code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-weight: 700;
+  }
+
   @media print {
     @page {
       size: A4 portrait;
@@ -169,6 +219,61 @@
       margin-top: 1px !important;
       color: #334155 !important;
     }
+
+    /* Print Portal Card in empty space */
+    .print-portal-card {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      border: 1.5px solid #0f172a !important;
+      border-radius: 8px !important;
+      padding: 8px 14px !important;
+      margin-top: 12px !important;
+      background: #fff !important;
+      box-shadow: none !important;
+    }
+    .portal-card-inner {
+      display: flex !important;
+      align-items: center !important;
+      gap: 14px !important;
+    }
+    .portal-badge {
+      border: 1px solid #93c5fd !important;
+      background: #eff6ff !important;
+      color: #1e40af !important;
+      font-size: 7.2pt !important;
+      padding: 1px 6px !important;
+      font-weight: 800 !important;
+    }
+    .portal-title {
+      font-size: 9.5pt !important;
+      font-weight: 800 !important;
+      color: #0f172a !important;
+      margin: 2px 0 !important;
+    }
+    .portal-desc {
+      font-size: 7.6pt !important;
+      color: #334155 !important;
+      line-height: 1.3 !important;
+      margin-bottom: 3px !important;
+    }
+    .portal-link {
+      font-size: 7.6pt !important;
+      color: #0f172a !important;
+    }
+    .portal-qr-box .qr-cell-box {
+      border: 1px solid #0f172a !important;
+      padding: 4px !important;
+      margin: 0 !important;
+    }
+    .portal-qr-box .qr-cell-box svg {
+      width: 86px !important;
+      height: 86px !important;
+    }
+    .portal-qr-box .qr-cell-box span {
+      font-size: 6.6pt !important;
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
   }
 </style>
 </head>
@@ -253,6 +358,23 @@
       </thead>
       <tbody id="qrTableBody"></tbody>
     </table>
+  </div>
+
+  <!-- การ์ด QR Code หน้าเว็บหลักสำหรับติดในพื้นที่ว่างหน้าสุดท้าย -->
+  <div class="print-portal-card" id="printPortalCard">
+    <div class="portal-card-inner">
+      <div class="portal-qr-box" id="portalQrBox"></div>
+      <div class="portal-info">
+        <span class="portal-badge">🌐 ระบบประเมินผลออนไลน์ CNC 2026</span>
+        <h3 class="portal-title">📱 สแกน QR Code เพื่อเปิดเข้าระบบประเมินผล (หน้าหลัก)</h3>
+        <p class="portal-desc">
+          สำหรับหัวหน้างาน (Leader, Asst. Supervisor, Supervisor) สแกนเพื่อเปิดเข้าระบบประเมินบนโทรศัพท์มือถือ สามารถเลือกประเมินตามสายงาน, ให้คะแนนผลการปฏิบัติงาน และตรวจสอบสรุปคะแนนอัตราส่วน 20%
+        </p>
+        <div class="portal-link">
+          🔗 <strong>ลิงก์หน้าหลัก:</strong> <code>https://thecabu503.github.io/cnc-1/</code>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1627,6 +1749,18 @@ function renderTable() {
   if (subDate) {
     const now = new Date();
     subDate.textContent = `พิมพ์เมื่อ: ${now.toLocaleDateString("th-TH")} ${now.toLocaleTimeString("th-TH", {hour:"2-digit", minute:"2-digit"})} น.`;
+  }
+
+  const portalBox = document.getElementById("portalQrBox");
+  if (portalBox) {
+    const mainPortalUrl = "https://thecabu503.github.io/cnc-1/";
+    const mainQrSvg = window.renderQRCodeSVG(mainPortalUrl, 92, 2);
+    portalBox.innerHTML = `
+      <div class="qr-cell-box" style="padding:4px; border:1.5px solid #0f172a; border-radius:8px; background:#fff; text-align:center;">
+        ${mainQrSvg}
+        <span style="font-size:0.7rem; font-weight:800; color:#1e40af; margin-top:2px; display:block;">เว็บหลัก CNC</span>
+      </div>
+    `;
   }
 
   const tbody = document.getElementById("qrTableBody");
