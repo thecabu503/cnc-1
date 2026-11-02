@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตาราง QR Code ประเมินผลรายบุคคล CNC 2026 (ครบทั้ง 4 ระดับ: Tech / Leader / Ass. / Engineer)</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sarabun', sans-serif; background: #f1f5f9; color: #0f172a; line-height: 1.45; padding-bottom: 40px; }
+  .header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 18px 22px; }
+  .header-inner { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+  .header h1 { font-size: 1.25rem; font-weight: 800; }
+  .header p { font-size: 0.85rem; color: #cbd5e1; margin-top: 2px; }
+  .btn {
+    padding: 9px 15px; border-radius: 9px; border: 1px solid #cbd5e1; background: #fff; color: #0f172a;
+    font-family: inherit; font-size: 0.86rem; font-weight: 700; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-primary { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+  .btn-green { background: #15803d; color: #fff; border-color: #15803d; }
+
+  .container { max-width: 1240px; margin: 18px auto; padding: 0 16px; }
+  .control-panel { background: #fff; border-radius: 14px; border: 1px solid #cbd5e1; padding: 16px 20px; margin-bottom: 16px; }
+  .grid-config { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 820px) { .grid-config { grid-template-columns: 1fr; } }
+
+  label { display: block; font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 4px; }
+  input[type="text"], input[type="url"], select {
+    width: 100%; padding: 9px 12px; border: 1.5px solid #cbd5e1; border-radius: 9px; font-family: inherit; font-size: 0.9rem;
+  }
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-top: 10px; border-top: 1px solid #e2e8f0; }
+
+  .table-wrap { background: #fff; border-radius: 14px; border: 1px solid #cbd5e1; overflow: hidden; }
+  .print-banner { display: none; padding: 10px 0 14px 0; border-bottom: 2px solid #0f172a; margin-bottom: 12px; }
+  table.qr-tbl { width: 100%; border-collapse: collapse; }
+  table.qr-tbl th { background: #0f172a; color: #fff; padding: 11px 12px; font-size: 0.86rem; text-align: left; }
+  table.qr-tbl td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+  table.qr-tbl tr:nth-child(even) { background: #f8fafc; }
+  table.qr-tbl tr { page-break-inside: avoid; break-inside: avoid; }
+
+  .badge-zone-1 { background: #dbeafe; color: #1e40af; font-weight: 800; padding: 3px 9px; border-radius: 6px; font-size: 0.8rem; }
+  .badge-zone-2 { background: #fce7f3; color: #9d174d; font-weight: 800; padding: 3px 9px; border-radius: 6px; font-size: 0.8rem; }
+  .badge-chain { background: #fef3c7; color: #92400e; font-weight: 800; padding: 3px 8px; border-radius: 6px; font-size: 0.78rem; display: inline-block; }
+
+  .qr-cell-box { display: inline-flex; flex-direction: column; align-items: center; background: #fff; border: 1px solid #cbd5e1; padding: 6px; border-radius: 8px; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .no-print { display: none !important; }
+    .container { max-width: 100%; margin: 0; padding: 0; }
+    .print-banner { display: block; }
+    .table-wrap { border: 1px solid #000; border-radius: 0; }
+    table.qr-tbl th { background: #1e293b !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    table.qr-tbl td { padding: 6px 8px; border-bottom: 1px solid #94a3b8; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header no-print">
+  <div class="header-inner">
+    <div>
+      <h1>📱 ตาราง QR Code ประเมินผลรายบุคคล CNC 2026 (ครบทั้ง 4 ระดับ — 87 คน)</h1>
+      <p>Leader ➔ Tech (55 คน)  |  Ass. ➔ Leader (13 คน)  |  Sup. ➔ Ass. (6 คน)  |  Sup. ➔ Engineer (13 คน)</p>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a href="index.html" class="btn">⬅️ กลับหน้าประเมินคะแนน</a>
+      <button type="button" class="btn btn-green" onclick="exportLinksCSV()">📥 ดาวน์โหลดลิงก์ทั้งหมด (CSV)</button>
+      <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ พิมพ์ตารางชุดที่เลือก (A4)</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="print-banner">
+    <h2 id="printTitle" style="font-size:1.18rem;">ตาราง QR Code ประเมินผลการปฏิบัติงานบุคลากร CNC ประจำปี 2026</h2>
+    <p style="font-size:0.85rem; color:#334155;">E&amp;H Precision (Thailand) Co., Ltd. — สแกน QR Code ประจำตัวผู้รับการประเมินเพื่อเปิดแบบฟอร์มที่ตรงตามตำแหน่งโดยอัตโนมัติ</p>
+  </div>
+
+  <div class="control-panel no-print">
+    <div class="grid-config">
+      <div>
+        <label>🌐 ลิงก์หน้าเว็บประเมินบน GitHub Pages (Base URL ของไฟล์ <code>index.html</code>)</label>
+        <input type="url" id="baseUrlInput" oninput="saveUrlAndRender()"
+          placeholder="เช่น https://username.github.io/cnc-evaluation-2026/index.html">
+        <div style="font-size:0.76rem; color:#0f766e; margin-top:4px;" id="urlAutoHint"></div>
+      </div>
+      <div>
+        <label>☁️ แนบลิงก์ Google Apps Script URL ไปกับ QR Code อัตโนมัติ (ตัวเลือกเสริม)</label>
+        <input type="url" id="gasUrlEmbed" oninput="saveUrlAndRender()"
+          placeholder="วางลิงก์ https://script.google.com/macros/s/.../exec (ถ้ามี)">
+        <div style="font-size:0.76rem; color:#64748b; margin-top:4px;">ช่วยให้มือถือของผู้ประเมินเชื่อมต่อ Google Sheet อัตโนมัติทันทีที่สแกน</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div style="min-width:290px;">
+        <select id="roleFilter" onchange="renderTable()" style="font-weight:700;">
+          <option value="ALL">ทุกระดับตำแหน่งรวมกัน (87 คน)</option>
+          <option value="TECH">🔧 1. สำหรับ Leader สแกนประเมิน Technician (55 คน)</option>
+          <option value="LEADER">👷 2. สำหรับ Ass. สแกนประเมิน Leader (13 คน)</option>
+          <option value="ASST">👔 3. สำหรับ Sup. สแกนประเมิน Ass. (6 คน)</option>
+          <option value="ENGINEER">⚙️ 4. สำหรับ Sup. สแกนประเมิน Engineer (13 คน)</option>
+        </select>
+      </div>
+      <div style="min-width:165px;">
+        <select id="zoneFilter" onchange="renderTable()">
+          <option value="ALL">ทุกโซน (CNC-1 &amp; CNC-2)</option>
+          <option value="CNC-1">เฉพาะ CNC-1</option>
+          <option value="CNC-2">เฉพาะ CNC-2</option>
+        </select>
+      </div>
+      <div style="flex:1; min-width:210px;">
+        <input type="text" id="searchInput" oninput="renderTable()" placeholder="🔍 ค้นหารหัสพนักงาน, ชื่อไทย, ชื่ออังกฤษ หรือตำแหน่ง...">
+      </div>
+      <div id="countLabel" style="font-weight:800; color:#1e40af; font-size:0.9rem;"></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="qr-tbl">
+      <thead>
+        <tr>
+          <th style="width:50px; text-align:center;">ลำดับ</th>
+          <th style="width:92px;">สายการผลิต</th>
+          <th style="width:92px;">รหัสพนักงาน</th>
+          <th>ชื่อ - นามสกุล (ผู้รับการประเมิน)</th>
+          <th style="width:185px;">สายการประเมิน (ผู้ประเมิน ➔ ผู้รับ)</th>
+          <th style="width:136px; text-align:center;">QR Code ประเมิน</th>
+          <th class="no-print" style="width:185px;">ลิงก์เข้าประเมินโดยตรง</th>
+        </tr>
+      </thead>
+      <tbody id="qrTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(function(global){
+var modulesMap = {};
+function defMod(name, fn){ var m={exports:{}}; fn(m, m.exports, reqMod); modulesMap[name]=m.exports; }
+function reqMod(p){ var k = p.replace('./',''); if(!k.endsWith('.js')) k += '.js'; return modulesMap[k]; }
+defMod('QRMode.js', function(module, exports, require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+});
+defMod('QRErrorCorrectLevel.js', function(module, exports, require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+});
+defMod('QRMaskPattern.js', function(module, exports, require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+});
+defMod('QRMath.js', function(module, exports, require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+});
+defMod('QRPolynomial.js', function(module, exports, require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+});
+defMod('QRRSBlock.js', function(module, exports, require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+});
+defMod('QRBitBuffer.js', function(module, exports, require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+});
+defMod('QRUtil.js', function(module, exports, require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+});
+defMod('QR8bitByte.js', function(module, exports, require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+});
+defMod('index.js', function(module, exports, require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+});
+
+var QRCode = reqMod('./index.js');
+var QRErrorCorrectLevel = reqMod('./QRErrorCorrectLevel.js');
+
+function encodeUTF8ToLatin1(str) {
+  return unescape(encodeURIComponent(str));
+}
+
+global.createQRMatrix = function(text, levelName) {
+  var lvl = QRErrorCorrectLevel[levelName || 'M'] || QRErrorCorrectLevel.M;
+  var qr = new QRCode(-1, lvl);
+  qr.addData(encodeUTF8ToLatin1(String(text)));
+  qr.make();
+  var n = qr.getModuleCount();
+  var mat = [];
+  for (var r = 0; r < n; r++) {
+    var row = [];
+    for (var c = 0; c < n; c++) {
+      row.push(qr.isDark(r, c) ? 1 : 0);
+    }
+    mat.push(row);
+  }
+  return mat;
+};
+
+global.renderQRCodeSVG = function(text, sizePx, marginModules) {
+  sizePx = sizePx || 128;
+  var margin = (marginModules === undefined) ? 3 : marginModules;
+  var mat = global.createQRMatrix(text, 'M');
+  var n = mat.length;
+  var total = n + margin * 2;
+  var d = [];
+  for (var r = 0; r < n; r++) {
+    for (var c = 0; c < n; c++) {
+      if (mat[r][c]) {
+        d.push('M' + (c + margin) + ',' + (r + margin) + 'h1v1h-1z');
+      }
+    }
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + total + ' ' + total + '" width="' + sizePx + '" height="' + sizePx + '" shape-rendering="crispEdges" style="display:block;background:#fff;border-radius:6px;">'
+    + '<rect width="' + total + '" height="' + total + '" fill="#ffffff"/>'
+    + '<path d="' + d.join('') + '" fill="#0f172a"/>'
+    + '</svg>';
+};
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+const MASTER_DATA = {"eval_year": 2026, "role_meta": {"TECH": {"key": "TECH", "title_th": "1. ช่างเทคนิค (Technician)", "evaluator_title_th": "หัวหน้างานระดับ Leader", "chain_badge": "Leader ➔ ประเมิน Technician", "item_count": 34, "max_score": 80.0}, "LEADER": {"key": "LEADER", "title_th": "2. หัวหน้างาน (Leader)", "evaluator_title_th": "ผู้ช่วยหัวหน้างาน (Asst. Supervisor / Ass.)", "chain_badge": "Ass. ➔ ประเมิน Leader", "item_count": 15, "max_score": 80.0}, "ASST": {"key": "ASST", "title_th": "3. ผู้ช่วยหัวหน้างาน (Asst. Supervisor)", "evaluator_title_th": "หัวหน้าส่วนงาน (Supervisor / Sup.)", "chain_badge": "Sup. ➔ ประเมิน Ass.", "item_count": 15, "max_score": 80.0}, "ENGINEER": {"key": "ENGINEER", "title_th": "4. วิศวกร (Engineer)", "evaluator_title_th": "หัวหน้าส่วนงาน (Supervisor / Sup.)", "chain_badge": "Sup. ➔ ประเมิน Engineer", "item_count": 15, "max_score": 80.0}}, "rubrics": {"TECH": [{"sec_no": 1, "sec_title": "1. กิริยามารยาทความประพฤติ", "max_pts": 5.0, "color": "1D4ED8", "light_bg": "EFF6FF", "items": [{"code": "1.1", "short": "สวัสดีทักทาย", "desc": "การสวัสดีทักทาย", "max": 1.0}, {"code": "1.2", "short": "ประชุมเช้า/จดบันทึก", "desc": "การเข้าร่วมประชุมตอนเช้า เพื่อรับฟังข่าวสาร รวมทั้งการจดบันทึก", "max": 1.0}, {"code": "1.3", "short": "กิจกรรมเช้า/Otoshikomi", "desc": "การเข้าร่วมกิจกรรมบริษัทช่วงเช้า เช่น Otoshikomi, เข้าแถววันจันทร์เพื่อทำกิจกรรมบริษัท", "max": 1.0}, {"code": "1.4", "short": "ไม่หลีกเลี่ยงงาน", "desc": "การหลีกเลี่ยงการทำงานระหว่างปฏิบัติงาน", "max": 1.0}, {"code": "1.5", "short": "การตอบสนองรับ-สั่งงาน", "desc": "การตอบสนองเวลาสั่งงาน และรับงานระหว่างพนักงานกับหัวหน้างาน", "max": 1.0}]}, {"sec_no": 2, "sec_title": "2. การแจ้งปัญหา", "max_pts": 5.0, "color": "0369A1", "light_bg": "F0F9FF", "items": [{"code": "2.1", "short": "แจ้งเมื่อพบปัญหา", "desc": "การ Information เมื่อพบปัญหาเกี่ยวกับงาน", "max": 2.0}, {"code": "2.2", "short": "แจ้งผลหลังแก้ไข", "desc": "การแจ้งผลหลังจากการดำเนินการแก้ไข", "max": 1.0}, {"code": "2.3", "short": "แจ้งปัญหาตอนต่อกะ", "desc": "การแจ้งปัญหาให้หัวหน้างานและเพื่อนร่วมงานรับทราบเมื่อมีการต่อกะ", "max": 2.0}]}, {"sec_no": 3, "sec_title": "3. การทำงานเสร็จตามเวลาที่กำหนดไว้", "max_pts": 5.0, "color": "0F766E", "light_bg": "F0FDFA", "items": [{"code": "3.1", "short": "งานเสร็จตามเวลา", "desc": "สามารถทำงานเสร็จตามเวลาที่ได้รับมอบหมายจากหัวหน้างาน", "max": 2.0}, {"code": "3.2", "short": "รับผิดชอบหน้าที่", "desc": "มีความรับผิดชอบต่อหน้าที่ในงานที่ตนเองทำอยู่", "max": 2.0}, {"code": "3.3", "short": "ช่วยเพื่อนเมื่อว่าง", "desc": "สามารถช่วยเหลือเพื่อนร่วมงานเมื่อว่างจากงานที่ตนเองทำอยู่", "max": 1.0}]}, {"sec_no": 4, "sec_title": "4. คุณภาพและความถูกต้องของงานที่ทำเสร็จ", "max_pts": 5.0, "color": "15803D", "light_bg": "F0FDF4", "items": [{"code": "4.1", "short": "ไม่พบงานเสียหลังแก้", "desc": "หลังจากแก้ไขปัญหาแล้วพบงานเสียหรือไม่", "max": 3.0}, {"code": "4.2", "short": "เอกสารปฏิบัติงานถูกต้อง", "desc": "เอกสารประกอบการปฏิบัติงานถูกต้องหรือไม่", "max": 2.0}]}, {"sec_no": 5, "sec_title": "5. ความร่วมมือในการทำงาน", "max_pts": 35.0, "color": "B45309", "light_bg": "FFFBEB", "items": [{"code": "5.1", "short": "ความร่วมมือทำ OT", "desc": "การให้ความร่วมมือในการทำล่วงเวลา (OT)", "max": 30.0}, {"code": "5.2", "short": "ช่วยเหลือเพื่อนร่วมงาน", "desc": "การให้ความช่วยเหลือเพื่อนร่วมงาน", "max": 5.0}]}, {"sec_no": 6, "sec_title": "6. ความสามารถในการอ่าน Drawing และการใช้เครื่องมือวัด", "max_pts": 5.0, "color": "6D28D9", "light_bg": "F5F3FF", "items": [{"code": "6.1", "short": "คำนวณ Spec Drawing", "desc": "คำนวณ Spec ใน Drawing ได้", "max": 1.0}, {"code": "6.2", "short": "เข้าใจสัญลักษณ์ Drawing", "desc": "เข้าใจสัญลักษณ์ ที่อยู่ใน Drawing", "max": 1.0}, {"code": "6.3", "short": "ใช้เครื่องมือวัดถูกต้อง", "desc": "ใช้เครื่องมือวัดที่กำหนดในใบ Inspection ได้ถูกต้อง", "max": 1.0}, {"code": "6.4", "short": "ดูแลรักษาเครื่องมือวัด", "desc": "การดูแลรักษาเครื่องมือวัดได้อย่างถูกวิธี", "max": 1.0}, {"code": "6.5", "short": "ตรวจเครื่องมือวัดก่อนชำรุด", "desc": "สามารถตรวจสอบเครื่องมือวัดก่อนที่จะชำรุดเสียหาย", "max": 1.0}]}, {"sec_no": 7, "sec_title": "7. การปฏิบัติตามกฎระเบียบ, ความปลอดภัย และ Kankyoseibi, Kaizen", "max_pts": 5.0, "color": "BE123C", "light_bg": "FFF1F2", "items": [{"code": "7.1", "short": "ไม่เล่นมือถือ/กินขนม", "desc": "ไม่รับโทรศัพท์ในเวลาทำงานและไม่กินของขบเคี้ยว เช่น หมากฝรั่ง ในพื้นที่ทำงาน", "max": 1.0}, {"code": "7.2", "short": "ส่ง Kaizen ตามเป้า", "desc": "ส่ง Kaizen ตามเป้าหมายบริษัท", "max": 1.0}, {"code": "7.3", "short": "เข้า-ออกงานตรงเวลา", "desc": "การเข้า - ออกงานตรงเวลา", "max": 1.0}, {"code": "7.4", "short": "สวมใส่อุปกรณ์ PPE", "desc": "ต้องสวมใส่อุปกรณ์ PPE ในพื้นที่ทำงานที่เกี่ยวข้องกับเครื่องจักร", "max": 1.0}, {"code": "7.5", "short": "ไม่หยอกล้อขณะทำงาน", "desc": "ไม่หยอกล้อ, เล่นกันในขณะที่ปฏิบัติงาน", "max": 1.0}]}, {"sec_no": 8, "sec_title": "8. ความสามารถในการควบคุมและตรวจสอบเครื่องจักร", "max_pts": 5.0, "color": "0E7490", "light_bg": "ECFEFF", "items": [{"code": "8.1", "short": "ทำตามเอกสารประจำเครื่อง", "desc": "สามารถปฏิบัติตามเอกสารประจำเครื่องจักรได้อย่างถูกต้อง", "max": 2.0}, {"code": "8.2", "short": "คุมเครื่องให้เดินปกติ", "desc": "สามารถควบคุมเครื่องจักรที่รับผิดชอบให้ทำงานได้ตามปกติ", "max": 2.0}, {"code": "8.3", "short": "ตรวจเครื่องก่อนชำรุด", "desc": "สามารถตรวจสอบเครื่องมือ เครื่องจักร อุปกรณ์ในการผลิตก่อนที่จะชำรุดเสียหาย", "max": 1.0}]}, {"sec_no": 9, "sec_title": "9. ความสามารถในการแก้ไขปัญหาเครื่องจักร, ปัญหาชิ้นงาน", "max_pts": 5.0, "color": "4338CA", "light_bg": "EEF2FF", "items": [{"code": "9.1", "short": "แก้ปัญหาชิ้นงาน/Setting", "desc": "สามารถแก้ไขหรือหาวิธีแก้ปัญหาของชิ้นงานได้ถูกต้อง เช่น Adjust, Plan, Repair Setting", "max": 3.0}, {"code": "9.2", "short": "แก้ปัญหา Alarm เครื่อง", "desc": "สามารถแก้ไขหรือหาวิธีการแก้ปัญหาของเครื่องจักรได้ถูกต้อง เช่น Alarm counter, Alarm Bar, Alarm sensor", "max": 2.0}]}, {"sec_no": 10, "sec_title": "10. มีความรู้ความเข้าใจและความสามารถในงานของตนเอง", "max_pts": 5.0, "color": "334155", "light_bg": "F8FAFC", "items": [{"code": "10.1", "short": "ทำงานได้ไม่ต้องอธิบายซ้ำ", "desc": "สามารถทำงานที่ทำอยู่ได้โดยไม่ต้องอธิบายซ้ำๆ", "max": 1.0}, {"code": "10.2", "short": "ปฏิบัติงานไม่บกพร่อง", "desc": "สามารถปฏิบัติงานของตัวเองโดยไม่บกพร่อง", "max": 2.0}, {"code": "10.3", "short": "เสนอวิธีเพิ่ม Productivity", "desc": "นำเสนอวิธีการทำงานเพื่อเพิ่ม Productivity ให้หัวหน้างานพิจารณา", "max": 1.0}, {"code": "10.4", "short": "เสนอวิธีลดของเสีย", "desc": "นำเสนอวิธีการลดของเสีย ของตนเองให้หัวหน้างานพิจารณา", "max": 1.0}]}], "LEADER": [{"sec_no": 1, "sec_title": "ส่วนที่ 1: วินัย การปฏิบัติงาน และความร่วมมือ (Leader — 46 คะแนน)", "max_pts": 46.0, "color": "0F766E", "items": [{"code": "L.1", "desc": "1. กิริยามารยาทและความสุภาพ (Manner/behavior and politeness)", "max": 4.0}, {"code": "L.2", "desc": "2. การแจ้งปัญหางานที่เกิดขึ้นให้หัวหน้างานรับทราบทันที (Report problem occurrence to Asst. Supervisor / Supervisor)", "max": 4.0}, {"code": "L.3", "desc": "3. การทำงานเสร็จตามเวลาที่กำหนดให้ (Accomplished task on schedule)", "max": 4.0}, {"code": "L.4", "desc": "4. คุณภาพและความถูกต้องของงานที่ทำเสร็จ (Quality and Accuracy of completed task)", "max": 4.0}, {"code": "L.5", "desc": "5. ความร่วมมือในการทำงานล่วงเวลา (Overtime cooperation)", "max": 30.0}]}, {"sec_no": 2, "sec_title": "ส่วนที่ 2: ภาวะผู้นำ การบริหารทีม และการสอนงาน (Leader — 34 คะแนน)", "max_pts": 34.0, "color": "1D4ED8", "items": [{"code": "L.6", "desc": "6. ความเอาใจใส่เพิ่มพูนความรู้, ความสามารถในงานที่ตนเองรับผิดชอบ (Develop & improve technical knowledge and skill)", "max": 4.0}, {"code": "L.7", "desc": "7. ความสามารถจูงใจผู้ใต้บังคับบัญชาให้ปฏิบัติตามกฎระเบียบ, ความปลอดภัย, Kankyoseibi และ Kaizen", "max": 4.0}, {"code": "L.8", "desc": "8. ความสามารถในการจัดกำลังคนให้พอเหมาะกับปริมาณงานที่ต้องทำในแต่ละวัน (Manpower planning Day & Night shift)", "max": 4.0}, {"code": "L.9", "desc": "9. ความสามารถในการแก้ไขปัญหางานให้ผู้ใต้บังคับบัญชา (Capability of solving subordinate's problem)", "max": 4.0}, {"code": "L.10", "desc": "10. ความสามารถในการสอนงานให้ผู้ใต้บังคับบัญชา (Capability of coaching subordinates)", "max": 4.0}, {"code": "L.11", "desc": "11. ความสามารถในการสั่งงานได้อย่างถูกต้องชัดเจน และครบถ้วน (Capability of commanding correctly & clearly)", "max": 3.0}, {"code": "L.12", "desc": "12. ความสามารถในการควบคุมและติดตามงานให้เสร็จลุล่วง (Capability of control and follow up task)", "max": 3.0}, {"code": "L.13", "desc": "13. ความสามารถในการแก้ไขปัญหาความขัดแย้งเรื่องงานของผู้ใต้บังคับบัญชา (Handling conflict among subordinates)", "max": 3.0}, {"code": "L.14", "desc": "14. ความสามารถในการทำให้ผู้ใต้บังคับบัญชาทำงานร่วมกันเป็นทีม (Capability of building up teamwork)", "max": 3.0}, {"code": "L.15", "desc": "15. ความมีมนุษย์สัมพันธ์ที่ดีกับผู้ใต้บังคับบัญชาและหัวหน้างาน (Human relationship with subordinates and chief)", "max": 2.0}]}], "ASST": [{"sec_no": 1, "sec_title": "ส่วนที่ 1: การวางแผน การบริหารบังคับบัญชา และการแก้ปัญหา (Asst. Supervisor — 36 คะแนน)", "max_pts": 36.0, "color": "6D28D9", "items": [{"code": "AS.1", "desc": "1. การแจ้งปัญหางานที่เกิดขึ้น, สาเหตุและแนวทางการแก้ไขให้หัวหน้างานรับทราบ (Report problem, root cause & countermeasure)", "max": 4.0}, {"code": "AS.2", "desc": "2. การทำงานสำเร็จตรงตามเป้าหมายที่หัวหน้างานกำหนดให้ (Accomplish task accordance with assignment & target)", "max": 4.0}, {"code": "AS.3", "desc": "3. ความสามารถในการวางแผนงานเพื่อให้บรรลุเป้าหมายที่กำหนดไว้ (Making plan to achieve the settled goal)", "max": 4.0}, {"code": "AS.4", "desc": "4. ความสามารถจูงใจผู้ใต้บังคับบัญชาให้ปฏิบัติตามกฎระเบียบ, ความปลอดภัย, Kankyoseibi และการทำ Kaizen", "max": 4.0}, {"code": "AS.5", "desc": "5. ความสามารถในการแก้ไขปัญหางานให้ผู้ใต้บังคับบัญชา (Capability of solving subordinate's problem)", "max": 4.0}, {"code": "AS.6", "desc": "6. ความสามารถในการสอนงานให้ผู้ใต้บังคับบัญชา (Capability of coaching subordinates)", "max": 4.0}, {"code": "AS.7", "desc": "7. ความสามารถในการสั่งงานได้อย่างถูกต้องชัดเจนและครบถ้วน (Capability of commanding correctly, clearly & completely)", "max": 4.0}, {"code": "AS.8", "desc": "8. ความสามารถในการควบคุมและติดตามงานให้สำเร็จลุล่วง (Capability of control and follow up task till completed)", "max": 4.0}, {"code": "AS.9", "desc": "9. ความสามารถในการแก้ปัญหาความขัดแย้งเรื่องงานของผู้ใต้บังคับบัญชา (Capability of handling conflict)", "max": 4.0}]}, {"sec_no": 2, "sec_title": "ส่วนที่ 2: การประสานงาน การวิเคราะห์ปรับปรุงระบบ และความร่วมมือ OT (Asst. Supervisor — 44 คะแนน)", "max_pts": 44.0, "color": "4338CA", "items": [{"code": "AS.10", "desc": "10. ความสามารถในการทำให้ผู้ใต้บังคับบัญชาทำงานร่วมกันเป็นทีม (Capability of building up teamwork)", "max": 3.0}, {"code": "AS.11", "desc": "11. ความสามารถในการประสานงานกับหน่วยงานอื่นเพื่อแก้ไขปัญหาร่วมกัน (Cooperate with other sections)", "max": 3.0}, {"code": "AS.12", "desc": "12. ความสามารถในการเก็บข้อมูลและปัญหาต่างๆเพื่อทำการวิเคราะห์ทางสถิติ (Technical data collecting for statistical analysis)", "max": 3.0}, {"code": "AS.13", "desc": "13. ความสามารถในการแก้ไขปรับปรุงวิธีการทำงานต่างๆเพื่อลดความผิดพลาดที่เกิดขึ้น (Corrective working procedure)", "max": 3.0}, {"code": "AS.14", "desc": "14. ความสามารถในการออกแบบและควบคุมงานเอกสารที่ใช้ภายในแผนก (Document design & control in process)", "max": 2.0}, {"code": "AS.15", "desc": "15. ความร่วมมือในการทำงานล่วงเวลา (Overtime cooperation)", "max": 30.0}]}], "ENGINEER": [{"sec_no": 1, "sec_title": "ส่วนที่ 1: ความเชี่ยวชาญทางเทคนิค การวางแผน และการแก้ปัญหาทางวิศวกรรม (Engineer — 36 คะแนน)", "max_pts": 36.0, "color": "B45309", "items": [{"code": "E.1", "desc": "1. การแจ้งปัญหางานที่เกิดขึ้น, สาเหตุและเสนอแนะวิธีการแก้ไขให้หัวหน้างานพิจารณา (Report problem occurrence to Supervisor)", "max": 4.0}, {"code": "E.2", "desc": "2. การทำงานสำเร็จตรงตามเป้าหมายที่หัวหน้างานกำหนดให้ (Accomplish task accordance with assignment & target)", "max": 4.0}, {"code": "E.3", "desc": "3. ความสามารถในการวางแผนงานเพื่อให้บรรลุเป้าหมายที่กำหนดไว้ (Making plan to achieve the settled goal)", "max": 4.0}, {"code": "E.4", "desc": "4. ระดับความรู้, ความสามารถ, ความชำนาญในงานของตน (Technical know-how and expertise level)", "max": 4.0}, {"code": "E.5", "desc": "5. ความสามารถในการแก้ไขปัญหางานให้แต่ละหน่วยงานที่เกี่ยวข้อง (Capability of solving problem for concerned section)", "max": 4.0}, {"code": "E.6", "desc": "6. ความสามารถในการชี้แนะ, ถ่ายทอดความรู้เทคนิคต่างๆให้กับผู้อื่น (Capability of coaching know-how)", "max": 4.0}, {"code": "E.7", "desc": "7. ความสามารถในการมอบหมายงานให้ผู้อื่นปฏิบัติได้อย่างถูกต้องและครบถ้วน (Directing concerned section to follow procedure)", "max": 4.0}, {"code": "E.8", "desc": "8. ความสามารถในการควบคุมและติดตามงานให้สำเร็จลุล่วง (Capability of control and follow up task till completed)", "max": 4.0}, {"code": "E.9", "desc": "9. การปฏิบัติตามกฎระเบียบของบริษัท, ความปลอดภัยและ Kankyoseibi และการทำ Kaizen", "max": 4.0}]}, {"sec_no": 2, "sec_title": "ส่วนที่ 2: การวิเคราะห์สถิติ การพัฒนากระบวนการ และความร่วมมือ OT (Engineer — 44 คะแนน)", "max_pts": 44.0, "color": "BE123C", "items": [{"code": "E.10", "desc": "10. ความสามารถในการทำงานร่วมกันเป็นทีมกับเพื่อนร่วมงาน (Capability of building up teamwork)", "max": 3.0}, {"code": "E.11", "desc": "11. ความสามารถในการประสานงานกับหน่วยงานอื่นเพื่อแก้ไขปัญหาร่วมกัน (Cooperate with other sections)", "max": 3.0}, {"code": "E.12", "desc": "12. ความสามารถในการเก็บข้อมูลและปัญหาต่างๆเพื่อการวิเคราะห์ทางสถิติ (Technical data collecting for statistical analysis)", "max": 3.0}, {"code": "E.13", "desc": "13. ความสามารถในการพัฒนาปรับปรุงวิธีการทำงานต่างๆเพื่อลดความผิดพลาด (Develop & improve working procedure)", "max": 3.0}, {"code": "E.14", "desc": "14. ความสามารถในการออกแบบและควบคุมงานเอกสารที่เกี่ยวข้องแต่ละ process (Document design & control in process)", "max": 2.0}, {"code": "E.15", "desc": "15. ความร่วมมือในการทำงานล่วงเวลา (Overtime cooperation)", "max": 30.0}]}]}, "evaluators_by_role": {"TECH": {"CNC-1": [{"id": "00706", "login": "WITTAYA_NG", "name_th": "นาย วิทยา งอมสงัด", "name_en": "Wittaya Ngomsa-ngad", "role": "Leader"}, {"id": "01115", "login": "JUCKRAYUT_BO", "name_th": "นาย จักรายุทธ บุตรอินทร์", "name_en": "Juckrayut Boot-in", "role": "Leader"}, {"id": "01329", "login": "YONGYUT_KH", "name_th": "นาย ยงยุทธ แคนเสาร์", "name_en": "Yongyut Khaensao", "role": "Leader"}, {"id": "01335", "login": "YUTTAPONG_NA", "name_th": "นาย ยุทธพงษ์ นาคเงิน", "name_en": "Yutthaphong Nakngoen", "role": "Leader"}, {"id": "01631", "login": "SATHIAN_PA", "name_th": "นาย เสถียร ปะนามะโกสา", "name_en": "Sathian Panamakosa", "role": "Leader"}, {"id": "01294", "login": "KITTIPONG_YA", "name_th": "นาย กิตติพงษ์ ยารังษี", "name_en": "Kittipong Yarangsee", "role": "Sub-Leader/Leader"}, {"id": "01150", "login": "KITTIPHOP_CH", "name_th": "นาย กิตติภพ ชายหาด", "name_en": "Kittiphop Chayhad", "role": "Sub-Leader/Leader"}], "CNC-2": [{"id": "00841", "login": "PANUPONG_MU", "name_th": "นาย ภาณุพงศ์ มุมมาลา", "name_en": "Panupong Mummala", "role": "Leader"}, {"id": "01334", "login": "SONGYOOT_YO", "name_th": "นาย ทรงยศ อยู่ยืน", "name_en": "Songyoot Youyeun", "role": "Leader"}, {"id": "01397", "login": "NIWAT_BU", "name_th": "นาย นิวัฒน์ บุดดีแหบ", "name_en": "Niwat Buddeehaeb", "role": "Leader"}, {"id": "01588", "login": "MANOP_WU", "name_th": "นาย มานพ วุฒิการณ์", "name_en": "Manop Wutthikan", "role": "Leader"}, {"id": "01621", "login": "TINNAKORN_MA", "name_th": "นาย ทินกร มะลิหอม", "name_en": "Tinnakorn Malihom", "role": "Leader"}, {"id": "00839", "login": "PRASOPCHAI_SU", "name_th": "นาย ประสพชัย สุเมผา", "name_en": "Prasopchai Sumepha", "role": "Leader"}]}, "LEADER": {"CNC-1": [{"id": "00563", "login": "JAMNONG_IN", "name_th": "นาย จำนง อินจินดา", "name_en": "Jamnong Injinda", "role": "Asst.Supervisor"}, {"id": "00683", "login": "THANATHON_NO", "name_th": "นาย ธนธรณ์ น้อยมาลา", "name_en": "Thanathon Noimala", "role": "Asst.Supervisor"}, {"id": "00227", "login": "NATTINEE_SA", "name_th": "นางสาว ณัฎฐินี สายสิงห์", "name_en": "Nattinee Saising", "role": "Asst.Supervisor"}], "CNC-2": [{"id": "01151", "login": "SATHEAN_JA", "name_th": "นาย เสถียร ใจเด็ด", "name_en": "Sathean Jaided", "role": "Asst.Supervisor"}, {"id": "01175", "login": "ANURAK_YO", "name_th": "นาย อนุรักษ์ โยธาทูน", "name_en": "Anurak Yotatoon", "role": "Asst.Supervisor"}, {"id": "01315", "login": "SONGKRAN_TO", "name_th": "นาย สงการ ทองสิงห์", "name_en": "Songkran Tongsing", "role": "Asst.Supervisor"}]}, "ASST": {"CNC-1": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "00073", "login": "VARITTHON_TE", "name_th": "นาย วรินทร ทีเวียง", "name_en": "Varitthon Teewieng", "role": "Supervisor"}, {"id": "00117", "login": "SIRIPORN_SA", "name_th": "นางสาว ศิริพร แซ่เลียว", "name_en": "Siriporn Sacliao", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}], "CNC-2": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}, {"id": "00531", "login": "WIPA_PR", "name_th": "นางสาว วิภา ปานเงิน", "name_en": "Wipa Pranngeon", "role": "Supervisor"}, {"id": "00247", "login": "SUJITRA_JU", "name_th": "นาง สุจิตรา จันทร์โฮง", "name_en": "Sujitra Junhong", "role": "Supervisor"}, {"id": "00442", "login": "NIKORN_KH", "name_th": "นาย นิกร คำเลิศ", "name_en": "Nikorn Khamlerd", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}]}, "ENGINEER": {"CNC-1": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "00073", "login": "VARITTHON_TE", "name_th": "นาย วรินทร ทีเวียง", "name_en": "Varitthon Teewieng", "role": "Supervisor"}, {"id": "00117", "login": "SIRIPORN_SA", "name_th": "นางสาว ศิริพร แซ่เลียว", "name_en": "Siriporn Sacliao", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}], "CNC-2": [{"id": "01923", "login": "TAKUYA_SA", "name_th": "นาย ทักกุยะ ซัมเป (Mr. Takuya S.)", "name_en": "Takuya Sampe", "role": "Supervisor"}, {"id": "01926", "login": "KLAYPONG_CH", "name_th": "นาย คล้ายพงศ์ ไชยฟู", "name_en": "Klaypong Chaifoo", "role": "Senior Supervisor"}, {"id": "00531", "login": "WIPA_PR", "name_th": "นางสาว วิภา ปานเงิน", "name_en": "Wipa Pranngeon", "role": "Supervisor"}, {"id": "00247", "login": "SUJITRA_JU", "name_th": "นาง สุจิตรา จันทร์โฮง", "name_en": "Sujitra Junhong", "role": "Supervisor"}, {"id": "00442", "login": "NIKORN_KH", "name_th": "นาย นิกร คำเลิศ", "name_en": "Nikorn Khamlerd", "role": "Supervisor"}, {"id": "00477", "login": "KAMSAI_KA", "name_th": "นาย คำใสย คะหาญ", "name_en": "Kamsai Kaharn", "role": "Supervisor (EG)"}]}}, "evaluatees_by_role": {"TECH": {"CNC-1": [{"zone": "CNC-1", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01954", "emp_disp": "01954 (เดิม V11204)", "login": "RAKSANA_TA (เดิม RAKSANA_TAS)", "name_th": "นาย รักษณ ทัศนาพันธ์", "name_en": "Raksana Tassanaphan", "disp_name": "นาย รักษณ ทัศนาพันธ์ (Raksana Tassanaphan)", "dept": "CAM_CNC / CNC", "mc_score": 7605.0, "set_score": 24.5, "raw_score": 7629.5, "bench_raw": 7629.5, "s60": 60.0, "leave_days": 5.0, "att20": 15.0, "default_tot100": 95.0, "ref2025": null, "default_rank": 1, "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01571", "emp_disp": "01571", "login": "NATTAWUT_SA", "name_th": "นาย ณัฐวุฒิ แสงใส", "name_en": "Nattawut Sangsai", "disp_name": "นาย ณัฐวุฒิ แสงใส (Nattawut Sangsai)", "dept": "CNC", "mc_score": 6623.25, "set_score": 48.0, "raw_score": 6671.25, "bench_raw": 7629.5, "s60": 52.46, "leave_days": 0.0, "att20": 20.0, "default_tot100": 92.46, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 2.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 3.0, "4.2": 2.0, "5.1": 27.0, "5.2": 4.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.5, "9.2": 1.5, "10.1": 1.0, "10.2": 1.5, "10.3": 0.5, "10.4": 0.5}, "total80": 66.0, "score20": 16.5}, "default_rank": 2, "line": "G-H-J-K", "start_date": "2012-04-02", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01306", "emp_disp": "01306", "login": "PUNSAK_KU", "name_th": "นาย พูนศักดิ์ คำพา", "name_en": "Punsak Kumpar", "disp_name": "นาย พูนศักดิ์ คำพา (Punsak Kumpar)", "dept": "CNC", "mc_score": 4605.25, "set_score": 286.0, "raw_score": 4891.25, "bench_raw": 7629.5, "s60": 38.47, "leave_days": 0.0, "att20": 20.0, "default_tot100": 78.47, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.5, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 1.0}, "total80": 58.0, "score20": 14.5}, "default_rank": 3, "line": "G-H-J-K", "start_date": "2009-06-22", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01467", "emp_disp": "01467", "login": "SATHAPORN_TH", "name_th": "นาย สถาพร ทาทิพย์", "name_en": "Sathaporn Thathip", "disp_name": "นาย สถาพร ทาทิพย์ (Sathaporn Thathip)", "dept": "CNC", "mc_score": 4618.5, "set_score": 38.5, "raw_score": 4657.0, "bench_raw": 7629.5, "s60": 36.62, "leave_days": 0.0, "att20": 20.0, "default_tot100": 76.62, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 26.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 0.0, "7.2": 0.0, "7.3": 0.5, "7.4": 0.5, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 56.0, "score20": 14.0}, "default_rank": 4, "line": "N-P-Q-R", "start_date": "2011-08-02", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01952", "emp_disp": "01952 (เดิม V11019)", "login": "WATTANA_KA (เดิม WATTHANA_KHE)", "name_th": "นาย วัฒนา เขตชมภู", "name_en": "Watthana Khetchomphu", "disp_name": "นาย วัฒนา เขตชมภู (Watthana Khetchomphu)", "dept": "CAM_CNC / CNC", "mc_score": 4871.5, "set_score": 22.5, "raw_score": 4894.0, "bench_raw": 7629.5, "s60": 38.49, "leave_days": 2.5, "att20": 17.5, "default_tot100": 75.99, "ref2025": null, "default_rank": 5, "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01520", "emp_disp": "01520", "login": "SUPAT_PH", "name_th": "นาย สุภัทร โพนแก้ว", "name_en": "Supat Phonkaow", "disp_name": "นาย สุภัทร โพนแก้ว (Supat Phonkaow)", "dept": "CNC", "mc_score": 4285.7, "set_score": 29.5, "raw_score": 4315.2, "bench_raw": 7629.5, "s60": 33.94, "leave_days": 0.0, "att20": 20.0, "default_tot100": 73.94, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.0, "4.2": 1.0, "5.1": 26.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.5, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.5, "score20": 14.62}, "default_rank": 6, "line": "N-P-Q-R", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "00709", "emp_disp": "00709", "login": "KRISADA_YA", "name_th": "นาย กฤษฎา ยะโส", "name_en": "Krisada Yaso", "disp_name": "นาย กฤษฎา ยะโส (Krisada Yaso)", "dept": "CNC", "mc_score": 4073.5, "set_score": 576.5, "raw_score": 4650.0, "bench_raw": 7629.5, "s60": 36.57, "leave_days": 3.0, "att20": 17.0, "default_tot100": 73.57, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 3.0, "4.2": 2.0, "5.1": 27.0, "5.2": 4.0, "6.1": 1.0, "6.2": 0.5, "6.3": 1.0, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 2.0, "8.2": 2.0, "8.3": 1.0, "9.1": 3.0, "9.2": 2.0, "10.1": 1.0, "10.2": 2.0, "10.3": 1.0, "10.4": 1.0}, "total80": 70.0, "score20": 17.5}, "default_rank": 7, "line": "G-H-J-K", "start_date": "2004-06-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01752", "emp_disp": "01752", "login": "THANATIS_C", "name_th": "นาย ธนธิศ แซ่เฮ้ง", "name_en": "Thanatis_CNC Staff", "disp_name": "นาย ธนธิศ แซ่เฮ้ง (Thanatis_CNC Staff)", "dept": "CNC", "mc_score": 3638.3, "set_score": 527.5, "raw_score": 4165.8, "bench_raw": 7629.5, "s60": 32.76, "leave_days": 0.0, "att20": 20.0, "default_tot100": 72.76, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 0.5, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 8, "line": "X-Y-Z", "start_date": "2017-05-15", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01320", "emp_disp": "01320", "login": "SAKDA_SU", "name_th": "นาย ศักดา สังฆคาม", "name_en": "Sakda Sungkakam", "disp_name": "นาย ศักดา สังฆคาม (Sakda Sungkakam)", "dept": "CNC", "mc_score": 45.5, "set_score": 4041.0, "raw_score": 4086.5, "bench_raw": 7629.5, "s60": 32.14, "leave_days": 0.0, "att20": 20.0, "default_tot100": 72.14, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.5, "4.2": 1.5, "5.1": 25.0, "5.2": 3.5, "6.1": 1.0, "6.2": 0.5, "6.3": 1.0, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 9, "line": "G-H-J-K", "start_date": "2009-08-17", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01652", "emp_disp": "01652", "login": "PRAWIT_RE", "name_th": "นาย ประวิทย์ เรียมแสน", "name_en": "Prawit Ream-san", "disp_name": "นาย ประวิทย์ เรียมแสน (Prawit Ream-san)", "dept": "CNC", "mc_score": 3405.5, "set_score": 392.0, "raw_score": 3797.5, "bench_raw": 7629.5, "s60": 29.86, "leave_days": 0.0, "att20": 20.0, "default_tot100": 69.86, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 1.0, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 1.0, "10.1": 0.5, "10.2": 0.5, "10.3": 0.5, "10.4": 0.5}, "total80": 57.0, "score20": 14.25}, "default_rank": 10, "line": "N-P-Q-R", "start_date": "2013-07-15", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01953", "emp_disp": "01953 (เดิม V11082)", "login": "YUTTHAKAN_KI (เดิม YUTTHAKAN_KLA)", "name_th": "นาย ยุทธการ กล้าเมืองกลาง", "name_en": "Yutthakan Klamueangklang", "disp_name": "นาย ยุทธการ กล้าเมืองกลาง (Yutthakan Klamueangklang)", "dept": "CAM_CNC / CNC", "mc_score": 3784.5, "set_score": 64.0, "raw_score": 3848.5, "bench_raw": 7629.5, "s60": 30.27, "leave_days": 0.75, "att20": 19.25, "default_tot100": 69.52, "ref2025": null, "default_rank": 11, "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01536", "emp_disp": "01536", "login": "SOMYOS_LA", "name_th": "นาย สมยศ หล้าบาง", "name_en": "Somyos Labang", "disp_name": "นาย สมยศ หล้าบาง (Somyos Labang)", "dept": "CNC", "mc_score": 3837.75, "set_score": 5.0, "raw_score": 3842.75, "bench_raw": 7629.5, "s60": 30.22, "leave_days": 1.0, "att20": 19.0, "default_tot100": 69.22, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 0.5, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.5, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 56.0, "score20": 14.0}, "default_rank": 12, "line": "X-Y-Z", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01312", "emp_disp": "01312", "login": "SOOKSAN_TE", "name_th": "นาย สุขสรร ถีระมัด", "name_en": "Sooksan Teeramad", "disp_name": "นาย สุขสรร ถีระมัด (Sooksan Teeramad)", "dept": "CNC", "mc_score": 3541.5, "set_score": 135.0, "raw_score": 3676.5, "bench_raw": 7629.5, "s60": 28.91, "leave_days": 0.0, "att20": 20.0, "default_tot100": 68.91, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.5, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 13, "line": "G-H-J-K", "start_date": "2009-07-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01507", "emp_disp": "01507", "login": "CHAIWAT_MU", "name_th": "นาย ชัยวัฒน์ มั่นดี", "name_en": "Chaiwat Mundee", "disp_name": "นาย ชัยวัฒน์ มั่นดี (Chaiwat Mundee)", "dept": "CNC", "mc_score": 3235.0, "set_score": 183.5, "raw_score": 3418.5, "bench_raw": 7629.5, "s60": 26.88, "leave_days": 0.0, "att20": 20.0, "default_tot100": 66.88, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.5, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 0.5, "7.5": 1.0, "8.1": 1.5, "8.2": 1.5, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 14, "line": "G-H-J-K", "start_date": "2011-09-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01138", "emp_disp": "01138", "login": "PINYO_KH", "name_th": "นาย ภิญโญ ขันติวงศ์", "name_en": "Pinyo Khantiwong", "disp_name": "นาย ภิญโญ ขันติวงศ์ (Pinyo Khantiwong)", "dept": "CNC", "mc_score": 3339.25, "set_score": 25.5, "raw_score": 3364.75, "bench_raw": 7629.5, "s60": 26.46, "leave_days": 0.0, "att20": 20.0, "default_tot100": 66.46, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 0.5, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.0, "4.2": 2.0, "5.1": 25.0, "5.2": 3.0, "6.1": 0.5, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.0, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 55.5, "score20": 13.88}, "default_rank": 15, "line": "X-Y-Z", "start_date": "2006-02-16", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01459", "emp_disp": "01459", "login": "SIRISAK_CO", "name_th": "นาย ศิริศักดิ์ คำพูล", "name_en": "Sirisak Compool", "disp_name": "นาย ศิริศักดิ์ คำพูล (Sirisak Compool)", "dept": "CNC", "mc_score": 3553.25, "set_score": 12.5, "raw_score": 3565.75, "bench_raw": 7629.5, "s60": 28.04, "leave_days": 2.0, "att20": 18.0, "default_tot100": 66.04, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 2.0, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 56.0, "score20": 14.0}, "default_rank": 16, "line": "G-H-J-K", "start_date": "2011-07-04", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01356", "emp_disp": "01356", "login": "PONRIT_WA", "name_th": "นาย พลฤทธิ์ วันคำ", "name_en": "Ponrit Wankham", "disp_name": "นาย พลฤทธิ์ วันคำ (Ponrit Wankham)", "dept": "CNC", "mc_score": 3631.75, "set_score": 19.5, "raw_score": 3651.25, "bench_raw": 7629.5, "s60": 28.71, "leave_days": 8.0, "att20": 12.0, "default_tot100": 60.71, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 0.5, "4.1": 1.5, "4.2": 1.0, "5.1": 27.5, "5.2": 4.0, "6.1": 0.5, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 0.5, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 2.0, "9.2": 1.0, "10.1": 0.5, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 58.0, "score20": 14.5}, "default_rank": 17, "line": "N-P-Q-R", "start_date": "2010-01-11", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01789", "emp_disp": "01789", "login": "KEATTIPONG_CH", "name_th": "นาย เกียรติพงษ์ ชัยถา", "name_en": "Keattipong Chaitha", "disp_name": "นาย เกียรติพงษ์ ชัยถา (Keattipong Chaitha)", "dept": "CNC", "mc_score": 138.5, "set_score": 3136.0, "raw_score": 3274.5, "bench_raw": 7629.5, "s60": 25.75, "leave_days": 6.5, "att20": 13.5, "default_tot100": 59.25, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 1.0, "2.1": 1.5, "2.2": 1.0, "2.3": 1.5, "3.1": 1.5, "3.2": 1.5, "3.3": 1.0, "4.1": 2.5, "4.2": 1.5, "5.1": 27.0, "5.2": 4.0, "6.1": 1.0, "6.2": 1.0, "6.3": 1.0, "6.4": 1.0, "6.5": 1.0, "7.1": 1.0, "7.2": 1.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 1.0, "9.1": 2.5, "9.2": 1.0, "10.1": 1.0, "10.2": 1.0, "10.3": 1.0, "10.4": 1.0}, "total80": 68.5, "score20": 17.12}, "default_rank": 18, "line": "X-Y-Z", "start_date": "16-Jan-18", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01751", "emp_disp": "01751", "login": "PAIROTE_C", "name_th": "นาย ไพโรจน์ พึ่งพุทธิกานต์", "name_en": "Pairote_CNC Staff", "disp_name": "นาย ไพโรจน์ พึ่งพุทธิกานต์ (Pairote_CNC Staff)", "dept": "CNC", "mc_score": 3360.75, "set_score": 10.0, "raw_score": 3370.75, "bench_raw": 7629.5, "s60": 26.51, "leave_days": 8.0, "att20": 12.0, "default_tot100": 58.51, "ref2025": {"items": {"1.1": 0.5, "1.2": 1.0, "1.3": 1.0, "1.4": 1.0, "1.5": 0.5, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.0, "3.2": 1.0, "3.3": 1.0, "4.1": 1.5, "4.2": 1.0, "5.1": 25.0, "5.2": 3.0, "6.1": 0.5, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 1.0, "7.4": 1.0, "7.5": 1.0, "8.1": 1.0, "8.2": 1.0, "8.3": 0.5, "9.1": 1.5, "9.2": 0.5, "10.1": 0.5, "10.2": 0.5, "10.3": 0.5, "10.4": 0.5}, "total80": 53.0, "score20": 13.25}, "default_rank": 19, "line": "X-Y-Z", "start_date": "2017-05-15", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01317", "emp_disp": "01317", "login": "SANCHAI_VI", "name_th": "นาย สัญชัย วิมลรัตน์", "name_en": "Sanchai Vimolrat", "disp_name": "นาย สัญชัย วิมลรัตน์ (Sanchai Vimolrat)", "dept": "CNC", "mc_score": 3335.25, "set_score": 35.5, "raw_score": 3370.75, "bench_raw": 7629.5, "s60": 26.51, "leave_days": 11.75, "att20": 8.25, "default_tot100": 54.76, "ref2025": {"items": {"1.1": 1.0, "1.2": 1.0, "1.3": 1.0, "1.4": 0.5, "1.5": 1.0, "2.1": 1.0, "2.2": 0.5, "2.3": 1.0, "3.1": 1.5, "3.2": 1.5, "3.3": 0.5, "4.1": 1.5, "4.2": 1.5, "5.1": 23.0, "5.2": 4.0, "6.1": 1.0, "6.2": 0.5, "6.3": 0.5, "6.4": 0.5, "6.5": 0.5, "7.1": 1.0, "7.2": 0.0, "7.3": 0.5, "7.4": 0.0, "7.5": 1.0, "8.1": 1.5, "8.2": 2.0, "8.3": 0.5, "9.1": 2.5, "9.2": 1.5, "10.1": 1.0, "10.2": 1.0, "10.3": 0.5, "10.4": 0.5}, "total80": 57.0, "score20": 14.25}, "default_rank": 20, "line": "S-T", "start_date": "2009-08-03", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11083", "emp_disp": "V11083", "login": "SAHAPHAP_SA", "name_th": "นาย สหภาพ สวัสดี", "name_en": "Sahaphap Sawaddee", "disp_name": "นาย สหภาพ สวัสดี (Sahaphap Sawaddee)", "dept": "CNC", "mc_score": 3611.5, "set_score": 11.0, "raw_score": 3622.5, "bench_raw": 4210.0, "s60": 51.63, "leave_days": 0.0, "att20": 20.0, "default_tot100": 91.63, "ref2025": null, "default_rank": 1, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11744", "emp_disp": "V11744", "login": "KITTICHAI_NA", "name_th": "นาย กิตติชัย นันทะเพชร", "name_en": "Kittichai Nanthaphet", "disp_name": "นาย กิตติชัย นันทะเพชร (Kittichai Nanthaphet)", "dept": "CNC", "mc_score": 4206.5, "set_score": 3.5, "raw_score": 4210.0, "bench_raw": 4210.0, "s60": 60.0, "leave_days": 13.0, "att20": 7.0, "default_tot100": 87.0, "ref2025": null, "default_rank": 2, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11685", "emp_disp": "V11685", "login": "JIRASAK_RI", "name_th": "นาย จีระศักดิ์ ฤทธิศาสตร์", "name_en": "JIRASAK RITTHISAT", "disp_name": "นาย จีระศักดิ์ ฤทธิศาสตร์ (JIRASAK RITTHISAT)", "dept": "CNC", "mc_score": 3072.25, "set_score": 14.5, "raw_score": 3086.75, "bench_raw": 4210.0, "s60": 43.99, "leave_days": 0.0, "att20": 20.0, "default_tot100": 83.99, "ref2025": null, "default_rank": 3, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11705", "emp_disp": "V11705", "login": "JETNARIN_KE", "name_th": "นาย เจตนรินทร์ เกตุวิริยะกรรม", "name_en": "Jetnarin Ketuwiriyakam", "disp_name": "นาย เจตนรินทร์ เกตุวิริยะกรรม (Jetnarin Ketuwiriyakam)", "dept": "CAM_CNC", "mc_score": 3510.75, "set_score": 2.0, "raw_score": 3512.75, "bench_raw": 4210.0, "s60": 50.06, "leave_days": 13.0, "att20": 7.0, "default_tot100": 77.06, "ref2025": null, "default_rank": 4, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11878", "emp_disp": "V11878", "login": "SITTISAK_KA", "name_th": "นาย สิทธิศักดิ์ คำคูณเมือง", "name_en": "Sittisak Kamkunmaung", "disp_name": "นาย สิทธิศักดิ์ คำคูณเมือง (Sittisak Kamkunmaung)", "dept": "CNC", "mc_score": 2032.0, "set_score": 12.0, "raw_score": 2044.0, "bench_raw": 4210.0, "s60": 29.13, "leave_days": 4.0, "att20": 16.0, "default_tot100": 65.13, "ref2025": null, "default_rank": 5, "line": "CNC-T1", "role_group": "TECH"}, {"zone": "CNC-1", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11904", "emp_disp": "V11904", "login": "JAKKAPHONG_PH", "name_th": "จักรพงศ์ ภูครองแง่", "name_en": "JAKKAPHONG PHUKRONGNGAE", "disp_name": "จักรพงศ์ ภูครองแง่ (JAKKAPHONG PHUKRONGNGAE)", "dept": "CNC", "mc_score": 314.0, "set_score": 0.0, "raw_score": 314.0, "bench_raw": 4210.0, "s60": 4.48, "leave_days": 0.0, "att20": 20.0, "default_tot100": 44.48, "ref2025": null, "default_rank": 6, "role_group": "TECH"}], "CNC-2": [{"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01319", "emp_disp": "01319", "login": "SEDTHA_NO", "name_th": "นาย เศรษฐา นกน้อย", "name_en": "Sedtha Noknoi", "disp_name": "นาย เศรษฐา นกน้อย (Sedtha Noknoi)", "dept": "CNC", "mc_score": 5195.25, "set_score": 21.5, "raw_score": 5216.75, "bench_raw": 5216.75, "s60": 60.0, "leave_days": 0.0, "att20": 20.0, "default_tot100": 100.0, "ref2025": null, "default_rank": 1, "line": "N-P-Q-R", "start_date": "2009-08-03", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01460", "emp_disp": "01460", "login": "SOMPOP_CH", "name_th": "นาย สมภพ ชะลุนรัมย์", "name_en": "Sompop Chalunram", "disp_name": "นาย สมภพ ชะลุนรัมย์ (Sompop Chalunram)", "dept": "CNC", "mc_score": 4510.25, "set_score": 326.0, "raw_score": 4836.25, "bench_raw": 5216.75, "s60": 55.62, "leave_days": 0.0, "att20": 20.0, "default_tot100": 95.62, "ref2025": null, "default_rank": 2, "line": "N-P-Q-R", "start_date": "2011-07-18", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01519", "emp_disp": "01519", "login": "KANCHANA_CH", "name_th": "นาย กาญจนะ ชำนาญพล", "name_en": "Kanchana Chamnanphon", "disp_name": "นาย กาญจนะ ชำนาญพล (Kanchana Chamnanphon)", "dept": "CNC", "mc_score": 4510.5, "set_score": 131.5, "raw_score": 4642.0, "bench_raw": 5216.75, "s60": 53.39, "leave_days": 0.0, "att20": 20.0, "default_tot100": 93.39, "ref2025": null, "default_rank": 3, "line": "N-P-Q-R", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01461", "emp_disp": "01461", "login": "RATTANAWONG_MA", "name_th": "รัตนาวงศ์ มาน้อย Mr.", "name_en": "Rattanawong Manoi", "disp_name": "รัตนาวงศ์ มาน้อย Mr. (Rattanawong Manoi)", "dept": "CNC", "mc_score": 4187.5, "set_score": 261.0, "raw_score": 4448.5, "bench_raw": 5216.75, "s60": 51.16, "leave_days": 0.0, "att20": 20.0, "default_tot100": 91.16, "ref2025": null, "default_rank": 4, "line": "Rattanawong", "start_date": "Manoi", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01957", "emp_disp": "01957 (เดิม V10216)", "login": "THANAKORN_NO (เดิม THANAKORN_H)", "name_th": "นาย ธนากร หนูหงษ์", "name_en": "Thanakorn Noohong", "disp_name": "นาย ธนากร หนูหงษ์ (Thanakorn Noohong)", "dept": "CNC", "mc_score": 4461.75, "set_score": 3.5, "raw_score": 4465.25, "bench_raw": 5216.75, "s60": 51.36, "leave_days": 1.0, "att20": 19.0, "default_tot100": 90.36, "ref2025": null, "default_rank": 5, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01466", "emp_disp": "01466", "login": "KANAKORN_PH", "name_th": "นาย คณากร เพ็งคุณ", "name_en": "Kanakorn Phengkhun", "disp_name": "นาย คณากร เพ็งคุณ (Kanakorn Phengkhun)", "dept": "CNC", "mc_score": 3460.0, "set_score": 860.0, "raw_score": 4320.0, "bench_raw": 5216.75, "s60": 49.69, "leave_days": 0.0, "att20": 20.0, "default_tot100": 89.69, "ref2025": null, "default_rank": 6, "line": "N-P-Q-R", "start_date": "2011-08-02", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01750", "emp_disp": "01750", "login": "ANUSAK_TAN", "name_th": "นาย อนุศักดิ์ แตงเรือง", "name_en": "Anusak Tangrueng", "disp_name": "นาย อนุศักดิ์ แตงเรือง (Anusak Tangrueng)", "dept": "CNC", "mc_score": 3402.0, "set_score": 358.5, "raw_score": 3760.5, "bench_raw": 5216.75, "s60": 43.25, "leave_days": 0.0, "att20": 20.0, "default_tot100": 83.25, "ref2025": null, "default_rank": 7, "line": "N-P-Q-R", "start_date": "16-Feb-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01309", "emp_disp": "01309", "login": "MONTRI_PA", "name_th": "นาย มนตรี ปะทะโก", "name_en": "Montri Pathako", "disp_name": "นาย มนตรี ปะทะโก (Montri Pathako)", "dept": "CNC", "mc_score": 2858.25, "set_score": 897.5, "raw_score": 3755.75, "bench_raw": 5216.75, "s60": 43.2, "leave_days": 0.0, "att20": 20.0, "default_tot100": 83.2, "ref2025": null, "default_rank": 8, "line": "N-P-Q-R", "start_date": "2009-06-29", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01594", "emp_disp": "01594", "login": "WANLOP_TU", "name_th": "นาย วัลลพ ตุรภิภาค", "name_en": "Wanlop Turaphipak", "disp_name": "นาย วัลลพ ตุรภิภาค (Wanlop Turaphipak)", "dept": "CNC", "mc_score": 3431.5, "set_score": 15.0, "raw_score": 3446.5, "bench_raw": 5216.75, "s60": 39.64, "leave_days": 0.0, "att20": 20.0, "default_tot100": 79.64, "ref2025": null, "default_rank": 9, "line": "V-W", "start_date": "2012-06-16", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01159", "emp_disp": "01159", "login": "AMNAJ_NA", "name_th": "นาย อำนาจ นามเย็น", "name_en": "Amnaj Namyen", "disp_name": "นาย อำนาจ นามเย็น (Amnaj Namyen)", "dept": "CNC", "mc_score": 3392.0, "set_score": 12.0, "raw_score": 3404.0, "bench_raw": 5216.75, "s60": 39.15, "leave_days": 0.0, "att20": 20.0, "default_tot100": 79.15, "ref2025": null, "default_rank": 10, "line": "N-P-Q-R", "start_date": "2006-04-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01400", "emp_disp": "01400", "login": "WEERAPONG_SI", "name_th": "นาย วีรพงษ์ สิตะเสน", "name_en": "Weerapong Sitasen", "disp_name": "นาย วีรพงษ์ สิตะเสน (Weerapong Sitasen)", "dept": "CNC", "mc_score": 2134.75, "set_score": 1246.5, "raw_score": 3381.25, "bench_raw": 5216.75, "s60": 38.89, "leave_days": 0.0, "att20": 20.0, "default_tot100": 78.89, "ref2025": null, "default_rank": 11, "line": "N-P-Q-R", "start_date": "2010-06-23", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01834", "emp_disp": "01834", "login": "WINAI_POR", "name_th": "นาย วินัย พรโสภณ", "name_en": "Winai Pornsopon", "disp_name": "นาย วินัย พรโสภณ (Winai Pornsopon)", "dept": "CNC", "mc_score": 2599.0, "set_score": 742.5, "raw_score": 3341.5, "bench_raw": 5216.75, "s60": 38.43, "leave_days": 0.0, "att20": 20.0, "default_tot100": 78.43, "ref2025": null, "default_rank": 12, "line": "V-W", "start_date": "2019-04-01", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01298", "emp_disp": "01298", "login": "MANUS_KO", "name_th": "นาย มานัส คงสัมฤทธิ", "name_en": "Manus Kongsumrit", "disp_name": "นาย มานัส คงสัมฤทธิ (Manus Kongsumrit)", "dept": "CNC", "mc_score": 2555.0, "set_score": 222.0, "raw_score": 2777.0, "bench_raw": 5216.75, "s60": 31.94, "leave_days": 0.0, "att20": 20.0, "default_tot100": 71.94, "ref2025": null, "default_rank": 13, "line": "S-T", "start_date": "2009-06-01", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01774", "emp_disp": "01774", "login": "SONGSAK_BU", "name_th": "นาย ทรงศักดิ์ บำรุงราช", "name_en": "Songsak Bumrungrat", "disp_name": "นาย ทรงศักดิ์ บำรุงราช (Songsak Bumrungrat)", "dept": "CNC", "mc_score": 1245.25, "set_score": 1457.0, "raw_score": 2702.25, "bench_raw": 5216.75, "s60": 31.08, "leave_days": 0.0, "att20": 20.0, "default_tot100": 71.08, "ref2025": null, "default_rank": 14, "line": "N-P-Q-R", "start_date": "2017-02-16", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01835", "emp_disp": "01835", "login": "NARONG_NU", "name_th": "นาย ณรงค์ น้ำคำ", "name_en": "NARONG NUMKAM", "disp_name": "นาย ณรงค์ น้ำคำ (NARONG NUMKAM)", "dept": "CNC", "mc_score": 2521.5, "set_score": 133.0, "raw_score": 2654.5, "bench_raw": 5216.75, "s60": 30.53, "leave_days": 0.0, "att20": 20.0, "default_tot100": 70.53, "ref2025": null, "default_rank": 15, "line": "S-T", "start_date": "2019-04-01", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01513", "emp_disp": "01513", "login": "PIYA_PR", "name_th": "นาย ปิยะ พรมฟัก", "name_en": "Piya Promfak", "disp_name": "นาย ปิยะ พรมฟัก (Piya Promfak)", "dept": "CNC", "mc_score": 631.75, "set_score": 1784.0, "raw_score": 2415.75, "bench_raw": 5216.75, "s60": 27.78, "leave_days": 0.0, "att20": 20.0, "default_tot100": 67.78, "ref2025": null, "default_rank": 16, "line": "S-T", "start_date": "2011-10-17", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "perm", "is_perm_group": true, "cat_label": "พนักงานประจำ", "emp_clean": "01603", "emp_disp": "01603", "login": "ANIWAT_JA", "name_th": "นาย อนิวัฒน์ จักรแก้ว", "name_en": "Aniwat Jakkaew", "disp_name": "นาย อนิวัฒน์ จักรแก้ว (Aniwat Jakkaew)", "dept": "CNC", "mc_score": 1364.5, "set_score": 797.5, "raw_score": 2162.0, "bench_raw": 5216.75, "s60": 24.87, "leave_days": 0.0, "att20": 20.0, "default_tot100": 64.87, "ref2025": null, "default_rank": 17, "line": "S-T", "start_date": "2012-08-07", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "promoted", "is_perm_group": true, "cat_label": "ปรับบรรจุ (Sub→ประจำ)", "emp_clean": "01951", "emp_disp": "01951 (เดิม V10840)", "login": "SATHAPORN_WO", "name_th": "นาย สถาพร วงค์พุฒ", "name_en": "Sathaporn WONGPUCH", "disp_name": "นาย สถาพร วงค์พุฒ (Sathaporn WONGPUCH)", "dept": "CNC", "mc_score": 2012.5, "set_score": 28.5, "raw_score": 2041.0, "bench_raw": 5216.75, "s60": 23.47, "leave_days": 4.0, "att20": 16.0, "default_tot100": 59.47, "ref2025": null, "default_rank": 18, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11746", "emp_disp": "V11746", "login": "JAKKARIN_SA", "name_th": "นาย จักรณรินทร์ สติภา", "name_en": "JAKKARIN SATIPHA", "disp_name": "นาย จักรณรินทร์ สติภา (JAKKARIN SATIPHA)", "dept": "CNC", "mc_score": 3468.75, "set_score": 32.5, "raw_score": 3501.25, "bench_raw": 3501.25, "s60": 60.0, "leave_days": 0.0, "att20": 20.0, "default_tot100": 100.0, "ref2025": null, "default_rank": 1, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V10990", "emp_disp": "V10990", "login": "KITTIPONGS", "name_th": "นาย กิจติพงศ์ ศิลาอุดม", "name_en": "Kittipong S.", "disp_name": "นาย กิจติพงศ์ ศิลาอุดม (Kittipong S.)", "dept": "CNC", "mc_score": 3339.0, "set_score": 5.0, "raw_score": 3344.0, "bench_raw": 3501.25, "s60": 57.31, "leave_days": 0.0, "att20": 20.0, "default_tot100": 97.31, "ref2025": null, "default_rank": 2, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11639", "emp_disp": "V11639", "login": "RACHEN_DE", "name_th": "นาย ราเชนทร์ ดีเสมอ", "name_en": "Rachen Deesamer", "disp_name": "นาย ราเชนทร์ ดีเสมอ (Rachen Deesamer)", "dept": "CNC", "mc_score": 2594.5, "set_score": 1.0, "raw_score": 2595.5, "bench_raw": 3501.25, "s60": 44.48, "leave_days": 0.0, "att20": 20.0, "default_tot100": 84.48, "ref2025": null, "default_rank": 3, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11640", "emp_disp": "V11640", "login": "PIKNET_CH", "name_th": "นาย พิคเนตร เชื่อนิตย์", "name_en": "Piknet Chuenit", "disp_name": "นาย พิคเนตร เชื่อนิตย์ (Piknet Chuenit)", "dept": "CNC", "mc_score": 1826.5, "set_score": 0.0, "raw_score": 1826.5, "bench_raw": 3501.25, "s60": 31.3, "leave_days": 0.0, "att20": 20.0, "default_tot100": 71.3, "ref2025": null, "default_rank": 4, "line": "CNC-T2", "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12164", "emp_disp": "V12164", "login": "KRITSANAPORN_CH", "name_th": "KRITSANAPORN CHAIYOTA", "name_en": "KRITSANAPORN CHAIYOTA", "disp_name": "KRITSANAPORN CHAIYOTA", "dept": "CNC", "mc_score": 993.5, "set_score": 0.0, "raw_score": 993.5, "bench_raw": 3501.25, "s60": 17.03, "leave_days": 0.0, "att20": 20.0, "default_tot100": 57.03, "ref2025": null, "default_rank": 5, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12144", "emp_disp": "V12144", "login": "JIRAYU_SE", "name_th": "JIRAYU SEESAKNOK", "name_en": "JIRAYU SEESAKNOK", "disp_name": "JIRAYU SEESAKNOK", "dept": "CNC", "mc_score": 883.5, "set_score": 0.0, "raw_score": 883.5, "bench_raw": 3501.25, "s60": 15.14, "leave_days": 0.0, "att20": 20.0, "default_tot100": 55.14, "ref2025": null, "default_rank": 6, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11144", "emp_disp": "V11144", "login": "PONRAT_SA", "name_th": "พลรัตน์ แสบงบาล", "name_en": "Ponrat Sabongban", "disp_name": "พลรัตน์ แสบงบาล (Ponrat Sabongban)", "dept": "CNC", "mc_score": 834.5, "set_score": 0.0, "raw_score": 834.5, "bench_raw": 3501.25, "s60": 14.3, "leave_days": 0.0, "att20": 20.0, "default_tot100": 54.3, "ref2025": null, "default_rank": 7, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11863", "emp_disp": "V11863", "login": "THAWISAK_KU", "name_th": "ทวีศักดิ์ กุดแกลง", "name_en": "Thawisak Kutthalaeng", "disp_name": "ทวีศักดิ์ กุดแกลง (Thawisak Kutthalaeng)", "dept": "CNC", "mc_score": 591.0, "set_score": 0.0, "raw_score": 591.0, "bench_raw": 3501.25, "s60": 10.13, "leave_days": 0.0, "att20": 20.0, "default_tot100": 50.13, "ref2025": null, "default_rank": 8, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V11169", "emp_disp": "V11169", "login": "SAKCHAI", "name_th": "ศักด์ชัย แสนทวีสุข", "name_en": "Sakchai S", "disp_name": "ศักด์ชัย แสนทวีสุข (Sakchai S)", "dept": "CNC", "mc_score": 491.0, "set_score": 0.0, "raw_score": 491.0, "bench_raw": 3501.25, "s60": 8.41, "leave_days": 0.0, "att20": 20.0, "default_tot100": 48.41, "ref2025": null, "default_rank": 9, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12219", "emp_disp": "V12219", "login": "KIRATI_SA", "name_th": "KIRATI SANPRANEE", "name_en": "KIRATI SANPRANEE", "disp_name": "KIRATI SANPRANEE", "dept": "CNC", "mc_score": 253.5, "set_score": 0.0, "raw_score": 253.5, "bench_raw": 3501.25, "s60": 4.34, "leave_days": 0.0, "att20": 20.0, "default_tot100": 44.34, "ref2025": null, "default_rank": 10, "role_group": "TECH"}, {"zone": "CNC-2", "kind": "sub", "is_perm_group": false, "cat_label": "Subcontract", "emp_clean": "V12178", "emp_disp": "V12178", "login": "CHATCHAPONG_KA", "name_th": "CHATCHAPONG KAPINIT", "name_en": "CHATCHAPONG KAPINIT", "disp_name": "CHATCHAPONG KAPINIT", "dept": "CNC", "mc_score": 103.5, "set_score": 0.0, "raw_score": 103.5, "bench_raw": 3501.25, "s60": 1.77, "leave_days": 0.0, "att20": 20.0, "default_tot100": 41.77, "ref2025": null, "default_rank": 11, "role_group": "TECH"}]}, "LEADER": {"CNC-1": [{"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "00706", "login": "WITTAYA_NG", "name_th": "นาย วิทยา งอมสงัด", "name_en": "Wittaya Ngomsa-ngad", "cat_label": "Leader", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01115", "login": "JUCKRAYUT_BO", "name_th": "นาย จักรายุทธ บุตรอินทร์", "name_en": "Juckrayut Boot-in", "cat_label": "Leader", "line": "G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01329", "login": "YONGYUT_KH", "name_th": "นาย ยงยุทธ แคนเสาร์", "name_en": "Yongyut Khaensao", "cat_label": "Leader", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01335", "login": "YUTTAPONG_NA", "name_th": "นาย ยุทธพงษ์ นาคเงิน", "name_en": "Yutthaphong Nakngoen", "cat_label": "Leader", "line": "CNC-T1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01631", "login": "SATHIAN_PA", "name_th": "นาย เสถียร ปะนามะโกสา", "name_en": "Sathian Panamakosa", "cat_label": "Leader", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01294", "login": "KITTIPONG_YA", "name_th": "นาย กิตติพงษ์ ยารังษี", "name_en": "Kittipong Yarangsee", "cat_label": "Sub-Leader/Leader", "line": "G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "LEADER", "emp_clean": "01150", "login": "KITTIPHOP_CH", "name_th": "นาย กิตติภพ ชายหาด", "name_en": "Kittiphop Chayhad", "cat_label": "Sub-Leader/Leader", "line": "G-H-J-K", "is_perm_group": true}], "CNC-2": [{"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "00841", "login": "PANUPONG_MU", "name_th": "นาย ภาณุพงศ์ มุมมาลา", "name_en": "Panupong Mummala", "cat_label": "Leader", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01334", "login": "SONGYOOT_YO", "name_th": "นาย ทรงยศ อยู่ยืน", "name_en": "Songyoot Youyeun", "cat_label": "Leader", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01397", "login": "NIWAT_BU", "name_th": "นาย นิวัฒน์ บุดดีแหบ", "name_en": "Niwat Buddeehaeb", "cat_label": "Leader", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01588", "login": "MANOP_WU", "name_th": "นาย มานพ วุฒิการณ์", "name_en": "Manop Wutthikan", "cat_label": "Leader", "line": "S-T", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "01621", "login": "TINNAKORN_MA", "name_th": "นาย ทินกร มะลิหอม", "name_en": "Tinnakorn Malihom", "cat_label": "Leader", "line": "V-W", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "LEADER", "emp_clean": "00839", "login": "PRASOPCHAI_SU", "name_th": "นาย ประสพชัย สุเมผา", "name_en": "Prasopchai Sumepha", "cat_label": "Leader", "line": "S-T", "is_perm_group": true}]}, "ASST": {"CNC-1": [{"zone": "CNC-1", "role_group": "ASST", "emp_clean": "00563", "login": "JAMNONG_IN", "name_th": "นาย จำนง อินจินดา", "name_en": "Jamnong Injinda", "cat_label": "Asst.Supervisor", "line": "G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ASST", "emp_clean": "00683", "login": "THANATHON_NO", "name_th": "นาย ธนธรณ์ น้อยมาลา", "name_en": "Thanathon Noimala", "cat_label": "Asst.Supervisor", "line": "X-Y-Z", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ASST", "emp_clean": "00227", "login": "NATTINEE_SA", "name_th": "นางสาว ณัฎฐินี สายสิงห์", "name_en": "Nattinee Saising", "cat_label": "Asst.Supervisor", "line": "G-H-J-K", "is_perm_group": true}], "CNC-2": [{"zone": "CNC-2", "role_group": "ASST", "emp_clean": "01151", "login": "SATHEAN_JA", "name_th": "นาย เสถียร ใจเด็ด", "name_en": "Sathean Jaided", "cat_label": "Asst.Supervisor", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ASST", "emp_clean": "01175", "login": "ANURAK_YO", "name_th": "นาย อนุรักษ์ โยธาทูน", "name_en": "Anurak Yotatoon", "cat_label": "Asst.Supervisor", "line": "N-P-Q-R", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ASST", "emp_clean": "01315", "login": "SONGKRAN_TO", "name_th": "นาย สงการ ทองสิงห์", "name_en": "Songkran Tongsing", "cat_label": "Asst.Supervisor", "line": "N-P-Q-R", "is_perm_group": true}]}, "ENGINEER": {"CNC-1": [{"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01896", "login": "SAKKARIN_CH", "name_th": "นาย ศักรินทร์ ช่วยประสิทธิ์", "name_en": "Sakkarin Chouprasit", "cat_label": "Engineer", "line": "CNC-T1 / G-H-J-K", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01841", "login": "WIRAYUT", "name_th": "นาย วีรยุทธ แวงมล", "name_en": "Wirayut Waengmon", "cat_label": "Engineer", "line": "EG1 / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01688", "login": "SONGRIT", "name_th": "นาย ทรงฤทธิ์ วรกาล", "name_en": "Songrit Worakarn", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01947", "login": "SAKDINAN_WO", "name_th": "นาย ศักดิ์นันท์ วงศ์ศรีชา", "name_en": "Sakdinan Wongsricha", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01874", "login": "PATIPAN_CH", "name_th": "นาย ปฏิภาณ จงดี", "name_en": "Patipan Chongdee", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01916", "login": "WADCHARA", "name_th": "นาย วัชระ บุญดล", "name_en": "Wadchara Bundon", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "00404", "login": "TUI", "name_th": "นาง ศศิภา สุขประเสริฐ", "name_en": "Sasipha Sukprasert", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}, {"zone": "CNC-1", "role_group": "ENGINEER", "emp_clean": "01899", "login": "NATTHAPHONG", "name_th": "นาย ณัฐพงษ์ ภูพวก", "name_en": "Natthaphong Phuphuak", "cat_label": "Engineer", "line": "EG / CNC-1", "is_perm_group": true}], "CNC-2": [{"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01939", "login": "WEERAPAT_WO", "name_th": "นาย วีรภัทร วงษ์พวง", "name_en": "Weerapat Wongphuang", "cat_label": "Engineer", "line": "CNC-T2 / S-T-V-W", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01895", "login": "NATTAWUT_TR", "name_th": "นาย ณัฐวุฒิ ตรีเพ็ชร", "name_en": "Nattawut Treepetch", "cat_label": "Engineer", "line": "CNC-T2 / S-T", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01462", "login": "SOMCHAI_KA", "name_th": "นาย สมชาย ขันทะ", "name_en": "Somchai Kanta", "cat_label": "Engineer", "line": "EG / CNC-2", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "01854", "login": "TEERASAK", "name_th": "นาย ธีรศักดิ์ สอนเพียร", "name_en": "Teerasak Sornphian", "cat_label": "Engineer", "line": "EG2 / CNC-2", "is_perm_group": true}, {"zone": "CNC-2", "role_group": "ENGINEER", "emp_clean": "V12129", "login": "PRICHA_HI", "name_th": "นาย ปรีชา หิตะเทศ", "name_en": "Pricha Hittathet", "cat_label": "CAM/Engineer", "line": "CAM_CNC / CNC-2", "is_perm_group": false}]}}};
+const DEFAULT_GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxnkesG3-wZlx1OpVp_Evqq5Sj3gYJCfUhIWlQJCGbZfn6JiTVHebSBvBFTta3n_QBqug/exec";
+const LS_QR_BASE = "cnc_eval2026_qr_base_url";
+const LS_GAS_URL = "cnc_eval2026_gas_url";
+
+function detectDefaultBaseUrl() {
+  const saved = localStorage.getItem(LS_QR_BASE);
+  if (saved) return saved;
+  if (window.location.protocol.startsWith("http")) {
+    const cleanHref = window.location.href.split("?")[0].split("#")[0];
+    return cleanHref.replace(/qr_table\.html$/i, "index.html");
+  }
+  return "https://YOUR-GITHUB-USERNAME.github.io/cnc-evaluation-2026/index.html";
+}
+
+function buildPersonEvalUrl(p) {
+  let base = document.getElementById("baseUrlInput").value.trim();
+  if (!base) base = detectDefaultBaseUrl();
+  if (base.endsWith("/")) base += "index.html";
+
+  const params = [
+    "role=" + encodeURIComponent(p.role_group),
+    "zone=" + encodeURIComponent(p.zone),
+    "emp=" + encodeURIComponent(p.emp_clean)
+  ];
+  const gas = document.getElementById("gasUrlEmbed").value.trim();
+  if (gas && gas.startsWith("https://script.google.com/") && gas !== DEFAULT_GAS_WEBAPP_URL) {
+    params.push("gas=" + encodeURIComponent(gas));
+  }
+  return base + (base.includes("?") ? "&" : "?") + params.join("&");
+}
+
+function saveUrlAndRender() {
+  localStorage.setItem(LS_QR_BASE, document.getElementById("baseUrlInput").value.trim());
+  const g = document.getElementById("gasUrlEmbed").value.trim();
+  if (g) localStorage.setItem(LS_GAS_URL, g);
+  renderTable();
+}
+
+function getFilteredPeople() {
+  const rf = document.getElementById("roleFilter").value;
+  const zf = document.getElementById("zoneFilter").value;
+  const q = document.getElementById("searchInput").value.trim().toUpperCase();
+
+  const roles = rf === "ALL" ? ["TECH", "LEADER", "ASST", "ENGINEER"] : [rf];
+  const list = [];
+  roles.forEach(rg => {
+    ["CNC-1", "CNC-2"].forEach(z => {
+      if (zf !== "ALL" && z !== zf) return;
+      (MASTER_DATA.evaluatees_by_role[rg][z] || []).forEach(p => {
+        if (q) {
+          const hay = `${p.emp_clean} ${p.name_th} ${p.name_en} ${p.login} ${p.cat_label} ${p.line || ""}`.toUpperCase();
+          if (!hay.includes(q)) return;
+        }
+        list.push(p);
+      });
+    });
+  });
+  return list;
+}
+
+function renderTable() {
+  const rf = document.getElementById("roleFilter");
+  document.getElementById("printTitle").textContent =
+    "ตาราง QR Code ประเมินผลบุคลากร CNC 2026 — " + rf.options[rf.selectedIndex].text;
+
+  const rows = getFilteredPeople();
+  document.getElementById("countLabel").textContent = `แสดง ${rows.length} คน`;
+
+  const tbody = document.getElementById("qrTableBody");
+  tbody.innerHTML = rows.map((p, idx) => {
+    const fullUrl = buildPersonEvalUrl(p);
+    const qrSvg = window.renderQRCodeSVG(fullUrl, 106, 2);
+    const zClass = p.zone === "CNC-1" ? "badge-zone-1" : "badge-zone-2";
+    const meta = MASTER_DATA.role_meta[p.role_group];
+
+    return `
+      <tr>
+        <td style="text-align:center; font-weight:700; color:#475569;">${idx + 1}</td>
+        <td>
+          <span class="${zClass}">${p.zone}</span>
+          <div style="font-size:0.75rem; color:#64748b; margin-top:4px;">${p.line || p.dept || ""}</div>
+        </td>
+        <td><strong style="font-size:1rem; color:#0f172a;">${p.emp_clean}</strong></td>
+        <td>
+          <div style="font-size:1.01rem; font-weight:800; color:#0f172a;">${p.name_th}</div>
+          <div style="font-size:0.81rem; color:#475569;">${p.name_en} <span style="color:#94a3b8;">(${p.cat_label})</span></div>
+        </td>
+        <td>
+          <span class="badge-chain">${meta.chain_badge}</span>
+          <div style="font-size:0.74rem; color:#64748b; margin-top:4px;">แบบฟอร์ม ${meta.item_count} ข้อ (80 คะแนน)</div>
+        </td>
+        <td style="text-align:center;">
+          <div class="qr-cell-box">
+            ${qrSvg}
+            <span style="font-size:0.69rem; font-weight:700; color:#334155; margin-top:2px;">${p.role_group} • ${p.emp_clean}</span>
+          </div>
+        </td>
+        <td class="no-print">
+          <a href="index.html?role=${encodeURIComponent(p.role_group)}&zone=${encodeURIComponent(p.zone)}&emp=${encodeURIComponent(p.emp_clean)}"
+             class="btn btn-primary" style="padding:6px 10px; font-size:0.8rem; width:100%; justify-content:center; margin-bottom:5px;">
+            ✍️ เปิดหน้าประเมินคนนี้
+          </a>
+          <button type="button" class="btn" style="padding:5px 10px; font-size:0.75rem; width:100%; justify-content:center;"
+             onclick="copyLink('${fullUrl.replace(/'/g, "\'")}')">
+            📋 คัดลอกลิงก์ QR
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function copyLink(url) {
+  navigator.clipboard.writeText(url);
+  alert("คัดลอกลิงก์ประเมินแล้ว:\n" + url);
+}
+
+function exportLinksCSV() {
+  const rows = getFilteredPeople();
+  const lines = ["No,Role_Group,Evaluation_Chain,Zone,Emp_ID,Name_TH,Name_EN,Position,Line,Evaluation_URL"];
+  rows.forEach((p, i) => {
+    const url = buildPersonEvalUrl(p);
+    const meta = MASTER_DATA.role_meta[p.role_group];
+    const esc = s => '"' + String(s || "").replace(/"/g, '""') + '"';
+    lines.push([
+      i + 1, esc(p.role_group), esc(meta.chain_badge), esc(p.zone), esc(p.emp_clean),
+      esc(p.name_th), esc(p.name_en), esc(p.cat_label), esc(p.line || p.dept), esc(url)
+    ].join(","));
+  });
+  const blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "CNC_4Tier_QR_Evaluation_Links_2026.csv";
+  a.click();
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("baseUrlInput").value = detectDefaultBaseUrl();
+  document.getElementById("gasUrlEmbed").value = localStorage.getItem(LS_GAS_URL) || DEFAULT_GAS_WEBAPP_URL;
+  document.getElementById("urlAutoHint").textContent = window.location.protocol.startsWith("http")
+    ? "✅ ตรวจพบลิงก์เว็บออนไลน์อัตโนมัติ — QR Code ทั้ง 87 คนพร้อมสแกนใช้งานทันที!"
+    : "💡 เมื่อนำขึ้น GitHub Pages แล้วเปิดหน้านี้บนเว็บ ลิงก์ QR ทั้งหมดจะเปลี่ยนเป็นลิงก์ GitHub จริงให้อัตโนมัติ";
+  renderTable();
+});
+</script>
+</body>
+</html>
