@@ -457,9 +457,8 @@
           <div style="display:flex; gap:8px; margin-bottom:8px;">
             <select id="targetSelect" style="flex:1;" onchange="onTargetChange()"></select>
           </div>
-          <div style="font-size:0.78rem; color:#64748b; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px;">
-            <span>✅ คนที่คุณประเมินแล้วจะมีเครื่องหมาย ✔ (อิงตาม Google Sheet)</span>
-            <button type="button" onclick="fetchCloudData(true)" style="padding:2px 8px; font-size:0.75rem; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; border-radius:4px; cursor:pointer; font-weight:600;">🔄 ตรวจสถานะ Google Sheet</button>
+          <div style="font-size:0.78rem; color:#64748b;">
+            ✅ ระบบตรวจสถานะจาก Google Sheet ให้อัตโนมัติ (คนที่มีเครื่องหมาย ✔ คือคนที่ประเมินแล้ว หากในชีตถูกลบเครื่องหมายจะหายไปทันที)
           </div>
         </div>
       </div>
@@ -650,7 +649,7 @@ function initApp() {
   updateConnectionBadge();
 
   if (getGasUrl()) {
-    fetchCloudData(false);
+    fetchCloudData(true);
   }
 }
 
@@ -767,9 +766,11 @@ function hasScoredPair(roleGroup, zone, evalKey, targetEmpId) {
     return cloudRawRecords.some(r => String(r.Record_Key) === rKey);
   }
 
-  // 3. ก่อนโหลดเสร็จ ให้ตรวจสอบจาก local cache
-  if (getLocalRecords()[rKey]) return true;
-  return cloudRawRecords.some(r => String(r.Record_Key) === rKey);
+  // 3. ก่อนโหลดเสร็จ: ถ้ามี GAS URL ให้รอผลตรวจจริงจาก Google Sheet ป้องกันแสดงเครื่องหมายถูกของคนที่ถูกลบไปแล้ว
+  if (!getGasUrl()) {
+    return Boolean(getLocalRecords()[rKey]);
+  }
+  return false;
 }
 
 function populateTargetSelect() {
@@ -959,15 +960,10 @@ function loadCurrentPairScores() {
       }
     }
   } else {
-    if (localObj[rKey] && localObj[rKey].scores) {
+    // ก่อนดึงข้อมูลจาก Google Sheet เสร็จ: ถ้ามี GAS URL ให้รอผลตรวจจริงจาก Sheet ป้องกันดึงคะแนนเก่าของคนที่ถูกลบไปแล้ว
+    if (!getGasUrl() && localObj[rKey] && localObj[rKey].scores) {
       savedScores = localObj[rKey].scores;
       savedRemark = localObj[rKey].remark || "";
-    } else {
-      const cloudHit = cloudRawRecords.find(r => String(r.Record_Key) === rKey);
-      if (cloudHit && cloudHit.Scores_JSON) {
-        try { savedScores = JSON.parse(cloudHit.Scores_JSON); } catch (e) { savedScores = null; }
-        savedRemark = cloudHit.Remark || "";
-      }
     }
   }
 
@@ -1117,7 +1113,7 @@ async function fetchCloudData(notify) {
       populateTargetSelect();
       renderTargetHero();
       loadCurrentPairScores();
-      if (notify) showToast(`🔄 ตรวจสอบสถานะจาก Google Sheet แล้ว (${cloudRawRecords.length} รายการ)`, "#1d4ed8");
+      if (notify) showToast(`✅ ซิงก์สถานะ Google Sheet อัตโนมัติสำเร็จ (${cloudRawRecords.length} รายการ)`, "#15803d");
     }
   } catch (e) {
     if (notify) showToast("⚠️ ไม่สามารถดึงข้อมูลจาก Google Sheet ได้ในขณะนี้", "#b45309");
