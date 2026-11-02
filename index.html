@@ -457,7 +457,10 @@
           <div style="display:flex; gap:8px; margin-bottom:8px;">
             <select id="targetSelect" style="flex:1;" onchange="onTargetChange()"></select>
           </div>
-          <div style="font-size:0.78rem; color:#64748b;">✅ คนที่คุณประเมินไปแล้วจะมีเครื่องหมาย ✔ แสดงหน้าชื่อ</div>
+          <div style="font-size:0.78rem; color:#64748b; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+            <span>✅ คนที่คุณประเมินแล้วจะมีเครื่องหมาย ✔ (อิงตาม Google Sheet)</span>
+            <button type="button" onclick="fetchCloudData(true)" style="padding:2px 8px; font-size:0.75rem; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; border-radius:4px; cursor:pointer; font-weight:600;">🔄 ตรวจสถานะ Google Sheet</button>
+          </div>
         </div>
       </div>
     </div>
@@ -514,6 +517,7 @@ let currentEvaluatorKey = "";
 let currentTargetEmpId = "";
 let currentScores = {};
 let cloudRawRecords = [];
+let cloudDataFetched = false;
 
 function getGasUrl() {
   return DEFAULT_GAS_WEBAPP_URL;
@@ -528,6 +532,24 @@ function getPendingQueue() {
 function savePendingQueue(arr) {
   localStorage.setItem(LS_PENDING_QUEUE, JSON.stringify(arr));
   updateConnectionBadge();
+}
+
+function syncLocalRecordsWithCloud() {
+  if (!cloudDataFetched) return;
+  const localObj = getLocalRecords();
+  const pendingKeys = new Set(getPendingQueue().map(x => x.record_key));
+  const cloudKeys = new Set(cloudRawRecords.map(r => String(r.Record_Key)));
+  let changed = false;
+  Object.keys(localObj).forEach(k => {
+    // หากข้อมูลในเครื่องไม่อยู่บน Google Sheet และไม่ได้อยู่ในคิวรอส่ง -> แสดงว่าถูกลบออกจาก Sheet
+    if (!cloudKeys.has(k) && !pendingKeys.has(k)) {
+      delete localObj[k];
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveLocalRecords(localObj);
+  }
 }
 
 function showToast(msg, bg) {
@@ -657,6 +679,7 @@ function onSelectRoleGroup(rg) {
   populateTargetSelect();
   renderRubricSections();
   loadCurrentPairScores();
+  if (getGasUrl()) fetchCloudData(false);
 }
 
 function onZoneChange() {
@@ -665,6 +688,7 @@ function onZoneChange() {
   populateEvaluatorSelect();
   populateTargetSelect();
   loadCurrentPairScores();
+  if (getGasUrl()) fetchCloudData(false);
 }
 
 function classifyEvaluatorGroup(roleStr) {
@@ -726,6 +750,7 @@ function onEvaluatorChange() {
   localStorage.setItem(`${LS_LAST_EVALUATOR}_${currentRoleGroup}_${currentZone}`, currentEvaluatorKey);
   populateTargetSelect();
   loadCurrentPairScores();
+  if (getGasUrl()) fetchCloudData(false);
 }
 
 function makeRecordKey(roleGroup, zone, evalKey, targetEmpId) {
@@ -734,6 +759,15 @@ function makeRecordKey(roleGroup, zone, evalKey, targetEmpId) {
 
 function hasScoredPair(roleGroup, zone, evalKey, targetEmpId) {
   const rKey = makeRecordKey(roleGroup, zone, evalKey, targetEmpId);
+  // 1. กำลังรอซิงก์ขึ้น Google Sheet จากคิวออฟไลน์
+  if (getPendingQueue().some(x => x.record_key === rKey)) return true;
+
+  // 2. หากเชื่อมต่อและดึงข้อมูลจาก Google Sheet แล้ว ให้ยึด Google Sheet เป็นหลักเท่านั้น (ถ้าถูกลบในชีต ให้ไม่มีเครื่องหมายถูก)
+  if (cloudDataFetched) {
+    return cloudRawRecords.some(r => String(r.Record_Key) === rKey);
+  }
+
+  // 3. ก่อนโหลดเสร็จ ให้ตรวจสอบจาก local cache
   if (getLocalRecords()[rKey]) return true;
   return cloudRawRecords.some(r => String(r.Record_Key) === rKey);
 }
@@ -912,14 +946,28 @@ function loadCurrentPairScores() {
   let savedScores = null;
   let savedRemark = "";
 
-  if (localObj[rKey] && localObj[rKey].scores) {
-    savedScores = localObj[rKey].scores;
-    savedRemark = localObj[rKey].remark || "";
-  } else {
+  if (cloudDataFetched) {
     const cloudHit = cloudRawRecords.find(r => String(r.Record_Key) === rKey);
     if (cloudHit && cloudHit.Scores_JSON) {
       try { savedScores = JSON.parse(cloudHit.Scores_JSON); } catch (e) { savedScores = null; }
       savedRemark = cloudHit.Remark || "";
+    } else {
+      const pendingHit = getPendingQueue().find(x => x.record_key === rKey);
+      if (pendingHit && pendingHit.scores) {
+        savedScores = pendingHit.scores;
+        savedRemark = pendingHit.remark || "";
+      }
+    }
+  } else {
+    if (localObj[rKey] && localObj[rKey].scores) {
+      savedScores = localObj[rKey].scores;
+      savedRemark = localObj[rKey].remark || "";
+    } else {
+      const cloudHit = cloudRawRecords.find(r => String(r.Record_Key) === rKey);
+      if (cloudHit && cloudHit.Scores_JSON) {
+        try { savedScores = JSON.parse(cloudHit.Scores_JSON); } catch (e) { savedScores = null; }
+        savedRemark = cloudHit.Remark || "";
+      }
     }
   }
 
@@ -1064,8 +1112,12 @@ async function fetchCloudData(notify) {
     const data = await resp.json();
     if (data && data.ok && Array.isArray(data.raw_scores)) {
       cloudRawRecords = data.raw_scores;
+      cloudDataFetched = true;
+      syncLocalRecordsWithCloud();
       populateTargetSelect();
-      if (notify) showToast(`🔄 ดึงข้อมูลล่าสุดจาก Google Sheet สำเร็จ (${cloudRawRecords.length} รายการ)`, "#1d4ed8");
+      renderTargetHero();
+      loadCurrentPairScores();
+      if (notify) showToast(`🔄 ตรวจสอบสถานะจาก Google Sheet แล้ว (${cloudRawRecords.length} รายการ)`, "#1d4ed8");
     }
   } catch (e) {
     if (notify) showToast("⚠️ ไม่สามารถดึงข้อมูลจาก Google Sheet ได้ในขณะนี้", "#b45309");
